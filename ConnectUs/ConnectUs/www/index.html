@@ -1,21 +1,42 @@
 ﻿<!DOCTYPE html>
-<html>
+<html ng-app="connectusApp">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
+    <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
     <title>ConnectUs</title>
 
-    <!-- ConnectUs-Verweise -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link href="css/index.css" rel="stylesheet" />
+    <link href="css/animate.css" rel="stylesheet" />
+
+
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-route.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-animate.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <p>Hallo, Ihre Anwendung ist bereit!</p>
+    <!-- MAIN CONTENT AND INJECTED VIEWS -->
+    <div id="main">
 
-    <button value="login" onclick="alert()">Login</button>
+        <!-- angular templating -->
+        <!-- this is where content will be injected -->
+        <div ng-view class="forward"></div>
+
+    </div>
+
+     
     <!-- Cordova-Verweis, wird Ihrer App beim Erstellen hinzugefügt. -->
     <script src="cordova.js"></script>
+
+    <!-- connectus Verweise -->
+    <script src="services/mobileServices/settings/connectus.js"></script>
     <script src="scripts/platformOverrides.js"></script>
 
     <script src="scripts/index.js"></script>
+
 </body>
 </html>

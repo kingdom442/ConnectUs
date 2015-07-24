@@ -11,5 +11,29 @@
             "url": "https://github.com/apache/cordova-plugin-dialogs",
             "subdir": "."
         }
+    },
+    "com.phonegap.plugins.facebookconnect": {
+        "source": {
+            "type": "registry",
+            "id": "com.phonegap.plugins.facebookconnect@0.11.0"
+        }
+    },
+    "org.apache.cordova.inappbrowser": {
+        "source": {
+            "type": "registry",
+            "id": "org.apache.cordova.inappbrowser"
+        }
+    },
+    "com.microsoft.azure-mobile-services": {
+        "source": {
+            "type": "registry",
+            "id": "com.microsoft.azure-mobile-services"
+        }
+    },
+    "org.apache.cordova.statusbar": {
+        "source": {
+            "type": "registry",
+            "id": "org.apache.cordova.statusbar"
+        }
     }
 }
