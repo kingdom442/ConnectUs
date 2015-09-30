@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.22823.1
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "ConnectUs", "ConnectUs\ConnectUs.jsproj", "{43DDC50B-2BAE-4190-8E20-EEAEFAC6BEBD}"
 EndProject
@@ -32,7 +32,7 @@ Global
 		{43DDC50B-2BAE-4190-8E20-EEAEFAC6BEBD}.Debug|Android.ActiveCfg = Debug|Android
 		{43DDC50B-2BAE-4190-8E20-EEAEFAC6BEBD}.Debug|Android.Build.0 = Debug|Android
 		{43DDC50B-2BAE-4190-8E20-EEAEFAC6BEBD}.Debug|Android.Deploy.0 = Debug|Android
-		{43DDC50B-2BAE-4190-8E20-EEAEFAC6BEBD}.Debug|Any CPU.ActiveCfg = Debug|Android
+		{43DDC50B-2BAE-4190-8E20-EEAEFAC6BEBD}.Debug|Any CPU.ActiveCfg = Debug|Windows Phone (Universal)
 		{43DDC50B-2BAE-4190-8E20-EEAEFAC6BEBD}.Debug|iOS.ActiveCfg = Debug|iOS
 		{43DDC50B-2BAE-4190-8E20-EEAEFAC6BEBD}.Debug|iOS.Build.0 = Debug|iOS
 		{43DDC50B-2BAE-4190-8E20-EEAEFAC6BEBD}.Debug|iOS.Deploy.0 = Debug|iOS
@@ -45,9 +45,9 @@ Global
 		{43DDC50B-2BAE-4190-8E20-EEAEFAC6BEBD}.Debug|Windows-AnyCPU.ActiveCfg = Debug|Windows-AnyCPU
 		{43DDC50B-2BAE-4190-8E20-EEAEFAC6BEBD}.Debug|Windows-AnyCPU.Build.0 = Debug|Windows-AnyCPU
 		{43DDC50B-2BAE-4190-8E20-EEAEFAC6BEBD}.Debug|Windows-AnyCPU.Deploy.0 = Debug|Windows-AnyCPU
-		{43DDC50B-2BAE-4190-8E20-EEAEFAC6BEBD}.Debug|Windows-ARM.ActiveCfg = Debug|Windows-ARM
-		{43DDC50B-2BAE-4190-8E20-EEAEFAC6BEBD}.Debug|Windows-ARM.Build.0 = Debug|Windows-ARM
-		{43DDC50B-2BAE-4190-8E20-EEAEFAC6BEBD}.Debug|Windows-ARM.Deploy.0 = Debug|Windows-ARM
+		{43DDC50B-2BAE-4190-8E20-EEAEFAC6BEBD}.Debug|Windows-ARM.ActiveCfg = Debug|Windows Phone (Universal)
+		{43DDC50B-2BAE-4190-8E20-EEAEFAC6BEBD}.Debug|Windows-ARM.Build.0 = Debug|Windows Phone (Universal)
+		{43DDC50B-2BAE-4190-8E20-EEAEFAC6BEBD}.Debug|Windows-ARM.Deploy.0 = Debug|Windows Phone (Universal)
 		{43DDC50B-2BAE-4190-8E20-EEAEFAC6BEBD}.Debug|Windows-x64.ActiveCfg = Debug|Windows-x64
 		{43DDC50B-2BAE-4190-8E20-EEAEFAC6BEBD}.Debug|Windows-x64.Build.0 = Debug|Windows-x64
 		{43DDC50B-2BAE-4190-8E20-EEAEFAC6BEBD}.Debug|Windows-x64.Deploy.0 = Debug|Windows-x64

@@ -1,0 +1,16 @@
+﻿.comparisonMainInfo {
+    font-family: Oswald, Ubuntu, serif;
+	font-size: 1.1em;
+    color: darkslategrey;
+    font-weight:bold;
+}
+
+.comparisonSubInfo {
+    font-size: 0.6em;
+    color: gray;
+}
+
+.fontDate {
+    font-family: Optima, Verdana, sans-serif;
+	font-size: 0.6em;
+}

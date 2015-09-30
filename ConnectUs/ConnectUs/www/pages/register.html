@@ -1,20 +1,38 @@
-﻿<div class="container">
-    <div class="row">
-        <div class="col-xs-12 bg-info">
-            <h1>Connect us <small>Register</small></h1>
-        </div>
+﻿
+<ons-page ng-controller="registerController">
+    <ons-toolbar>
+        <div class="center"><h3 style="display:inline;">Connect<span style="color:cornflowerblue;">Us</span></h3></div>
+    </ons-toolbar>
+
+
+    <div style="text-align: center">
+        <br />
+        <ons-page>
+
+
+            <ons-list>
+                <ons-list-item>
+                    <input ng-model="username" type="text" placeholder="Username" class="text-input text-input--transparent" style="margin-top:8px; width: 100%;">
+                </ons-list-item>
+
+                <ons-list-item>
+                    <input ng-model="email" type="text" placeholder="Email Address" class="text-input text-input--transparent" style="margin-top:8px; width: 100%;">
+                </ons-list-item>
+                <ons-list-item>
+                    <input ng-model="password" type="password" placeholder="Password" class="text-input text-input--transparent" style="margin-top:8px; width: 100%;">
+                </ons-list-item>
+
+            </ons-list>
+
+
+            <div class="content-padded">
+                <ons-button ng-click="register()" modifier="large">
+                    Sign Up
+                </ons-button>
+                <button class="button--large--quiet content-padded" ng-click="menu.setMainPage('pages/login.html', { closeMenu: true });" style="margin-top:4px;">Cancel</button>
+            </div>
+
+
+        </ons-page>
     </div>
-
-    <form>
-        <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
-        </div>
-        <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-        </div>
-        <button type="submit" class="btn btn-default">Register</button>
-
-    </form>
-</div>
+</ons-page>

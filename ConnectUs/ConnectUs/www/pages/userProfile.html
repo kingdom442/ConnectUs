@@ -1,0 +1,104 @@
+﻿<ons-page ng-controller="userProfileController" ng-init="init()">
+    <ng-include src="'pages/detail/connectusToolbar.html'"></ng-include>
+
+    <ons-carousel fullscreen overscrollable auto-scroll var="profileCarousel">
+        <ons-carousel-item>
+            <div class="profile-card">
+                <img ng-src="{{userinfo.profilepicurl}}" class="profile-image">
+                <div class="profile-name">{{userinfo.username}}</div>
+                <div class="profile-id">{{userinfo.age}}</div>
+                <div class="profile-desc">{{userinfo.description}}</div>
+            </div>
+
+            <div class="settings-header">Others</div>
+
+            <ons-list modifier="inset" class="settings-list">
+                <ons-list-item modifier="chevron" ng-click="editProfile()">
+                    <ons-icon icon="fa-pencil"></ons-icon>
+                    Edit Profile
+                </ons-list-item>
+                <ons-list-item modifier="chevron">
+                    Terms of Use
+                </ons-list-item>
+
+                <ons-list-item modifier="chevron">
+                    Privacy Policy
+                </ons-list-item>
+            </ons-list>
+        </ons-carousel-item>
+
+        <ons-carousel-item>
+            <ons-dialog cancelable var="ageDialog">
+                <ons-list>
+                    <ons-list-item modifier="tappable chevron" ng-click="userinfo.age='13 - 18'; ageDialog.hide()">13 - 18</ons-list-item>
+                    <ons-list-item modifier="tappable chevron" ng-click="userinfo.age='19 - 25'; ageDialog.hide()">19 - 25</ons-list-item>
+                    <ons-list-item modifier="tappable chevron" ng-click="userinfo.age='26 - 32'; ageDialog.hide()">26 - 32</ons-list-item>
+                    <ons-list-item modifier="tappable chevron" ng-click="userinfo.age='33 - 40'; ageDialog.hide()">33 - 40</ons-list-item>
+                    <ons-list-item modifier="tappable chevron" ng-click="userinfo.age='41 - 50'; ageDialog.hide()">41 - 50</ons-list-item>
+                    <ons-list-item modifier="tappable chevron" ng-click="userinfo.age='> 50'; ageDialog.hide()">> 50</ons-list-item>
+                </ons-list>
+            </ons-dialog>
+
+            <ons-row class="profile-wrapper">
+                <ons-col width="60px" class="profile-image-wrapper">
+                    <img ng-src="{{editProfileImg}}" class="profile-image-small" ng-click="editPicture()">
+                </ons-col>
+
+                <ons-col>
+                    <div class="profile-name">{{userinfo.username}}</div>
+                    <div class="profile-email">{{userinfo.mail}}</div>
+                </ons-col>
+
+            </ons-row>
+
+
+            <div class="settings-header">Personal data</div>
+            <ons-list modifier="inset" class="settings-list">
+                <ons-list-item style="margin-top:5px;">
+                    First name
+                    <input modifier="list-item" type="text" placeholder="" ng-model="userinfo.firstname" />
+                </ons-list-item>
+                <ons-list-item style="margin-top:5px;">
+                    Last name
+                    <input modifier="list-item" type="text" placeholder="" ng-model="userinfo.lastname" />
+                </ons-list-item>
+                <ons-list-item style="margin-top:5px;">
+                    Description
+                    <textarea modifier="list-item" class="textarea" rows="3" placeholder="Describe yourself" ng-model="userinfo.description"></textarea>
+                </ons-list-item>
+
+                <ons-list-item>
+                    Age
+                    <button modifier="list-item" class="button--quiet content-padded" ng-click="showAgePopover()">{{userinfo.age}}</button>
+                </ons-list-item>
+            </ons-list>
+
+            <div class="settings-header">Connected Profiles</div>
+            <ons-list modifier="inset" class="settings-list">
+                <ons-list-item>
+                    <i class="fa fa-facebook-square fa-lg" style="color:#3b5998;"></i>
+                    Facebook
+                    <ons-switch modifier="list-item" ng-model="userinfo.fbConnected" ng-change="changeFBConnection()"></ons-switch>
+                    <button ng-if="userinfo.fbConnected" class="button--quiet" ng-click="synchronizeFBProfile()">Sync Profile</button>
+                </ons-list-item>
+
+                <ons-list-item>
+                    <i class="fa fa-linkedin-square fa-lg" style="color:#0077B5;"></i>
+                    Linked In
+                    <ons-switch modifier="list-item" ng-checked="userinfo.linkedInConnected" disabled></ons-switch>
+                </ons-list-item>
+            </ons-list>
+
+            <button class="button--large--cta content-padded" ng-click="save()" style="margin-top:4px;">Save</button>
+
+            <button class="button--large--quiet content-padded" ng-click="goBack()" style="margin-top:4px;">Cancel</button>
+        </ons-carousel-item>
+     </ons-carousel>
+
+    <ons-modal var="modalSyncFailed" ng-click="modalSyncFailed.hide()">
+        <br>
+        <br>We couldn't sync your FacebookProfile. Please try it again later.
+        <br>
+    </ons-modal>
+</ons-page>
+

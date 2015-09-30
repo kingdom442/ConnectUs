@@ -16,9 +16,9 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort />
-    <IISExpressAnonymousAuthentication />
-    <IISExpressWindowsAuthentication />
+    <IISExpressSSLPort>44300</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
   </PropertyGroup>
@@ -58,6 +58,10 @@
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Facebook, Version=6.0.10.0, Culture=neutral, PublicKeyToken=58cb4f2111d1e6de, processorArchitecture=MSIL">
+      <HintPath>..\packages\Facebook.7.0.6\lib\net45\Facebook.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -120,20 +124,32 @@
       <HintPath>..\packages\Microsoft.Owin.Security.Twitter.2.1.0\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.ServiceBus">
-      <HintPath>..\packages\WindowsAzure.ServiceBus.2.3.4.0\lib\net40-full\Microsoft.ServiceBus.dll</HintPath>
+    <Reference Include="Microsoft.SqlServer.Types, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.Types.11.0.2\lib\net20\Microsoft.SqlServer.Types.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.WindowsAzure.Configuration, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.WindowsAzure.ConfigurationManager.2.0.3\lib\net40\Microsoft.WindowsAzure.Configuration.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.WindowsAzure.Mobile, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WindowsAzure.MobileServices.2.0.0-beta\lib\net45\Microsoft.WindowsAzure.Mobile.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.Mobile.Ext, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WindowsAzure.MobileServices.2.0.0-beta\lib\net45\Microsoft.WindowsAzure.Mobile.Ext.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.WindowsAzure.Mobile.Service, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\WindowsAzure.MobileServices.Backend.1.0.390\lib\net45\Microsoft.WindowsAzure.Mobile.Service.dll</HintPath>
+      <HintPath>..\packages\WindowsAzure.MobileServices.Backend.1.0.470\lib\net45\Microsoft.WindowsAzure.Mobile.Service.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.WindowsAzure.Mobile.Service.Entity, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\WindowsAzure.MobileServices.Backend.Entity.1.0.390\lib\net45\Microsoft.WindowsAzure.Mobile.Service.Entity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.Mobile.Service.Security, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WindowsAzure.MobileServices.Backend.Security.1.0.470\lib\net45\Microsoft.WindowsAzure.Mobile.Service.Security.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.WindowsAzure.Mobile.Service.Tables, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -152,15 +168,25 @@
       <HintPath>..\packages\RazorEngine.3.4.1\lib\net45\RazorEngine.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.IdentityModel.Tokens.Jwt, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.3.0.2\lib\net45\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.Extensions, Version=2.2.28.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.28\lib\net45\System.Net.Http.Extensions.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Net.Http.Formatting, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.2\lib\net45\System.Net.Http.Formatting.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Net.Http.Primitives, Version=4.2.28.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.28\lib\net45\System.Net.Http.Primitives.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Spatial, Version=5.6.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Spatial.5.6.2\lib\net40\System.Spatial.dll</HintPath>
@@ -221,18 +247,117 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\TodoItemController.cs" />
-    <Compile Include="DataObjects\TodoItem.cs" />
+    <Compile Include="Controllers\account\CustomLoginController.cs" />
+    <Compile Include="Controllers\CompareUsersController.cs" />
+    <Compile Include="Controllers\facebook\FBConnectUserController.cs" />
+    <Compile Include="Controllers\account\CustomRegistrationController.cs" />
+    <Compile Include="Controllers\account\CheckAuthTokenController.cs" />
+    <Compile Include="Controllers\facebook\FBSyncProfileController.cs" />
+    <Compile Include="Controllers\facebook\FBTokenController.cs" />
+    <Compile Include="Controllers\FindUsersController.cs" />
+    <Compile Include="Controllers\GetUserInfoController.cs" />
+    <Compile Include="Controllers\table\ConnectRequestController.cs" />
+    <Compile Include="Controllers\table\UserComparisonController.cs" />
+    <Compile Include="Controllers\table\UserController.cs" />
+    <Compile Include="Controllers\table\UserContextController.cs" />
+    <Compile Include="Controllers\table\UserInfoController.cs" />
+    <Compile Include="DataObjects\Account.cs" />
+    <Compile Include="DataObjects\Authentication\CustomLoginResult.cs" />
+    <Compile Include="DataObjects\Authentication\FacebookUserResult.cs" />
+    <Compile Include="DataObjects\Authentication\LoginRequest.cs" />
+    <Compile Include="DataObjects\Authentication\RegistrationRequest.cs" />
+    <Compile Include="DataObjects\ConnectRequest.cs" />
+    <Compile Include="DataObjects\DTO\AccountId.cs" />
+    <Compile Include="DataObjects\DTO\BasicUserInfoDTO.cs" />
+    <Compile Include="DataObjects\DTO\FindUsersRequestData.cs" />
+    <Compile Include="DataObjects\DTO\Profile\ProfileDataObjects.cs" />
+    <Compile Include="DataObjects\DTO\Profile\Work.cs" />
+    <Compile Include="DataObjects\DTO\UserComparisonRequestDTO.cs" />
+    <Compile Include="DataObjects\DTO\UserComparisonResultDTO.cs" />
+    <Compile Include="DataObjects\DTO\UserContextDTO.cs" />
+    <Compile Include="DataObjects\Event.cs" />
+    <Compile Include="DataObjects\Network.cs" />
+    <Compile Include="DataObjects\DTO\Profile\Education.cs" />
+    <Compile Include="DataObjects\UserContact.cs" />
+    <Compile Include="Migrations\201509260833374_26.9.cs" />
+    <Compile Include="Migrations\201509260833374_26.9.Designer.cs">
+      <DependentUpon>201509260833374_26.9.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509260858101_scheis.cs" />
+    <Compile Include="Migrations\201509260858101_scheis.Designer.cs">
+      <DependentUpon>201509260858101_scheis.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509300833068_usercontact_friends_event.cs" />
+    <Compile Include="Migrations\201509300833068_usercontact_friends_event.Designer.cs">
+      <DependentUpon>201509300833068_usercontact_friends_event.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509301013179_unique_connect_request.cs" />
+    <Compile Include="Migrations\201509301013179_unique_connect_request.Designer.cs">
+      <DependentUpon>201509301013179_unique_connect_request.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509301029179_uniqueconst.cs" />
+    <Compile Include="Migrations\201509301029179_uniqueconst.Designer.cs">
+      <DependentUpon>201509301029179_uniqueconst.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Utils\Enum\FBFields.cs" />
+    <Compile Include="DataObjects\DTO\Profile\ProfileData.cs" />
+    <Compile Include="DataObjects\UserComparison.cs" />
+    <Compile Include="DataObjects\UserContext.cs" />
+    <Compile Include="DataObjects\UserInfo.cs" />
+    <Compile Include="DataObjects\UserInfoDetail.cs" />
+    <Compile Include="Migrations\201509180900194_init.cs" />
+    <Compile Include="Migrations\201509180900194_init.Designer.cs">
+      <DependentUpon>201509180900194_init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509181114203_NewUserInfoDetailId.cs" />
+    <Compile Include="Migrations\201509181114203_NewUserInfoDetailId.Designer.cs">
+      <DependentUpon>201509181114203_NewUserInfoDetailId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509191210071_UserComparison.cs" />
+    <Compile Include="Migrations\201509191210071_UserComparison.Designer.cs">
+      <DependentUpon>201509191210071_UserComparison.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\MobileServiceContext.cs" />
-    <Compile Include="ScheduledJobs\SampleJob.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\FBProfileDataProvider.cs" />
+    <Compile Include="Service\IProfileDataProvider.cs" />
+    <Compile Include="Service\ETLProfileDataProvider.cs" />
+    <Compile Include="SqlServerTypes\Loader.cs" />
+    <Compile Include="Utils\CustomLoginProvider.cs" />
+    <Compile Include="Utils\DBGeographyUtil.cs" />
+    <Compile Include="Utils\JsonUtil.cs" />
+    <Compile Include="Utils\LoginProviderUtil.cs" />
+    <Compile Include="Utils\ProfileComparisonUtil.cs" />
+    <Compile Include="Utils\ProfileDataParser.cs" />
+    <Compile Include="Utils\Singleton\MobileServiceClientFactory.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="..\packages\Microsoft.SqlServer.Types.11.0.2\nativeBinaries\x64\msvcr100.dll">
+      <Link>SqlServerTypes\x64\msvcr100.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\packages\Microsoft.SqlServer.Types.11.0.2\nativeBinaries\x64\SqlServerSpatial110.dll">
+      <Link>SqlServerTypes\x64\SqlServerSpatial110.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\packages\Microsoft.SqlServer.Types.11.0.2\nativeBinaries\x86\msvcr100.dll">
+      <Link>SqlServerTypes\x86\msvcr100.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\packages\Microsoft.SqlServer.Types.11.0.2\nativeBinaries\x86\SqlServerSpatial110.dll">
+      <Link>SqlServerTypes\x86\SqlServerSpatial110.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DB\sql\insertNetworks.sql" />
     <Content Include="Global.asax" />
-    <Content Include="Web.config" />
+    <Content Include="SqlServerTypes\readme.htm" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -242,6 +367,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="ScheduledJobs\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -252,6 +378,35 @@
   <ItemGroup>
     <None Include="Properties\PublishProfiles\connectus - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\connectus - Web Deploy.pubxml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201509180900194_init.resx">
+      <DependentUpon>201509180900194_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509181114203_NewUserInfoDetailId.resx">
+      <DependentUpon>201509181114203_NewUserInfoDetailId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509191210071_UserComparison.resx">
+      <DependentUpon>201509191210071_UserComparison.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509260833374_26.9.resx">
+      <DependentUpon>201509260833374_26.9.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509260858101_scheis.resx">
+      <DependentUpon>201509260858101_scheis.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509300833068_usercontact_friends_event.resx">
+      <DependentUpon>201509300833068_usercontact_friends_event.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509301013179_unique_connect_request.resx">
+      <DependentUpon>201509301013179_unique_connect_request.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509301029179_uniqueconst.resx">
+      <DependentUpon>201509301029179_uniqueconst.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -271,7 +426,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>62028</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:62028/</IISUrl>
+          <IISUrl>http://192.168.1.103:62028/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
@@ -282,4 +437,9 @@
     </VisualStudio>
   </ProjectExtensions>
   <Import Project="..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets')" />
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
+    <Error Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
+  </Target>
 </Project>

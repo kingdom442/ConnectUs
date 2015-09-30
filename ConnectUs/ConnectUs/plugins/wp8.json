@@ -19,6 +19,10 @@
                         {
                             "xml": "<feature name=\"StatusBar\"><param name=\"wp-package\" value=\"StatusBar\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"SplashScreen\"><param name=\"wp-package\" value=\"SplashScreen\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -50,6 +54,9 @@
             "PACKAGE_NAME": "{5a513c80-321a-11e5-a84c-8f923a0ff6a0}"
         },
         "org.apache.cordova.statusbar": {
+            "PACKAGE_NAME": "{5a513c80-321a-11e5-a84c-8f923a0ff6a0}"
+        },
+        "org.apache.cordova.splashscreen": {
             "PACKAGE_NAME": "{5a513c80-321a-11e5-a84c-8f923a0ff6a0}"
         }
     },

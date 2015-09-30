@@ -21,13 +21,21 @@ namespace ConnectusMobileService.Models
         // service name, set by the 'MS_MobileServiceName' AppSettings in the local 
         // Web.config, is the same as the service name when hosted in Azure.
 
-        private const string connectionStringName = "Name=MS_TableConnectionString";
+        private const string connectionStringName = "MS_TableConnectionString";
 
         public MobileServiceContext() : base(connectionStringName)
         {
-        }
 
-        public DbSet<TodoItem> TodoItems { get; set; }
+        }
+        
+        public DbSet<Account> Accounts { get; set; }
+        public DbSet<UserContext> UserContexts { get; set; }
+        public DbSet<UserInfo> UserInfos { get; set; }
+        public DbSet<UserInfoDetail> UserInfoDetails { get; set; }
+        public DbSet<UserComparison> UserComparisons { get; set; }
+        public DbSet<Network> Networks { get; set; }
+        public DbSet<Event> Events { get; set; }
+        public DbSet<ConnectRequest> ConnectRequests { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -37,9 +45,6 @@ namespace ConnectusMobileService.Models
                 modelBuilder.HasDefaultSchema(schema);
             }
 
-            modelBuilder.Conventions.Add(
-                new AttributeToColumnAnnotationConvention<TableColumnAttribute, string>(
-                    "ServiceTableColumn", (property, attributes) => attributes.Single().ColumnType.ToString()));
         }
     }
 

@@ -1,1 +1,55 @@
-﻿
+﻿<ons-page ng-controller="homeController">
+    <ng-include src="'pages/detail/connectusToolbar.html'"></ng-include>
+
+    <div class="content-padded">
+        <button class="button--large--cta" ng-click="menu.setMainPage('pages/findUsers.html', {closeMenu: true})">Find people around</button>
+    </div>
+
+    <ons-list>
+        <span>
+            <ons-list-header>
+                Other users compared your profiles <ons-icon icon="fa-compress"
+                                                                size="20px"
+                                                                fixed-width="false"
+                                                                class="headerIconRight">
+                </ons-icon>
+            </ons-list-header>
+
+        </span>
+        <ons-list-item ng-repeat="userCmp in lastComparisons" ng-click="showUserComparison(userCmp)" modifier="chevron">
+            <ons-row align="center">
+                <ons-col width="80px">
+                    <img ng-src="images/profile-icon.png" class="avator profile-image-small" />
+                </ons-col>
+                <ons-col>
+                    <ons-row class="item-desc">{{ userCmp.userName }}</ons-row>
+                    <ons-row class="item-desc">{{ userCmp.date }}</ons-row>
+                </ons-col>
+            </ons-row>
+        </ons-list-item>
+        <ons-list-item ng-if="lastComparisons.length == 0">
+            <span>Here you see users you connected with in the past. So far there are none.</span>
+        </ons-list-item>
+    </ons-list>
+
+    <ons-list>
+        <span>
+            <ons-list-header>
+                Current and upcoming events <ons-icon icon="fa-calendar"
+                                                             size="20px"
+                                                             fixed-width="false"
+                                                             class="headerIconRight">
+                </ons-icon>
+            </ons-list-header>
+
+        </span>
+        <ons-list-item ng-repeat="event in events" modifier="chevron">
+        </ons-list-item>
+        <ons-list-item ng-if="!events">
+            <span>There are no events at the moment.</span>
+        </ons-list-item>
+    </ons-list>
+
+
+</ons-page>
+

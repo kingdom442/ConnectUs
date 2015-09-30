@@ -1,20 +1,42 @@
-﻿<div class="container">
-    <div class="row">
-        <div class="col-xs-12 bg-info">
-            <h1>Connect us <small>Login</small></h1>
-        </div>
+﻿<ons-page ng-controller="loginController">
+
+    <ng-include src="'pages/detail/connectusToolbar.html'"></ng-include>
+
+    <ons-list>
+        <ons-list-item>
+            <input ng-model="username" type="text" placeholder="Username" class="text-input text-input--transparent" style="margin-top:8px; width: 100%;">
+        </ons-list-item>
+
+
+        <ons-list-item>
+            <input ng-model="password" type="password" placeholder="Password" class="text-input text-input--transparent" style="margin-top:8px; width: 100%;">
+        </ons-list-item>
+    </ons-list>
+    <div class="content-padded">
+        <ons-button modifier="large"
+                    ng-click="login()">
+            SignIn
+        </ons-button>
+        
     </div>
+    <center>
+        Or
+    </center>
 
-    <form>
-        <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
-        </div>
-        <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-        </div>
-        <button type="submit" class="btn btn-default">Login</button>
+    <div class="content-padded">
+        <ons-button modifier="large"
+                    ng-click="fbLogin()">
+            SignIn with Facebook
+        </ons-button>
+   </div>
 
-    </form>
-</div>
+    <h4 class="content-padded">
+        Have you already <button class="button--quiet" style="display:inline;" ng-click="menu.setMainPage('pages/register.html', { animation: slide });">registered</button> a user?
+    </h4>
+
+    <ons-modal var="modal" ng-click="modal.hide()">
+        <br>
+        <br>Login failed - Invalid Username or Password?
+        <br>
+    </ons-modal>
+</ons-page>

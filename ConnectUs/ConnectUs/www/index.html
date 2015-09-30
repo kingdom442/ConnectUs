@@ -1,42 +1,115 @@
 ﻿<!DOCTYPE html>
-<html ng-app="connectusApp">
+<html lang="en" ng-app="connectusApp">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+
     <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
     <meta name="viewport" content="initial-scale=1, width=device-width" />
-    <title>ConnectUs</title>
 
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <!-- CSS dependencies -->
+    <link rel="stylesheet" href="lib/onsen/css/onsenui.css" />
+    <link rel="stylesheet" href="lib/onsen/css/onsen-css-components-default.css" />
+    <link rel="stylesheet" type="text/css" href="lib/onsen/css/ionicons/css/ionicons.css">
+    <link rel="stylesheet" type="text/css" href="css/menu.css">
+    <link rel="stylesheet" type="text/css" href="css/settings.css">
+    <link rel="stylesheet" type="text/css" href="css/font.css">
     <link href="css/index.css" rel="stylesheet" />
-    <link href="css/animate.css" rel="stylesheet" />
 
-
-    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-route.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-animate.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <!-- JS dependencies (order matters!) -->
+    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+    <script src="scripts/platformOverrides.js"></script>
+    <script src="lib/angular/angular.js"></script>
+    <script src="lib/onsen/js/onsenui.js"></script>
+    <script src="lib/jquery/jquery-2.1.4.js"></script>
+       
+    <script>
+    </script>
 </head>
-<body>
-    <!-- MAIN CONTENT AND INJECTED VIEWS -->
-    <div id="main">
+<body ng-controller="appController">
 
-        <!-- angular templating -->
-        <!-- this is where content will be injected -->
-        <div ng-view class="forward"></div>
+    <ons-sliding-menu main-page="pages/login.html"
+                      menu-page="menu.html"
+                      side="left"
+                      swipeable="false"
+                      var="menu"
+                      max-slide-distance="70%"
+                      type="reveal">
+    </ons-sliding-menu>
 
-    </div>
+    <ons-template id="menu.html">
+        <ons-page modifier="menu-page">
+            <ons-toolbar modifier="transparent">
+                <div class="right">
+                    <ons-toolbar-button class="menu-close" ng-click="menu.close()">
+                        <ons-icon>Close</ons-icon>
+                    </ons-toolbar-button>
+                </div>
+            </ons-toolbar>
 
-     
+            <ons-list class="menu-list">
+                <ons-list-item class="menu-item" ng-click="menu.setMainPage('pages/home.html', {closeMenu: true})">
+                    <ons-icon icon="fa-home"></ons-icon>
+                    Home
+                </ons-list-item>
+                <ons-list-item class="menu-item" ng-click="menu.setMainPage('pages/findUsers.html', {closeMenu: true})">
+                    <ons-icon icon="fa-search"></ons-icon>
+                    Find people around
+                </ons-list-item>
+                <ons-list-item class="menu-item" ng-click="menu.setMainPage('pages/userProfile.html', {closeMenu: true})">
+                    <ons-icon icon="fa-user"></ons-icon>
+                    {{username}}
+                </ons-list-item>
+                <ons-list-item class="menu-item" ng-click="menu.setMainPage('pages/settings.html', {closeMenu: true})">
+                    <ons-icon icon="fa-cog"></ons-icon>
+                    Settings
+                </ons-list-item>
+            </ons-list>
+            <br>
+
+            <ons-list class="bottom-menu-list">
+                <ons-list-item class="bottom-menu-item" ng-click="menu.setMainPage('about.html', {closeMenu: true})">
+                    About
+                </ons-list-item>
+                <ons-list-item class="bottom-menu-item" ng-click="logout()">
+                    Logout
+                </ons-list-item>
+            </ons-list>
+        </ons-page>
+    </ons-template>
+
+
+
     <!-- Cordova-Verweis, wird Ihrer App beim Erstellen hinzugefügt. -->
-    <script src="cordova.js"></script>
-
-    <!-- connectus Verweise -->
-    <script src="services/mobileServices/settings/connectus.js"></script>
+    <!--<script src="cordova.js"></script>-->
     <script src="scripts/platformOverrides.js"></script>
 
     <script src="scripts/index.js"></script>
-
+    <script src="scripts/services/helper/alert.js"></script>
+    <script src="scripts/services/mobileServices/mscFactory.js"></script>
+    <!-- Data -->
+    <script src="scripts/objects/userComparison.js"></script>
+    <script src="scripts/objects/userinfo.js"></script>
+    <script src="scripts/objects/userprofiledata.js"></script>
+    <script src="scripts/objects/connectStates.js"></script>
+    <!-- Service -->
+    <script src="scripts/services/mobileServices/loginService.js"></script>
+    <script src="scripts/services/mobileServices/registerService.js"></script>
+    <script src="scripts/services/mobileServices/contextService.js"></script>
+    <script src="scripts/services/mobileServices/findUsersService.js"></script>
+    <script src="scripts/services/mobileServices/userService.js"></script>
+    <script src="scripts/services/mobileServices/userComparisonService.js"></script>
+    <script src="scripts/services/mobileServices/userConnectService.js"></script>
+    <!--Controller-->
+    <script src="scripts/controller/appController.js"></script>
+    <script src="scripts/controller/loginController.js"></script>
+    <script src="scripts/controller/registerController.js"></script>
+    <script src="scripts/controller/homeController.js"></script>
+    <script src="scripts/controller/lastProfileComparisonsController.js"></script>
+    <script src="scripts/controller/findUsersController.js"></script>
+    <script src="scripts/controller/userProfileController.js"></script>
+    <script src="scripts/controller/connectUsersController.js"></script>
 </body>
 </html>

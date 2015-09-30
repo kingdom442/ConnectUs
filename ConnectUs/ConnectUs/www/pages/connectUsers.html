@@ -1,0 +1,84 @@
+﻿<ons-page ng-controller="connectUsersController" ng-init="connect()">
+    <ng-include src="'pages/detail/connectusToolbar.html'"></ng-include>
+
+    <h3 style="display:inline;">Usercomparison</h3>
+    <ons-row>
+        <ng-include style="margin-left:15px;margin-top:5px;" src="'pages/detail/userInfo.html'"></ng-include>
+    </ons-row>
+
+    <ons-scroller>
+        <ons-list id="educationList">
+            <span>
+                <ons-list-header>
+                    Education <ons-icon icon="fa-graduation-cap"
+                                        size="lg"
+                                        fixed-width="false"
+                                        class="headerIconRight">
+                    </ons-icon>
+                </ons-list-header>
+
+            </span>
+            <ons-list-item ng-repeat="edu in equalEducations">
+                <ons-row>
+                    <ons-col width="20%">{{edu.dateTo}}</ons-col>
+                    <ons-col class="comparisonMainInfo" width="80%">{{edu.name}}</ons-col>
+                </ons-row>
+            </ons-list-item>
+            <ons-list-item ng-if="equalEducations.length == 0 && !dataLoading">You have no matching education objects.</ons-list-item>
+        </ons-list>
+
+        <ons-list id="workList">
+            <span>
+                <ons-list-header>
+                    Work <ons-icon icon="fa-building"
+                                   size="20px"
+                                   fixed-width="false"
+                                   class="headerIconRight">
+                    </ons-icon>
+                </ons-list-header>
+
+            </span>
+            <ons-list-item ng-repeat="work in equalWork">
+                <ons-row>
+                    <ons-col style="margin-top:5px;line-height:normal;" class="fontDate verticalMiddle" width="20%">
+                        {{work.dateFrom}}<br />
+                        -<br />
+                        {{work.dateTo}}
+                    </ons-col>
+                    <ons-col class="comparisonMainInfo" width="80%">{{work.name}} <span class="comparisonSubInfo">{{work.city}}</span></ons-col>
+                </ons-row>
+            </ons-list-item>
+            <ons-list-item ng-if="equalWork.length == 0 && !dataLoading">You have no matching work objects.</ons-list-item>
+        </ons-list>
+
+        <ons-list id="interestsList">
+            <span>
+                <ons-list-header>
+                    Interests <ons-icon icon="fa-thumbs-up"
+                                        size="20px"
+                                        fixed-width="false"
+                                        class="headerIconRight">
+                    </ons-icon>
+                </ons-list-header>
+
+            </span>
+            <ons-list-item ng-repeat="edu in equalInterests">
+                <ons-row>
+                    <ons-col width="20%">{{edu.yearTo}}</ons-col>
+                    <ons-col width="80%">{{edu.name}}</ons-col>
+                </ons-row>
+            </ons-list-item>
+            <ons-list-item ng-if="equalInterests.length == 0 && !dataLoading">You have no matching interests.</ons-list-item>
+        </ons-list>
+
+    </ons-scroller>
+    <ons-row class="fixToBottom content-padded" ng-switch="connectState">
+        <div ng-switch-when="requested">
+            Connection requested.
+        </div>
+        <div ng-switch-when="connected">
+            You are connected.
+        </div>
+        <button ng-switch-default class="button--large--cta" ng-click="connectRequest()">Connect</button>
+    </ons-row>
+</ons-page>
