@@ -55,8 +55,17 @@ namespace ConnectusMobileService.Controllers
                     SaltedAndHashedPassword = LoginProviderUtil.hash(registrationRequest.password, salt)
                 };
                 context.Accounts.Add(newAccount);
-                context.UserInfos.Add(new UserInfo() { Description = "About me", UserId = account.Id });
                 context.SaveChanges();
+
+                UserInfo newUserInfo;
+                context.UserInfos.Add(newUserInfo = new UserInfo()
+                {
+                    Description = "About me", UserId = newAccount.Id, Id = Guid.NewGuid().ToString(), NetworkId = (Int16)NetworkType.CONNECT_US,
+                    UserInfoDetail = new UserInfoDetail()
+                });
+
+                context.SaveChanges();
+                
 
                 return this.Request.CreateResponse(HttpStatusCode.Created);
             }

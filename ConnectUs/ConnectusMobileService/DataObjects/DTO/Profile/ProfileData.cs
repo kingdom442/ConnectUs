@@ -14,6 +14,7 @@ namespace ConnectusMobileService.DataObjects.Profile
         {
             this.EducationList = new List<Education>();
             this.WorkHistory = new List<Work>();
+            this.Interests = new List<Interest>();
         }
 
         public string ProfilePicUrl { get; set; }
@@ -25,6 +26,7 @@ namespace ConnectusMobileService.DataObjects.Profile
 
         public List<Education> EducationList { get; set; }
         public List<Work> WorkHistory { get; set; }
+        public List<Interest> Interests { get; set; }
 
         public string AsJsonString()
         {

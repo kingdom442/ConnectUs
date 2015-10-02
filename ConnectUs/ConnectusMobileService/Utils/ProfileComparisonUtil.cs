@@ -32,6 +32,8 @@ namespace ConnectusMobileService.Utils
                 CompareEducation(ref userComparison, userProfile, compUserProfile);
             if(objectsToCompare.Contains(ProfileDataObjects.Work))
                 CompareWork(ref userComparison, userProfile, compUserProfile);
+            if (objectsToCompare.Contains(ProfileDataObjects.Team))
+                CompareInterests(ref userComparison, userProfile, compUserProfile, InterestType.TEAM);
 
             return userComparison;
         }
@@ -59,6 +61,22 @@ namespace ConnectusMobileService.Utils
             userComparison.EqualProfileData.WorkHistory = bothProfileWorkHistory.ToList();
             userComparison.OnlyUserProfileData.WorkHistory = onlyProfile1WorkHistory.ToList();
             userComparison.OnlyCompUserProfileData.WorkHistory = onlyProfile2WorkHistory.ToList();
+        }
+
+        private static void CompareInterests(ref UserComparison userComparison, ProfileData userProfile, ProfileData compUserProfile, InterestType typeToCompare)
+        {
+            IEnumerable<Interest> onlyProfile1Interests = userProfile.Interests.Where(x => x.type == typeToCompare).Except(compUserProfile.Interests);
+            IEnumerable<Interest> onlyProfile2Interests = compUserProfile.Interests.Where(x => x.type == typeToCompare).Except(userProfile.Interests);
+
+            IEnumerable<Interest> bothProfileInterests = userProfile.Interests.Where(x => x.type == typeToCompare).Except(onlyProfile1Interests);
+            
+            //For the interests Add instead of = (other interest types could have been already added)
+            userComparison.EqualProfileData.Interests.AddRange(bothProfileInterests.ToList());
+            
+            userComparison.OnlyUserProfileData.Interests.AddRange(onlyProfile1Interests.ToList());
+
+            //userComparison.OnlyCompUserProfileData.Interests.RemoveAll(x => x.Type == typeToCompare);
+            userComparison.OnlyCompUserProfileData.Interests.AddRange(onlyProfile2Interests.ToList());
         }
     }
 }

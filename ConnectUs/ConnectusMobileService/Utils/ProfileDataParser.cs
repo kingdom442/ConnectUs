@@ -34,6 +34,16 @@ namespace ConnectusMobileService.Utils
                     position = (!JsonUtil.IsNullOrEmpty(jWork.SelectToken("position"))) ? (string)jWork["position"]: null
                 });
             }
+            JArray jTeams = (JArray)fbJson[FBFields.FAVORITE_TEAMS.ToString().ToLower()];
+            foreach (JObject jTeam in jTeams)
+            {
+                profileData.Interests.Add(new Interest()
+                {
+                    name = (!JsonUtil.IsNullOrEmpty(jTeam.SelectToken("name"))) ? (string)jTeam["name"] : null,
+                    type = InterestType.TEAM
+                });
+            }
+
 
 
             return profileData;

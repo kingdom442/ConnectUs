@@ -29,7 +29,7 @@ namespace ConnectusMobileService.Utils
             UserInfo merged = userInfos.First();
             if (merged.UserInfoDetail == null)
                 merged.UserInfoDetail = new UserInfoDetail() { UserInfoId = merged.Id, JsonInfo = "{}" };
-            JObject mergedJson = (merged.UserInfoDetail.JsonInfo != null) ? JObject.Parse(merged.UserInfoDetail.JsonInfo): null;
+            JObject mergedJson = (merged.UserInfoDetail.JsonInfo != null) ? JObject.Parse(merged.UserInfoDetail.JsonInfo): new JObject();
 
             foreach (UserInfo uiDet in userInfos.Where(x => x.Id != merged.Id))
             {

@@ -256,6 +256,7 @@
     <Compile Include="Controllers\facebook\FBTokenController.cs" />
     <Compile Include="Controllers\FindUsersController.cs" />
     <Compile Include="Controllers\GetUserInfoController.cs" />
+    <Compile Include="Controllers\table\EventController.cs" />
     <Compile Include="Controllers\table\ConnectRequestController.cs" />
     <Compile Include="Controllers\table\UserComparisonController.cs" />
     <Compile Include="Controllers\table\UserController.cs" />
@@ -270,6 +271,7 @@
     <Compile Include="DataObjects\DTO\AccountId.cs" />
     <Compile Include="DataObjects\DTO\BasicUserInfoDTO.cs" />
     <Compile Include="DataObjects\DTO\FindUsersRequestData.cs" />
+    <Compile Include="DataObjects\DTO\Profile\Interest.cs" />
     <Compile Include="DataObjects\DTO\Profile\ProfileDataObjects.cs" />
     <Compile Include="DataObjects\DTO\Profile\Work.cs" />
     <Compile Include="DataObjects\DTO\UserComparisonRequestDTO.cs" />
@@ -298,6 +300,14 @@
     <Compile Include="Migrations\201509301029179_uniqueconst.cs" />
     <Compile Include="Migrations\201509301029179_uniqueconst.Designer.cs">
       <DependentUpon>201509301029179_uniqueconst.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510010935026_a.cs" />
+    <Compile Include="Migrations\201510010935026_a.Designer.cs">
+      <DependentUpon>201510010935026_a.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510011623289_eventupdate.cs" />
+    <Compile Include="Migrations\201510011623289_eventupdate.Designer.cs">
+      <DependentUpon>201510011623289_eventupdate.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils\Enum\FBFields.cs" />
     <Compile Include="DataObjects\DTO\Profile\ProfileData.cs" />
@@ -406,6 +416,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201509301029179_uniqueconst.resx">
       <DependentUpon>201509301029179_uniqueconst.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510010935026_a.resx">
+      <DependentUpon>201510010935026_a.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510011623289_eventupdate.resx">
+      <DependentUpon>201510011623289_eventupdate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

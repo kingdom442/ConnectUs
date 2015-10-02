@@ -44,6 +44,13 @@ namespace ConnectusMobileService.Controllers
                         FacebookId = fbConnectUserRequest.UserId
                     };
                     context.Accounts.Add(account);
+                    UserInfo newUserInfo;
+                    context.UserInfos.Add(newUserInfo = new UserInfo()
+                    {
+                        Description = "About me", UserId = account.Id, Id = Guid.NewGuid().ToString(), NetworkId = (Int16)NetworkType.FACEBOOK,
+                        UserInfoDetail = new UserInfoDetail()
+                    });
+                   
                     context.SaveChanges();
                     httpStatus = HttpStatusCode.Created;
                 }

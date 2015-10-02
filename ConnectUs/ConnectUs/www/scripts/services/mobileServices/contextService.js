@@ -1,5 +1,4 @@
-﻿// http://go.microsoft.com/fwlink/?LinkID=290993&clcid=0x407
-
+﻿
 
 angular.module('connectusApp').service('contextService', function($rootScope){       
     this.postContext = function (successCB) {

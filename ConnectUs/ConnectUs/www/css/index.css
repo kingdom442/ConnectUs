@@ -69,4 +69,41 @@ body {
 .fixToBottom {
     position:absolute;
     bottom: 10px;
+    margin-top: 10px;
+}
+
+.highlightPositive{
+    background-color: lightgreen;
+    color:black;
+    padding-left:5px;
+    font-weight: bold;
+}
+
+
+.highlightNegative{
+    background-color: #f2dede;
+    color:black;
+    padding-left:5px;
+    font-weight: bold;
+}
+
+.highlightInfo{
+    background-color: cornflowerblue;
+    color:black;
+    padding-left:5px;
+    font-weight: bold;
+}
+
+.textImportant {
+    font-weight:bold;
+}
+
+.textDetail {
+    font-weight:lighter;
+    color:lightgray;
+}
+
+.scrollableContent{
+    overflow-y: scroll;
+    padding-bottom: 60px;
 }

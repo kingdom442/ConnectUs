@@ -1,4 +1,4 @@
-﻿<ons-page ng-controller="connectUsersController" ng-init="connect()">
+﻿<ons-page ng-controller="connectUsersController" ng-init="connect(); loadConnectState();">
     <ng-include src="'pages/detail/connectusToolbar.html'"></ng-include>
 
     <h3 style="display:inline;">Usercomparison</h3>
@@ -51,34 +51,66 @@
             <ons-list-item ng-if="equalWork.length == 0 && !dataLoading">You have no matching work objects.</ons-list-item>
         </ons-list>
 
-        <ons-list id="interestsList">
+        <ons-list id="interestList">
             <span>
                 <ons-list-header>
-                    Interests <ons-icon icon="fa-thumbs-up"
-                                        size="20px"
-                                        fixed-width="false"
-                                        class="headerIconRight">
+                    Teams <ons-icon icon="fa-thumbs-up"
+                                    size="20px"
+                                    fixed-width="false"
+                                    class="headerIconRight">
                     </ons-icon>
                 </ons-list-header>
 
             </span>
-            <ons-list-item ng-repeat="edu in equalInterests">
-                <ons-row>
-                    <ons-col width="20%">{{edu.yearTo}}</ons-col>
-                    <ons-col width="80%">{{edu.name}}</ons-col>
+            <ons-list-item ng-repeat="team in equalInterests">
+                <ons-row class="item-desc textImportant">
+                    {{team.name}}
+                </ons-row>
+                <ons-row class="item-desc textDetail">
+                    {{team.description}}
                 </ons-row>
             </ons-list-item>
             <ons-list-item ng-if="equalInterests.length == 0 && !dataLoading">You have no matching interests.</ons-list-item>
-        </ons-list>
 
+            <span>
+                <ons-list-header>
+                    Sports <ons-icon icon="fa-futbol-o"
+                                     size="20px"
+                                     fixed-width="false"
+                                     class="headerIconRight">
+                    </ons-icon>
+                </ons-list-header>
+
+            </span>
+            <ons-list-item ng-repeat="team in equalSports">
+                <ons-row class="item-desc textImportant">
+                    {{team.name}}
+                </ons-row>
+                <ons-row class="item-desc textDetail">
+                    {{team.description}}
+                </ons-row>
+            </ons-list-item>
+            <ons-list-item ng-if="sportInterests.length == 0 && !dataLoading">You have no matching sport interests.</ons-list-item>
+        </ons-list>
     </ons-scroller>
+
     <ons-row class="fixToBottom content-padded" ng-switch="connectState">
-        <div ng-switch-when="requested">
-            Connection requested.
+        <div ng-switch-when="1" style="width:100%;">
+            <div ng-if="requester == 0" class="highlightInfo">Connection requested.</div>
+            <div ng-if="requester == 1">
+                <div class="highlightInfo" style="margin-bottom:5px;">The user sent you a connect request</div>
+
+                <button class="button--large--cta" style="width:48%;background-color:#ff0000;float:left;margin-right:4%;" ng-click="rejectConnectRequest()">Reject</button>
+                <button class="button--large--cta" style="width:48%" ng-click="acceptConnectRequest()">Accept</button>
+            </div>
         </div>
-        <div ng-switch-when="connected">
+        <div ng-switch-when="2" class="highlightPositive" style="width:100%;">
             You are connected.
         </div>
-        <button ng-switch-default class="button--large--cta" ng-click="connectRequest()">Connect</button>
+        <div ng-switch-when="3" class="highlightNegative" style="width:100%;">
+            <div ng-if="requester == 0">{{}} rejected your connect request..</div>
+            <div ng-if="requester == 1">You rejected the connect request.</div>
+        </div>
+        <button ng-switch-when="0" class="button--large--cta" ng-click="sendConnectRequest()">Connect</button>
     </ons-row>
 </ons-page>

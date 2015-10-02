@@ -43,24 +43,22 @@ namespace ConnectusMobileService.Controllers
                 UserInfo userInfo;
                 if (context.UserInfos.Any(ui => ui.UserId == accountid.accountid && ui.NetworkId == facebook.Id))
                 {
-                    userInfo = context.UserInfos.First(ui => ui.UserId == accountid.accountid && ui.NetworkId == facebook.Id);
+                    userInfo = context.UserInfos.Include("UserInfoDetail").First(ui => ui.UserId == accountid.accountid && ui.NetworkId == facebook.Id);
                     userInfo.Description = fbProfileData.Description;
                     userInfo.ProfilePicUrl = fbProfileData.ProfilePicUrl;
                     // TODO: Update other propoerties
+                    userInfo.UserInfoDetail.JsonInfo = fbProfileData.AsJsonString();
                 }
                 else
                 {
                     userInfo = new UserInfo(fbProfileData) { UserId = accountid.accountid };
                     userInfo.SetNetork(facebook);
                     userInfo.Id = Guid.NewGuid().ToString();
+                    userInfo.UserInfoDetail = new UserInfoDetail() { JsonInfo = fbProfileData.AsJsonString() };
                     context.UserInfos.Add(userInfo);
-         
-                    httpStatus = HttpStatusCode.Created;
                 }
-
-                UserInfoDetail userInfoDetail = new UserInfoDetail(userInfo.Id, fbProfileData.AsJsonString());
-                context.UserInfoDetails.AddOrUpdate(userInfoDetail);
                 context.SaveChanges();
+                httpStatus = HttpStatusCode.Created;
                 return this.Request.CreateResponse(httpStatus, userInfo);
             }
 

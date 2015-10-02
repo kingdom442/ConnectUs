@@ -1,4 +1,4 @@
-﻿<ons-page ng-controller="homeController">
+﻿<ons-page ng-controller="homeController" ng-init="getEvents()">
     <ng-include src="'pages/detail/connectusToolbar.html'"></ng-include>
 
     <div class="content-padded">
@@ -44,6 +44,16 @@
 
         </span>
         <ons-list-item ng-repeat="event in events" modifier="chevron">
+            <ons-row align="center">
+                <ons-col width="60%">
+                    <ons-row class="item-desc textImportant">{{event.name}}</ons-row>
+                    <ons-row class="item-desc textDetail">{{ event.place }}</ons-row>
+                </ons-col>
+                <ons-col style="text-align:right;">
+                    <ons-row class="item-desc">{{ event.from }}</ons-row>
+                    <ons-row class="item-desc">{{ event.to }}</ons-row>
+                </ons-col>
+            </ons-row>
         </ons-list-item>
         <ons-list-item ng-if="!events">
             <span>There are no events at the moment.</span>

@@ -24,8 +24,7 @@ namespace ConnectusMobileService.Controllers
         public HttpResponseMessage Post(LoginRequest loginRequest)
         {
             MobileServiceContext context = new MobileServiceContext();
-            Account account = context.Accounts
-                .Where(a => a.Username == loginRequest.username).SingleOrDefault();
+            Account account = context.Accounts.SingleOrDefault(a => a.Username == loginRequest.username);
             if (account != null)
             {
                 byte[] incoming = LoginProviderUtil
