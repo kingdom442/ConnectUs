@@ -7,7 +7,7 @@
     </ons-row>
 
     <ons-scroller>
-        <ons-list id="educationList">
+        <ons-list id="educationList" ng-if="compareEducation">
             <span>
                 <ons-list-header>
                     Education <ons-icon icon="fa-graduation-cap"
@@ -24,10 +24,10 @@
                     <ons-col class="comparisonMainInfo" width="80%">{{edu.name}}</ons-col>
                 </ons-row>
             </ons-list-item>
-            <ons-list-item ng-if="equalEducations.length == 0 && !dataLoading">You have no matching education objects.</ons-list-item>
+            <ons-list-item ng-if="equalEducations.length == 0 && loadingCounter == 0">You have no matching education objects.</ons-list-item>
         </ons-list>
 
-        <ons-list id="workList">
+        <ons-list id="workList" ng-if="compareWork">
             <span>
                 <ons-list-header>
                     Work <ons-icon icon="fa-building"
@@ -48,13 +48,13 @@
                     <ons-col class="comparisonMainInfo" width="80%">{{work.name}} <span class="comparisonSubInfo">{{work.city}}</span></ons-col>
                 </ons-row>
             </ons-list-item>
-            <ons-list-item ng-if="equalWork.length == 0 && !dataLoading">You have no matching work objects.</ons-list-item>
+            <ons-list-item ng-if="equalWork.length == 0 && loadingCounter == 0">You have no matching work objects.</ons-list-item>
         </ons-list>
 
-        <ons-list id="interestList">
+        <ons-list id="teamList" ng-if="compareTeams">
             <span>
                 <ons-list-header>
-                    Teams <ons-icon icon="fa-thumbs-up"
+                    Teams <ons-icon icon="fa-trophy"
                                     size="20px"
                                     fixed-width="false"
                                     class="headerIconRight">
@@ -70,11 +70,12 @@
                     {{team.description}}
                 </ons-row>
             </ons-list-item>
-            <ons-list-item ng-if="equalInterests.length == 0 && !dataLoading">You have no matching interests.</ons-list-item>
-
+            <ons-list-item ng-if="equalInterests.length == 0 && loadingCounter == 0">You have no matching interests.</ons-list-item>
+        </ons-list>
+        <ons-list id="athleteList" ng-if="compareAthletes">
             <span>
                 <ons-list-header>
-                    Sports <ons-icon icon="fa-futbol-o"
+                    Athletes <ons-icon icon="fa-soccer-ball-o"
                                      size="20px"
                                      fixed-width="false"
                                      class="headerIconRight">
@@ -90,7 +91,7 @@
                     {{team.description}}
                 </ons-row>
             </ons-list-item>
-            <ons-list-item ng-if="sportInterests.length == 0 && !dataLoading">You have no matching sport interests.</ons-list-item>
+            <ons-list-item ng-if="sportInterests.length == 0 && loadingCounter == 0">You have no matching sport interests.</ons-list-item>
         </ons-list>
     </ons-scroller>
 

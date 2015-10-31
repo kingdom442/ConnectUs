@@ -7,11 +7,17 @@ using Microsoft.WindowsAzure.Mobile.Service;
 using ConnectusMobileService.Utils;
 using System.Data.Entity.Migrations;
 using Microsoft.WindowsAzure.Mobile.Service.Config;
+using ConnectusMobileService.Migrations;
 
 namespace ConnectusMobileService
 {
     public class WebApiConfig: IBootstrapper
     {
+        public WebApiConfig()
+        {
+
+        }
+
         public void Initialize()
         {
             // Use this class to set configuration options for your mobile service
@@ -25,9 +31,9 @@ namespace ConnectusMobileService
             // line. Comment it out again when you deploy your service for production use.
             config.IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.Always;
             //config.Properties["MS_IsHosted"] = true;
-            
+
             Database.SetInitializer<MobileServiceContext>(new MobileServiceInitializer());
-      
+
             //var migrator = new DbMigrator(new Configuration());
             //migrator.Update();
         }

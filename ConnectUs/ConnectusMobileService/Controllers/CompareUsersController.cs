@@ -24,9 +24,19 @@ namespace ConnectusMobileService.Controllers
         // POST api/CompareUsers
         public HttpResponseMessage Post(UserComparisonRequestDTO userComparisonRequest)
         {
-            //TODO: Check If users were already compared (is comparison up do date?)
             Services.Log.Info("Entered CompareUsers!");
             MobileServiceContext context = new MobileServiceContext();
+            UserComparison lastUserComparison = context.UserComparisons.Where(x => (x.UserId == userComparisonRequest.UserId && x.CompUserId == userComparisonRequest.CompUserId) || (x.UserId == userComparisonRequest.CompUserId && x.CompUserId == userComparisonRequest.UserId)).OrderByDescending(x => x.CreatedAt).FirstOrDefault();
+            if(lastUserComparison != null)
+            {
+                if(!context.UserInfos.Any(x => x.UserId == userComparisonRequest.UserId && x.UpdatedAt > lastUserComparison.CreatedAt) &&
+                    !context.UserInfos.Any(x => x.UserId == userComparisonRequest.UserId && x.UpdatedAt > lastUserComparison.CreatedAt))
+                {
+                    //No Profile changes since last update
+                    return this.Request.CreateResponse(HttpStatusCode.OK, lastUserComparison);
+                }
+            }
+
             if (userComparisonRequest.CompareObjects == null)
                 userComparisonRequest.CompareObjects = ProfileData.GetAllProfileDataObjects();
 

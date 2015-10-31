@@ -1,0 +1,58 @@
+﻿<ons-page ng-controller="userContactController">
+    <ng-include src="'pages/detail/connectusToolbar.html'"></ng-include>
+
+    <ons-row>
+        <ng-include style="margin-left:15px;margin-top:5px;" src="'pages/detail/userInfo.html'"></ng-include>
+    </ons-row>
+
+    <ons-list class="contactList">
+        <ons-list-header>
+            Contact information <ons-icon icon="fa-user"
+                                   size="20px"
+                                   fixed-width="false"
+                                   class="headerIconRight">
+            </ons-icon>
+        </ons-list-header>
+        <ons-list-item>
+            First name:
+            <label modifier="list-item"  ng-bind="userInfo.userContact.firstname" />
+        </ons-list-item>
+        <ons-list-item>
+            Last name:
+            <label ng-bind="userInfo.userContact.lastname" />
+        </ons-list-item>
+        <ons-list-item>
+            <ons-icon icon="fa-phone"
+                      size="20px" />
+                Phone number:
+                <label modifier="list-item" ng-bind="userInfo.userContact.phoneNumber" />
+        </ons-list-item>
+        <ons-list-item>
+            <ons-icon icon="fa-envelope"
+                      size="20px">
+            E-Mail:
+            <label ng-bind="userInfo.userContact.eMail" />
+        </ons-list-item>
+        <ons-list-item>
+            Age:
+            <label modifier="list-item" ng-bind="userInfo.age" />
+        </ons-list-item>
+    
+
+        <ons-list-header>
+            Profile Links <ons-icon icon="fa-link"
+                                    size="20px"
+                                    fixed-width="false"
+                                    class="headerIconRight">
+            </ons-icon>
+        </ons-list-header>
+
+        <ons-list-item ng-if="userInfo.fbConnected">
+            <a href="{{userInfo.fbLink}}">Facebook Profile Link</a>
+        </ons-list-item>
+        
+    </ons-list>
+
+    <div ng-if="!userInfo.fbConnected" class="highlightInfo" style="margin-bottom:5px;">Currently the user has not connected any profile.</div>
+
+</ons-page>

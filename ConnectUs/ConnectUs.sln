@@ -36,9 +36,9 @@ Global
 		{43DDC50B-2BAE-4190-8E20-EEAEFAC6BEBD}.Debug|iOS.ActiveCfg = Debug|iOS
 		{43DDC50B-2BAE-4190-8E20-EEAEFAC6BEBD}.Debug|iOS.Build.0 = Debug|iOS
 		{43DDC50B-2BAE-4190-8E20-EEAEFAC6BEBD}.Debug|iOS.Deploy.0 = Debug|iOS
-		{43DDC50B-2BAE-4190-8E20-EEAEFAC6BEBD}.Debug|Windows Phone (Universal).ActiveCfg = Release|Windows Phone (Universal)
-		{43DDC50B-2BAE-4190-8E20-EEAEFAC6BEBD}.Debug|Windows Phone (Universal).Build.0 = Release|Windows Phone (Universal)
-		{43DDC50B-2BAE-4190-8E20-EEAEFAC6BEBD}.Debug|Windows Phone (Universal).Deploy.0 = Release|Windows Phone (Universal)
+		{43DDC50B-2BAE-4190-8E20-EEAEFAC6BEBD}.Debug|Windows Phone (Universal).ActiveCfg = Debug|Windows Phone (Universal)
+		{43DDC50B-2BAE-4190-8E20-EEAEFAC6BEBD}.Debug|Windows Phone (Universal).Build.0 = Debug|Windows Phone (Universal)
+		{43DDC50B-2BAE-4190-8E20-EEAEFAC6BEBD}.Debug|Windows Phone (Universal).Deploy.0 = Debug|Windows Phone (Universal)
 		{43DDC50B-2BAE-4190-8E20-EEAEFAC6BEBD}.Debug|Windows Phone 8.ActiveCfg = Debug|Windows Phone 8
 		{43DDC50B-2BAE-4190-8E20-EEAEFAC6BEBD}.Debug|Windows Phone 8.Build.0 = Debug|Windows Phone 8
 		{43DDC50B-2BAE-4190-8E20-EEAEFAC6BEBD}.Debug|Windows Phone 8.Deploy.0 = Debug|Windows Phone 8

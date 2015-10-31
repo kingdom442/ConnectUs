@@ -1,18 +1,17 @@
 ﻿
-angular.module('connectusApp').controller('registerController', function ($scope, registerService) {
+angular.module('connectusApp').controller('registerController', function ($scope, callbackHandler, registerService) {
     $scope.hideMenuToggle = true;
+    $scope.loadingCounter = 0;
 
     $scope.register = function () {
-        $scope.dataLoading = true;
+        $scope.loadingCounter++;
         registerService.register($scope.username, $scope.password, function () {
             showAlert('Successfully registered');
-            $scope.dataLoading = false;
-            $scope.$apply();
+            callbackHandler.finished($scope, false);
             menu.setMainPage('pages/login.html', { closeMenu: true });
         }, function () {
             showAlert('Registration failed');
-            $scope.dataLoading = false;
-            $scope.$apply();
+            callbackHandler.finished($scope, false);
         });
     };
 });

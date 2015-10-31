@@ -15,7 +15,7 @@ namespace ConnectusMobileService.Utils
     {
         internal static ProfileData ParseFBData(JObject fbJson)
         {
-            ProfileData profileData = new ProfileData() { ProfilePicUrl = (string)fbJson[FBFields.PICTURE.ToString().ToLower()]["data"]["url"], FirstName = (string)fbJson[FBFields.FIRST_NAME.ToString().ToLower()], LastName = (string)fbJson[FBFields.LAST_NAME.ToString().ToLower()], Description = (string)fbJson[FBFields.BIO.ToString().ToLower()], Gender = (string)fbJson[FBFields.GENDER.ToString().ToLower()] };
+            ProfileData profileData = new ProfileData() { ProfilePicUrl = (string)fbJson[FBFields.PICTURE.ToString().ToLower()]["data"]["url"], FirstName = (string)fbJson[FBFields.FIRST_NAME.ToString().ToLower()], LastName = (string)fbJson[FBFields.LAST_NAME.ToString().ToLower()], Description = (string)fbJson[FBFields.BIO.ToString().ToLower()], Gender = (string)fbJson[FBFields.GENDER.ToString().ToLower()], ProfileLink = (string)fbJson[FBFields.LINK.ToString().ToLower()] };
 
             JArray jEducations = (JArray)fbJson[FBFields.EDUCATION.ToString().ToLower()];
             foreach(JObject jEducation in jEducations)
@@ -44,7 +44,15 @@ namespace ConnectusMobileService.Utils
                 });
             }
 
-
+            JArray jAthletes = (JArray)fbJson[FBFields.FAVORITE_ATHLETES.ToString().ToLower()];
+            foreach (JObject jAthlete in jAthletes)
+            {
+                profileData.Interests.Add(new Interest()
+                {
+                    name = (!JsonUtil.IsNullOrEmpty(jAthlete.SelectToken("name"))) ? (string)jAthlete["name"] : null,
+                    type = InterestType.TEAM
+                });
+            }
 
             return profileData;
         }

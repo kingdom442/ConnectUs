@@ -5,7 +5,7 @@ using System.Web;
 
 namespace ConnectusMobileService.DataObjects.DTO.Profile
 {
-    public struct Work
+    public class Work: ProfileDataItem
     {
         public string name, description; //CompanyName...
         public string type, position;
@@ -15,6 +15,11 @@ namespace ConnectusMobileService.DataObjects.DTO.Profile
         public enum WorkType
         {
             COMPANY, VOLUNTARY
+        }
+
+        protected override string CompareFieldValue()
+        {
+            return name;
         }
     }
 }

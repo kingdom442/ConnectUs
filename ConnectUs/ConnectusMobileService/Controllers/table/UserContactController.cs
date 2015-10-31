@@ -10,53 +10,42 @@ using ConnectusMobileService.DataObjects.DTO;
 using Microsoft.WindowsAzure.Mobile.Service.Security;
 using System.Data.Entity.Spatial;
 using ConnectusMobileService.Utils;
-using System;
-using System.Collections.Generic;
 
 namespace ConnectusMobileService.Controllers
 {
     [AuthorizeLevel(AuthorizationLevel.User)]
-    public class UserComparisonController : TableController<UserComparison>
+    public class UserContactController : TableController<UserContact>
     {
         MobileServiceContext context = new MobileServiceContext();
 
         protected override void Initialize(HttpControllerContext controllerContext)
         {
             base.Initialize(controllerContext);
-            DomainManager = new EntityDomainManager<UserComparison>(context, Request, Services);
+            DomainManager = new EntityDomainManager<UserContact>(context, Request, Services);
         }
 
         // GET tables/UserContext
-        public IEnumerable<UserComparisonResultDTO> GetAllUserContext()
+        public IQueryable<UserContact> GetAllUserContext()
         {
-            IEnumerable<UserComparison> result = Query().ToList();
-            return result.Select(x => new UserComparisonResultDTO()
-            {
-                UserId = x.UserId,
-                UserName = x.User.Username,
-                CompUserId = x.CompUserId,
-                CompUserName = x.CompUser.Username,
-                Date = x.CreatedAt,
-                EqualData = x.EqualJson
-            });
+            return Query();
         }
 
         // GET tables/UserContext/48D68C86-6EA6-4C25-AA33-223FC9A27959
-        public SingleResult<UserComparison> GetUserContext(string id)
+        public SingleResult<UserContact> GetUserContext(string id)
         {
             return Lookup(id);
         }
 
         // PATCH tables/UserContext/48D68C86-6EA6-4C25-AA33-223FC9A27959
-        public Task<UserComparison> PatchUserContext(string id, Delta<UserComparison> patch)
+        public Task<UserContact> PatchUserContext(string id, Delta<UserContact> patch)
         {
              return UpdateAsync(id, patch);
         }
 
         // POST tables/UserContext
-        public async Task<IHttpActionResult> PostUserContext(UserComparison item)
+        public async Task<IHttpActionResult> PostUserContext(UserContact item)
         {
-            UserComparison current = await InsertAsync(item);
+            UserContact current = await InsertAsync(item);
             return CreatedAtRoute("Tables", new { id = current.Id }, current);
         }
         

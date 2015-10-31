@@ -28,12 +28,14 @@ namespace ConnectusMobileService.Utils
 
             userComparison.Networks = networks.ToList();
 
-            if (objectsToCompare.Contains(ProfileDataObjects.Education))
+            if (objectsToCompare.Contains(ProfileDataObjects.EDUCATION))
                 CompareEducation(ref userComparison, userProfile, compUserProfile);
-            if(objectsToCompare.Contains(ProfileDataObjects.Work))
+            if(objectsToCompare.Contains(ProfileDataObjects.WORK))
                 CompareWork(ref userComparison, userProfile, compUserProfile);
-            if (objectsToCompare.Contains(ProfileDataObjects.Team))
+            if (objectsToCompare.Contains(ProfileDataObjects.TEAM))
                 CompareInterests(ref userComparison, userProfile, compUserProfile, InterestType.TEAM);
+            if (objectsToCompare.Contains(ProfileDataObjects.ATHLETE))
+                CompareInterests(ref userComparison, userProfile, compUserProfile, InterestType.ATHLETE);
 
             return userComparison;
         }

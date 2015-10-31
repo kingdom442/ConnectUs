@@ -34,9 +34,7 @@
         Have you already <button class="button--quiet" style="display:inline;" ng-click="menu.setMainPage('pages/register.html', { animation: slide });">registered</button> a user?
     </h4>
 
-    <ons-modal var="modal" ng-click="modal.hide()">
-        <br>
-        <br>Login failed - Invalid Username or Password?
-        <br>
-    </ons-modal>
+    <div ng-if="loginFailed" style="margin-top:5px;" class="highlightNegative content-padded">
+        Login failed - Invalid Username or Password?
+    </div>
 </ons-page>

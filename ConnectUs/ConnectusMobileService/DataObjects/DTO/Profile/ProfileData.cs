@@ -23,6 +23,8 @@ namespace ConnectusMobileService.DataObjects.Profile
         public string Description { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        //The URL to the profile
+        public string ProfileLink { get; set; }
 
         public List<Education> EducationList { get; set; }
         public List<Work> WorkHistory { get; set; }

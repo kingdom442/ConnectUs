@@ -62,25 +62,27 @@ namespace ConnectusMobileService.Migrations
             if(context.Networks.Count() == 0)
                 Network.GetAllNetworks().ToList().ForEach(n => context.Networks.AddOrUpdate(n));
 
-            Event defaultEvent1 = new Event()
+            if (context.Events.Count() == 0)
             {
-                Id = Guid.NewGuid().ToString(),
-                Name = "Defaultevent",
-                Place = "Linz",
-                FromDate = new DateTimeOffset(2015, 8, 1, 12, 0, 0, TimeSpan.FromHours(0)),
-                ToDate = new DateTimeOffset(2015, 11, 1, 12, 0, 0, TimeSpan.FromHours(0))
-            };
-            context.Events.Add(defaultEvent1);
-            Event defaultEvent2 = new Event()
-            {
-                Id = Guid.NewGuid().ToString(),
-                Name = "Upcoming Event",
-                Place = "Wien",
-                FromDate = new DateTimeOffset(2015, 11, 5, 12, 0, 0, TimeSpan.FromHours(0)),
-                ToDate = new DateTimeOffset(2015, 12, 1, 12, 0, 0, TimeSpan.FromHours(0))
-            };
-            context.Events.Add(defaultEvent2);
-
+                Event defaultEvent1 = new Event()
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Name = "Defaultevent",
+                    Place = "Linz",
+                    FromDate = new DateTimeOffset(2015, 8, 1, 12, 0, 0, TimeSpan.FromHours(0)),
+                    ToDate = new DateTimeOffset(2015, 11, 1, 12, 0, 0, TimeSpan.FromHours(0))
+                };
+                context.Events.Add(defaultEvent1);
+                Event defaultEvent2 = new Event()
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Name = "Upcoming Event",
+                    Place = "Wien",
+                    FromDate = new DateTimeOffset(2015, 11, 5, 12, 0, 0, TimeSpan.FromHours(0)),
+                    ToDate = new DateTimeOffset(2015, 12, 1, 12, 0, 0, TimeSpan.FromHours(0))
+                };
+                context.Events.Add(defaultEvent2);
+            }
 
             context.SaveChanges();
             base.Seed(context);

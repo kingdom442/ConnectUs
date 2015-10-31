@@ -1,0 +1,15 @@
+﻿<ons-page ng-controller="connectedUsersController" ng-init="init()">
+    <ng-include src="'pages/detail/connectusToolbar.html'"></ng-include>
+
+    <ons-list>
+        <ons-list-header>
+            Connected Users<ons-icon icon="fa-user"
+                                   size="20px"
+                                   fixed-width="false"
+                                   class="headerIconRight">
+            </ons-icon>
+        </ons-list-header>
+        <ons-list-item class="item" modifier="chevron" ng-repeat="user in connectedUsers" ng-click="showUserDetails(user)">
+            <ng-include src="'pages/detail/userInfo.html'"></ng-include>
+        </ons-list-item>
+</ons-page>

@@ -5,43 +5,20 @@ using System.Web;
 
 namespace ConnectusMobileService.DataObjects.DTO.Profile
 {
-    public class Interest: IEquatable<Interest>
+    public class Interest: ProfileDataItem
     {
         public string name { get; set; }
         public string description { get; set; }
         public InterestType type { get; set; }
 
-
-        public bool Equals(Interest obj)
+        protected override string CompareFieldValue()
         {
-            if (obj.GetType() != this.GetType())
-                return false;
-            if (!name.Equals(((Interest)obj).name))
-                return false;
-            if (description != ((Interest)obj).description)
-                return false;
-            if (type != ((Interest)obj).type)
-                return false;
-
-            return true;
-        }
-
-
-
-        public override int GetHashCode()
-        {
-            int hash = 17;
-            if(name != null)
-                hash = hash * 31 + name.GetHashCode();
-            if(description != null)
-                hash = hash * 31 + description.GetHashCode();
-            hash = hash * 31 + type.GetHashCode();
-            return hash;
+            return name + type;
         }
     }
 
     public enum InterestType
     {
-        SPORT, MUSIC, TEAM, ORGANISATION
+        SPORT, MUSIC, TEAM, ORGANISATION, ATHLETE
     }
 }

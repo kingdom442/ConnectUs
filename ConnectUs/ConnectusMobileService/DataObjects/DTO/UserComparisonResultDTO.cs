@@ -13,5 +13,6 @@ namespace ConnectusMobileService.DataObjects.DTO
         public string CompUserName { get; set; }
         public DateTimeOffset? Date { get; set; }
         public string EqualData { get; set; }
+        public bool CurrentUserIsInitiator { get; set; }
     }
 }

@@ -1,50 +1,50 @@
 ﻿
-angular.module('connectusApp').controller('userProfileController', function ($scope, $rootScope, $timeout, userService, loginService) {
+angular.module('connectusApp').controller('userProfileController', function ($scope, $rootScope, userService, callbackHandler, loginService) {
     $scope.userinfo = new UserInfo($rootScope.accountId, $rootScope.username, '', undefined, "Age", Date.now);
     $scope.editProfileImg = 'images/profile-icon.png';
+    $scope.loadingCounter = 0;
 
     $scope.loadUserInfo = function () {
-        $scope.dataLoading = true;
-        userService.loadUserInfo(function (userinfo) {
+        $scope.loadingCounter++;
+        userService.loadUserInfo($rootScope.accountId, function (userinfo) {
             if (userinfo) {
                 $scope.userinfo = userinfo;
                 $scope.editProfileImg = userinfo.profilePicUrl;
             }
-            $scope.dataLoading = false;
-            $scope.$apply();
+            callbackHandler.finished($scope, false);
         }, function (error) {
-            $scope.dataLoading = false;
-            $scope.$apply();
+            callbackHandler.finished($scope, false);
         });
     }
 
     $scope.synchronizeFBProfile = function () {
-        $scope.dataLoading = true;
+        $scope.loadingCounter++;
        
         userService.syncFBUserInfo(function () {
-            $scope.dataLoading = false;
-            $scope.saved = true;
-            $scope.$apply();
-            $timeout(function(){
-                $scope.saved=false;
-            }, 2000);
+            callbackHandler.finished($scope, true);
         }, function (error) {
-            $scope.dataLoading = false;
-            $scope.$apply();
+            callbackHandler.finished($scope, fálse);
             modalSyncFailed.show();
         });
     }
 
-    $scope.save = function () {
-        $scope.dataLoading = true;
-        userService.updateUserInfo($scope.userinfo, function (suc) {
-            $scope.goBack();
-            $scope.dataLoading = false;
-            $scope.$apply();
-        }, function (err) {
-            $scope.dataLoading = false;
-            $scope.$apply();
-        });
+    $scope.save = function (form) {
+        if (form.$valid) {
+            $scope.loadingCounter++;
+            userService.updateUserInfo($scope.userinfo, function (suc) {
+                if ($scope.userinfo.userContact.phoneNumber || $scope.userinfo.userContact.eMail) {
+                    userService.updateUserContact($scope.userinfo, function (suc) {
+                    callbackHandler.finished($scope, true);
+                    }, function (err) {
+                        callbackHandler.finished($scope, false);
+                    });
+                } else {
+                    callbackHandler.finished($scope, true);
+                }
+            }, function (err) {
+                callbackHandler.finished($scope, false);
+            });
+        }
     };
 
     $scope.editProfile = function(){
@@ -97,11 +97,9 @@ angular.module('connectusApp').controller('userProfileController', function ($sc
             return;
         }
         if ($scope.userinfo.fbConnected) {
-            $scope.dataLoading = true;
+            $scope.loadingCounter++;
             loginService.fbLogin(function () {
-
-                $scope.dataLoading = false;
-                $scope.$apply();
+                callbackHandler.finished($scope, false);
             });
         } else {
 

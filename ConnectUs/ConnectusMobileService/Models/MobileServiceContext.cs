@@ -32,6 +32,7 @@ namespace ConnectusMobileService.Models
         public DbSet<UserContext> UserContexts { get; set; }
         public DbSet<UserInfo> UserInfos { get; set; }
         public DbSet<UserInfoDetail> UserInfoDetails { get; set; }
+        public DbSet<UserContact> UserContacts { get; set; }
         public DbSet<UserComparison> UserComparisons { get; set; }
         public DbSet<Network> Networks { get; set; }
         public DbSet<Event> Events { get; set; }

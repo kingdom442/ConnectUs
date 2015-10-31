@@ -7,6 +7,6 @@ namespace ConnectusMobileService.DataObjects.DTO.Profile
 {
     public enum ProfileDataObjects
     {
-        Education, Work, Sport, Music, Team
+        EDUCATION, WORK, SPORT, MUSIC, TEAM, ATHLETE
     }
 }

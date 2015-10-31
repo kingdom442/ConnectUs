@@ -1,39 +1,58 @@
-﻿angular.module('connectusApp').controller('connectUsersController', function ($scope, $rootScope, userComparisonService, userConnectService, connectStates) {
-    $scope.dataLoading = true;
+﻿angular.module('connectusApp').controller('connectUsersController', function ($scope, $rootScope, callbackHandler, userComparisonService, userConnectService, connectStates) {
+    $scope.loadingCounter = 0;
     $scope.equalEducations = [];
     $scope.equalWork = [];
     $scope.equalInterests = [];
     $scope.sportInterests = [];
     $scope.user = {};
 
+    $scope.compareEducation = getBooleanFromLocalStorage('setting_education');
+    $scope.compareWork = getBooleanFromLocalStorage('setting_work');
+    $scope.compareTeams = getBooleanFromLocalStorage('setting_teams');
+    $scope.compareAthletes = getBooleanFromLocalStorage('setting_athletes');
+    $scope.compareObjects = [];
+    if ($scope.compareEducation)
+        $scope.compareObjects.push("EDUCATION");
+    if ($scope.compareWork)
+        $scope.compareObjects.push("WORK");
+    if ($scope.compareTeams)
+        $scope.compareObjects.push("TEAM");
+    if ($scope.compareAthletes)
+        $scope.compareObjects.push("ATHLETE");
+
     if ($rootScope.selectedUser) {
         $scope.user = $rootScope.selectedUser;
-        userComparisonService.compareUsers($scope.user.userid, comparisonFinished, errCB);
+        $scope.loadingCounter++;
+        userComparisonService.compareUsers($scope.user.userid, $scope.compareObjects, comparisonFinished, errCB);
         $rootScope.selectedUser = undefined;
     }
     else if ($rootScope.selectedUserComparison) {
         comparisonFinished($rootScope.selectedUserComparison);
         $scope.user.userid = $rootScope.selectedUserComparison.userId;
+        $scope.user.username = $rootScope.selectedUserComparison.userName;
         $rootScope.selectedUserComparison = undefined;
     }
 
     function comparisonFinished(result) {
-        $scope.dataLoading = false;
 
         var parsedEqualData = JSON.parse(result.equalJson);
-
-        parsedEqualData.EducationList.forEach(function (edu) {
-            $scope.equalEducations.push(new Education(edu.name, edu.type, edu.yearTo));
-        });
-        parsedEqualData.WorkHistory.forEach(function (work) {
-            $scope.equalWork.push(new Work(work.name, work.type, work.dateFrom, work.dateTo, work.city));
-        });
-        parsedEqualData.Interests.forEach(function (interest) {
-            $scope.equalInterests.push(new Interest(interest.name, interest.description, interest.type));
-        });
-        if (!$scope.$$phase) {
-            $scope.$apply();
+        if (parsedEqualData.EducationList) {
+            parsedEqualData.EducationList.forEach(function (edu) {
+                $scope.equalEducations.push(new Education(edu.name, edu.type, edu.yearTo));
+            });
         }
+        if (parsedEqualData.WorkHistory) {
+            parsedEqualData.WorkHistory.forEach(function (work) {
+                $scope.equalWork.push(new Work(work.name, work.type, work.dateFrom, work.dateTo, work.city));
+            });
+        }
+        if (parsedEqualData.Interests) {
+            parsedEqualData.Interests.forEach(function (interest) {
+                $scope.equalInterests.push(new Interest(interest.name, interest.description, interest.type));
+            });
+        }
+        //if (!$scope.$$phase) {
+        callbackHandler.finished($scope, false);
     }
 
     function errCB() {
@@ -41,44 +60,43 @@
     }
 
     $scope.loadConnectState = function () {
+        $scope.loadingCounter++;   
         //requester = 0 if requester is current user, else 1
         userConnectService.loadConnectState($scope.user.userid, function (connectRequestId, state, requester) {
-            $scope.dataLoading = false;
             $scope.connectState = connectStates.fromNr(state);
             $scope.connectRequestId = connectRequestId;
             $scope.requester = requester;
-            $scope.$apply();
+            callbackHandler.finished($scope, false);
         }, function () {
         });
     }
 
     //Send a connect request to the selected user
     $scope.sendConnectRequest = function () {
-        $scope.dataLoading = true;
+        $scope.loadingCounter++;
         userConnectService.sendConnectRequest($scope.user.userid, function () {
-            $scope.dataLoading = false;
             $scope.connectState = connectStates.REQUESTED;
-            $scope.$apply();
+            callbackHandler.finished($scope, false);
         }, function(){
         });
     };
 
     $scope.acceptConnectRequest = function () {
-        $scope.dataLoading = true;
+        $scope.loadingCounter++;
         userConnectService.acceptConnectRequest($scope.user.userid, $scope.connectRequestId, function () {
-            $scope.dataLoading = false;
             $scope.connectState = connectStates.CONNECTED;
-            $scope.$apply();
+            callbackHandler.finished($scope, false);
+            $rootScope.selectedUserId = $scope.user.userid;
+            menu.setMainPage('pages/userContact.html', { closeMenu: true });
         }, function () {
         });
     };
 
     $scope.rejectConnectRequest = function () {
-        $scope.dataLoading = true;
+        $scope.loadingCounter++;
         userConnectService.rejectConnectRequest($scope.user.userid, $scope.connectRequestId, function () {
-            $scope.dataLoading = false;
             $scope.connectState = connectStates.REJECTED;
-            $scope.$apply();
+            callbackHandler.finished($scope, false);
         }, function () {
         });
     };

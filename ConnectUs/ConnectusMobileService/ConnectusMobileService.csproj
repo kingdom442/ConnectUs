@@ -248,6 +248,8 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\account\CustomLoginController.cs" />
+    <Compile Include="Controllers\ConnectedUsersController.cs" />
+    <Compile Include="Controllers\UnseenComparisonsController.cs" />
     <Compile Include="Controllers\CompareUsersController.cs" />
     <Compile Include="Controllers\facebook\FBConnectUserController.cs" />
     <Compile Include="Controllers\account\CustomRegistrationController.cs" />
@@ -256,6 +258,7 @@
     <Compile Include="Controllers\facebook\FBTokenController.cs" />
     <Compile Include="Controllers\FindUsersController.cs" />
     <Compile Include="Controllers\GetUserInfoController.cs" />
+    <Compile Include="Controllers\table\UserContactController.cs" />
     <Compile Include="Controllers\table\EventController.cs" />
     <Compile Include="Controllers\table\ConnectRequestController.cs" />
     <Compile Include="Controllers\table\UserComparisonController.cs" />
@@ -269,9 +272,11 @@
     <Compile Include="DataObjects\Authentication\RegistrationRequest.cs" />
     <Compile Include="DataObjects\ConnectRequest.cs" />
     <Compile Include="DataObjects\DTO\AccountId.cs" />
-    <Compile Include="DataObjects\DTO\BasicUserInfoDTO.cs" />
+    <Compile Include="DataObjects\DTO\UnseenComparisonsRequestDTO.cs" />
+    <Compile Include="DataObjects\DTO\UserInfoDTO.cs" />
     <Compile Include="DataObjects\DTO\FindUsersRequestData.cs" />
     <Compile Include="DataObjects\DTO\Profile\Interest.cs" />
+    <Compile Include="DataObjects\DTO\Profile\ProfileDataItem.cs" />
     <Compile Include="DataObjects\DTO\Profile\ProfileDataObjects.cs" />
     <Compile Include="DataObjects\DTO\Profile\Work.cs" />
     <Compile Include="DataObjects\DTO\UserComparisonRequestDTO.cs" />
@@ -309,6 +314,27 @@
     <Compile Include="Migrations\201510011623289_eventupdate.Designer.cs">
       <DependentUpon>201510011623289_eventupdate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201510141156442_usercontactupdate.cs" />
+    <Compile Include="Migrations\201510141156442_usercontactupdate.Designer.cs">
+      <DependentUpon>201510141156442_usercontactupdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510141300481_minor.cs" />
+    <Compile Include="Migrations\201510141300481_minor.Designer.cs">
+      <DependentUpon>201510141300481_minor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510141417176_minor1.cs" />
+    <Compile Include="Migrations\201510141417176_minor1.Designer.cs">
+      <DependentUpon>201510141417176_minor1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510160912045_usercomparison_update.cs" />
+    <Compile Include="Migrations\201510160912045_usercomparison_update.Designer.cs">
+      <DependentUpon>201510160912045_usercomparison_update.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510161212589_minor2.cs" />
+    <Compile Include="Migrations\201510161212589_minor2.Designer.cs">
+      <DependentUpon>201510161212589_minor2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Service\Data\UserInfoService.cs" />
     <Compile Include="Utils\Enum\FBFields.cs" />
     <Compile Include="DataObjects\DTO\Profile\ProfileData.cs" />
     <Compile Include="DataObjects\UserComparison.cs" />
@@ -339,6 +365,7 @@
     <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="Utils\CustomLoginProvider.cs" />
     <Compile Include="Utils\DBGeographyUtil.cs" />
+    <Compile Include="Utils\JaroWinklerDistance.cs" />
     <Compile Include="Utils\JsonUtil.cs" />
     <Compile Include="Utils\LoginProviderUtil.cs" />
     <Compile Include="Utils\ProfileComparisonUtil.cs" />
@@ -422,6 +449,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201510011623289_eventupdate.resx">
       <DependentUpon>201510011623289_eventupdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510141156442_usercontactupdate.resx">
+      <DependentUpon>201510141156442_usercontactupdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510141300481_minor.resx">
+      <DependentUpon>201510141300481_minor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510141417176_minor1.resx">
+      <DependentUpon>201510141417176_minor1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510160912045_usercomparison_update.resx">
+      <DependentUpon>201510160912045_usercomparison_update.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510161212589_minor2.resx">
+      <DependentUpon>201510161212589_minor2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

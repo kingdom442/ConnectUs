@@ -12,7 +12,6 @@
     <!-- CSS dependencies -->
     <link rel="stylesheet" href="lib/onsen/css/onsenui.css" />
     <link rel="stylesheet" href="lib/onsen/css/onsen-css-components-default.css" />
-    <link rel="stylesheet" type="text/css" href="lib/onsen/css/ionicons/css/ionicons.css">
     <link rel="stylesheet" type="text/css" href="css/menu.css">
     <link rel="stylesheet" type="text/css" href="css/settings.css">
     <link rel="stylesheet" type="text/css" href="css/font.css">
@@ -58,6 +57,10 @@
                     <ons-icon icon="fa-search"></ons-icon>
                     Find people around
                 </ons-list-item>
+                <ons-list-item class="menu-item" ng-click="menu.setMainPage('pages/connectedUsers.html', {closeMenu: true})">
+                    <ons-icon icon="fa-users"></ons-icon>
+                    Connected Users
+                </ons-list-item>
                 <ons-list-item class="menu-item" ng-click="menu.setMainPage('pages/userProfile.html', {closeMenu: true})">
                     <ons-icon icon="fa-user"></ons-icon>
                     {{username}}
@@ -88,7 +91,9 @@
 
     <script src="scripts/index.js"></script>
     <script src="scripts/services/helper/alert.js"></script>
+    <script src="scripts/services/helper/localstorage.js"></script>
     <script src="scripts/services/mobileServices/mscFactory.js"></script>
+    <script src="scripts/services/helper/callbackHandler.js"></script>
     <!-- Data -->
     <script src="scripts/objects/userComparison.js"></script>
     <script src="scripts/objects/userinfo.js"></script>
@@ -107,6 +112,8 @@
     <!--Controller-->
     <script src="scripts/controller/appController.js"></script>
     <script src="scripts/controller/loginController.js"></script>
+    <script src="scripts/controller/userContactController.js"></script>
+    <script src="scripts/controller/connectedUsersController.js"></script>
     <script src="scripts/controller/registerController.js"></script>
     <script src="scripts/controller/homeController.js"></script>
     <script src="scripts/controller/lastProfileComparisonsController.js"></script>
