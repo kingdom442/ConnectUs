@@ -1,6 +1,6 @@
 ﻿angular.module('connectusApp').controller('connectedUsersController', function ($scope, $rootScope, callbackHandler, userConnectService) {
     $scope.loadingCounter = 0;
-
+    $rootScope.pageStackCount = 2;
 
     $scope.init = function () {
         $scope.loadConnectedUsers($rootScope.accountId);

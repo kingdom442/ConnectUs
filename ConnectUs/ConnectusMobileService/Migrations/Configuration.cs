@@ -1,19 +1,21 @@
 namespace ConnectusMobileService.Migrations
 {
-    using Utils;
+    using ConnectusMobileService.Utils.LoginProviders;
     using Microsoft.WindowsAzure.Mobile.Service.Tables;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
     using DataObjects;
+    using Models;
 
     internal sealed class Configuration : DbMigrationsConfiguration<ConnectusMobileService.Models.MobileServiceContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            SetSqlGenerator("System.Data.SqlClient", new EntityTableSqlGenerator());
+            MigrationsDirectory = "Migrations";
+            SetSqlGenerator("System.Data.SqlClient", new AzureSqlGenerator());
         }
 
         protected override void Seed(ConnectusMobileService.Models.MobileServiceContext context)
@@ -21,7 +23,7 @@ namespace ConnectusMobileService.Migrations
             byte[] salt = LoginProviderUtil.generateSalt();
             if (!context.Accounts.Any(a => a.Username == "max"))
             {
-                Account defaultAccount1 = new Account
+                Account defaultAccount1 = new Account()
                 {
                     Id = Guid.NewGuid().ToString(),
                     Username = "max",
@@ -32,11 +34,9 @@ namespace ConnectusMobileService.Migrations
                 UserInfo newUserInfo;
                 context.UserInfos.AddOrUpdate(newUserInfo = new UserInfo()
                 {
-                    Description = "About me",
+                    Bio = "About me",
                     UserId = defaultAccount1.Id,
-                    Id = Guid.NewGuid().ToString(),
-                    NetworkId = (Int16)NetworkType.CONNECT_US,
-                    UserInfoDetail = new UserInfoDetail()
+                    Id = Guid.NewGuid().ToString()
                 });
             }
             if (!context.Accounts.Any(a => a.Username == "user"))
@@ -52,17 +52,15 @@ namespace ConnectusMobileService.Migrations
                 UserInfo defaultUserInfo2;
                 context.UserInfos.AddOrUpdate(defaultUserInfo2 = new UserInfo()
                 {
-                    Description = "About me",
+                    Bio = "About me",
                     UserId = defaultAccount2.Id,
-                    Id = Guid.NewGuid().ToString(),
-                    NetworkId = (Int16)NetworkType.CONNECT_US,
-                    UserInfoDetail = new UserInfoDetail()
+                    Id = Guid.NewGuid().ToString()
                 });
             }
             if(context.Networks.Count() == 0)
                 Network.GetAllNetworks().ToList().ForEach(n => context.Networks.AddOrUpdate(n));
 
-            if (context.Events.Count() == 0)
+            if (!context.Events.Any(e => e.Name == "Defaultevent"))
             {
                 Event defaultEvent1 = new Event()
                 {
@@ -83,9 +81,31 @@ namespace ConnectusMobileService.Migrations
                 };
                 context.Events.Add(defaultEvent2);
             }
-
+            AddTestUsers(context);
             context.SaveChanges();
             base.Seed(context);
         }
+
+        private void AddTestUsers(MobileServiceContext context)
+        {
+            if (!context.Accounts.Any(e => e.Username == "Maxi"))
+            {
+                Account testAccount1 = new Account
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Username = "Maxi"
+                };
+                context.Accounts.AddOrUpdate(testAccount1);
+                UserInfo testUserInfo1;
+                context.UserInfos.AddOrUpdate(testUserInfo1 = new UserInfo()
+                {
+                    Bio = "Test",
+                    About = "Ich bin der Testmaxi",
+                    UserId = testAccount1.Id,
+                    Id = Guid.NewGuid().ToString()
+                });
+            }
+        }
+
     }
 }

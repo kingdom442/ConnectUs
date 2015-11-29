@@ -5,38 +5,34 @@
     },
     "config_munge": {
         "files": {
-            "config.xml": {
+            "Properties/WMAppManifest.xml": {
                 "parents": {
-                    "/*": [
+                    "/Deployment/App/Capabilities": [
                         {
-                            "xml": "<feature name=\"Notification\"><param name=\"wp-package\" value=\"Notification\" /></feature>",
+                            "xml": "<Capability Name=\"ID_CAP_NETWORKING\" />",
+                            "count": 2
+                        },
+                        {
+                            "xml": "<Capability Name=\"ID_CAP_IDENTITY_DEVICE\" />",
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"InAppBrowser\"><param name=\"wp-package\" value=\"InAppBrowser\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"StatusBar\"><param name=\"wp-package\" value=\"StatusBar\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"SplashScreen\"><param name=\"wp-package\" value=\"SplashScreen\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "xml": "<Capability Name=\"ID_CAP_LOCATION\" />",
                             "count": 1
                         }
                     ]
                 }
             },
-            "Properties/WMAppManifest.xml": {
+            "config.xml": {
                 "parents": {
-                    "/Deployment/App/Capabilities": [
+                    "/*": [
                         {
-                            "xml": "<Capability Name=\"ID_CAP_LOCATION\" />",
+                            "xml": "<feature name=\"InAppBrowser\"><param name=\"wp-package\" value=\"InAppBrowser\" /></feature>",
                             "count": 1
                         },
                         {
-                            "xml": "<Capability Name=\"ID_CAP_NETWORKING\" />",
-                            "count": 2
+                            "xml": "<feature name=\"Device\"><param name=\"wp-package\" value=\"Device\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -44,25 +40,19 @@
         }
     },
     "installed_plugins": {
-        "cordova-plugin-dialogs": {
-            "PACKAGE_NAME": "{dd914aa0-2d23-11e5-8bc9-a3bdc676aec0}"
-        },
-        "org.apache.cordova.geolocation": {
-            "PACKAGE_NAME": "{dd914aa0-2d23-11e5-8bc9-a3bdc676aec0}"
-        },
         "com.microsoft.azure-mobile-services": {
-            "PACKAGE_NAME": "{5a513c80-321a-11e5-a84c-8f923a0ff6a0}"
+            "PACKAGE_NAME": "{57359770-91bb-11e5-83ad-151b86050b21}"
         },
-        "org.apache.cordova.statusbar": {
-            "PACKAGE_NAME": "{5a513c80-321a-11e5-a84c-8f923a0ff6a0}"
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "{57359770-91bb-11e5-83ad-151b86050b21}"
         },
-        "org.apache.cordova.splashscreen": {
-            "PACKAGE_NAME": "{5a513c80-321a-11e5-a84c-8f923a0ff6a0}"
+        "cordova-plugin-geolocation": {
+            "PACKAGE_NAME": "{57359770-91bb-11e5-83ad-151b86050b21}"
         }
     },
     "dependent_plugins": {
-        "org.apache.cordova.inappbrowser": {
-            "PACKAGE_NAME": "{5a513c80-321a-11e5-a84c-8f923a0ff6a0}"
+        "cordova-plugin-inappbrowser": {
+            "PACKAGE_NAME": "{57359770-91bb-11e5-83ad-151b86050b21}"
         }
     }
 }

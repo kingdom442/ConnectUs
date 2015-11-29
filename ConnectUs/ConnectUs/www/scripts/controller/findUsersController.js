@@ -6,24 +6,28 @@ angular.module('connectusApp').controller('findUsersController', function ($scop
     $scope.selecteduser = undefined;
     $scope.noUserFound = false;
     $scope.showComparedUsers = false;
-    $scope.geolocationAllowed = getBooleanFromLocalStorage('setting_geolocation');
+    $scope.geolocationAllowed = true;
+    $scope.geolocationEnabled = getBooleanFromLocalStorage('setting_geolocation');
     $scope.loadingCounter = 0;
+    $rootScope.pageStackCount = 2;
 
     $scope.findUsers = function (findAlreadyComparedUsers) {
-        if ($scope.geolocationAllowed) {
+        if ($scope.geolocationEnabled) {
             $scope.loadingCounter++;
             var onSuccess = function (position) {
-                findUsersService.findAvailableUsersByGeoLocation(position.coords, findAlreadyComparedUsers, function (users) {
+                findUsersService.findAvailableUsersByGeoLocation(position.coords, findAlreadyComparedUsers, getItemFromLocalStorage('setting_searcharea'), function (users) {
                     if (users && users.length > 0 && users[0]) {
                         $.each(users, function (index, u) {
                             if (!findAlreadyComparedUsers)
-                                $scope.users.push(new UserInfo(u.accountId, u.username, u.profilePicUrl, u.description, true, u.age, ""));
+                                $scope.users.push(new UserInfo(u.accountId, u.username, u.profilePicUrl, u.status, u.about, true, u.age, ""));
                             else
-                                $scope.comparedusers.push(new UserInfo(u.accountId, u.username, u.profilePicUrl, u.description, true, u.age, ""));
+                                $scope.comparedusers.push(new UserInfo(u.accountId, u.username, u.profilePicUrl, u.status, u.about, true, u.age, ""));
                         });
                     } else {
                         $scope.noUserFound = true;
                     }
+                    callbackHandler.finished($scope, false);
+                }, function () {
                     callbackHandler.finished($scope, false);
                 });
 
@@ -31,6 +35,8 @@ angular.module('connectusApp').controller('findUsersController', function ($scop
 
             function onError(error) {
                 $scope.users = [];
+                callbackHandler.finished($scope, false);
+                $scope.geolocationAllowed = false;
             }
 
             navigator.geolocation.getCurrentPosition(onSuccess, onError);
@@ -45,17 +51,4 @@ angular.module('connectusApp').controller('findUsersController', function ($scop
             $scope.comparedusers = [];
     };
 
-    $scope.showUser = function (selectedUser) {
-        $scope.selectedUser = selectedUser;
-        //ons.createDialog('userDetails.html', {parentScope: $scope}).then(function (dialog) {
-        //    dialog.show();
-        //});
-        $scope.initConnect();
-    };
-
-    $scope.initConnect = function () {
-        //userDialog.destroy();
-        $rootScope.selectedUser = $scope.selectedUser;
-        menu.setMainPage('pages/connectUsers.html', {  closeMenu: true })
-    };
 });

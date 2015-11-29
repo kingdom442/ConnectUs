@@ -91,23 +91,20 @@
     <splash src="res/screens/wp8/SplashScreenImage.jpg" width="480" height="800" />
   </platform>
   <preference name="KeepRunning" value="True" />
-  <preference name="ShowTitle" value="False" />
-  <preference name="InAppBrowserStorageEnabled" value="False" />
-  <preference name="SuppressesIncrementalRendering" value="False" />
+  <preference name="ShowTitle" value="True" />
+  <preference name="InAppBrowserStorageEnabled" value="True" />
+  <preference name="SuppressesIncrementalRendering" value="True" />
   <preference name="AutoHideSplashScreen" value="true" />
-  <vs:plugin name="org.apache.cordova.geolocation" version="0.3.12" />
   <vs:platformSpecificValues>
     <vs:platformSpecificWidget platformName="windows" version="0.1.0.0" />
   </vs:platformSpecificValues>
-  <vs:plugin name="org.apache.cordova.inappbrowser" version="0.6.0" />
-  <vs:plugin name="com.microsoft.azure-mobile-services" version="1.2.8" />
-  <vs:plugin name="org.apache.cordova.statusbar" version="0.1.10" />
-  <vs:plugin name="org.apache.cordova.splashscreen" version="1.0.0" />
   <preference name="Orientation" value="portrait" />
   <preference name="Fullscreen" value="True" />
-  <preference name="android-minSdkVersion" value="13" />
+  <preference name="android-minSdkVersion" value="14" />
   <preference name="android-maxSdkVersion" value="19" />
   <preference name="android-targetSdkVersion" value="19" />
+  <vs:plugin name="com.microsoft.azure-mobile-services" version="1.2.9" />
   <vs:plugin name="cordova-plugin-device" version="1.0.1" />
-  <vs:plugin name="cordova-plugin-camera" version="1.2.0" />
+  <vs:plugin name="cordova-plugin-geolocation" version="1.0.1" />
+  <vs:plugin name="cordova-plugin-inappbrowser" version="1.0.1" />
 </widget>

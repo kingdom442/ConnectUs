@@ -4,10 +4,10 @@
     <ons-carousel fullscreen var="profileCarousel">
         <ons-carousel-item>
             <div class="profile-card">
-                <img ng-src="{{userinfo.profilepicurl}}" class="profile-image">
+                <img ng-src="{{editProfileImg || 'images/profile-icon.png'}}" class="profile-image">
                 <div class="profile-name">{{userinfo.username}}</div>
                 <div class="profile-id">{{userinfo.age}}</div>
-                <div class="profile-desc">{{userinfo.description}}</div>
+                <div class="profile-desc">{{userinfo.status}}</div>
             </div>
 
             <ons-list modifier="inset" class="settings-list">
@@ -33,7 +33,7 @@
 
                 <ons-row class="profile-wrapper">
                     <ons-col width="60px" class="profile-image-wrapper">
-                        <img ng-src="{{editProfileImg}}" class="profile-image-small" ng-click="editPicture()">
+                        <img ng-src="{{userCmp.profilePic || 'images/profile-icon.png'}}" class="profile-image-small" />
                     </ons-col>
 
                     <ons-col>
@@ -44,6 +44,17 @@
                 </ons-row>
 
                 <form name="userInfoForm" ng-submit="save(userInfoForm)">
+                    <div class="settings-header">Personal Information</div>
+                    <ons-list modifier="inset" class="settings-list">
+                        <ons-list-item>
+                            Status
+                            <input type="text" class="text-input" style="width:100%;" placeholder="Current status" ng-model="userinfo.status" />
+                        </ons-list-item>
+                        <ons-list-item style="margin-bottom:10px;">
+                            About me
+                            <textarea rows="4" class="text-input" style="width:100%;height: 100px;" placeholder="About" ng-model="userinfo.about" />
+                        </ons-list-item>
+                    </ons-list>
                     <div class="settings-header">Personal data</div>
                     <div style="margin-top:5px;" class="highlightInfo content-padded">
                         The following information is visible for users you connect with. By adding infos here, you can easily interchange contact and personal infos.
@@ -60,7 +71,7 @@
                         </ons-list-item>
                         <ons-list-item>
                             Phone number
-                            <input type="tel" pattern= "\d*" class="text-input" style="width:100%;" placeholder="Enter your nr." ng-model="userinfo.userContact.phoneNumber" />
+                            <input type="tel" pattern="\d*" class="text-input" style="width:100%;" placeholder="Enter your nr." ng-model="userinfo.userContact.phoneNumber" />
                         </ons-list-item>
                         <ons-list-item>
                             E-Mail
@@ -81,13 +92,12 @@
                         <i class="fa fa-facebook-square fa-lg" style="color:#3b5998;"></i>
                         Facebook
                         <ons-switch modifier="list-item" ng-model="userinfo.fbConnected" ng-change="changeFBConnection()"></ons-switch>
-                        <button ng-if="userinfo.fbConnected" class="button--quiet" ng-click="synchronizeFBProfile()">Sync Profile</button>
                     </ons-list-item>
 
                     <ons-list-item>
                         <i class="fa fa-linkedin-square fa-lg" style="color:#0077B5;"></i>
                         Linked In
-                        <ons-switch modifier="list-item" ng-checked="userinfo.linkedInConnected" disabled></ons-switch>
+                        <ons-switch modifier="list-item" ng-model="userinfo.linkedInConnected" ng-change="changeLIConnection()"></ons-switch>
                     </ons-list-item>
                 </ons-list>
             </ons-scroller>

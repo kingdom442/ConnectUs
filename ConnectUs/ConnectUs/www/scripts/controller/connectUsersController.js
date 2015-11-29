@@ -5,6 +5,7 @@
     $scope.equalInterests = [];
     $scope.sportInterests = [];
     $scope.user = {};
+    $rootScope.pageStackCount = 2;
 
     $scope.compareEducation = getBooleanFromLocalStorage('setting_education');
     $scope.compareWork = getBooleanFromLocalStorage('setting_work');
@@ -23,12 +24,14 @@
     if ($rootScope.selectedUser) {
         $scope.user = $rootScope.selectedUser;
         $scope.loadingCounter++;
-        userComparisonService.compareUsers($scope.user.userid, $scope.compareObjects, comparisonFinished, errCB);
+        userComparisonService.compareUsers($scope.user.accountId, $scope.compareObjects, comparisonFinished, errCB);
         $rootScope.selectedUser = undefined;
     }
     else if ($rootScope.selectedUserComparison) {
+        $scope.loadingCounter++;
         comparisonFinished($rootScope.selectedUserComparison);
-        $scope.user.userid = $rootScope.selectedUserComparison.userId;
+        $scope.user.profilePicUrl = $rootScope.selectedUserComparison.profilePicUrl;
+        $scope.user.accountId = $rootScope.selectedUserComparison.userId;
         $scope.user.username = $rootScope.selectedUserComparison.userName;
         $rootScope.selectedUserComparison = undefined;
     }
@@ -51,7 +54,6 @@
                 $scope.equalInterests.push(new Interest(interest.name, interest.description, interest.type));
             });
         }
-        //if (!$scope.$$phase) {
         callbackHandler.finished($scope, false);
     }
 
@@ -62,7 +64,7 @@
     $scope.loadConnectState = function () {
         $scope.loadingCounter++;   
         //requester = 0 if requester is current user, else 1
-        userConnectService.loadConnectState($scope.user.userid, function (connectRequestId, state, requester) {
+        userConnectService.loadConnectState($scope.user.accountId, function (connectRequestId, state, requester) {
             $scope.connectState = connectStates.fromNr(state);
             $scope.connectRequestId = connectRequestId;
             $scope.requester = requester;
@@ -74,7 +76,7 @@
     //Send a connect request to the selected user
     $scope.sendConnectRequest = function () {
         $scope.loadingCounter++;
-        userConnectService.sendConnectRequest($scope.user.userid, function () {
+        userConnectService.sendConnectRequest($scope.user.accountId, function () {
             $scope.connectState = connectStates.REQUESTED;
             callbackHandler.finished($scope, false);
         }, function(){
@@ -83,10 +85,10 @@
 
     $scope.acceptConnectRequest = function () {
         $scope.loadingCounter++;
-        userConnectService.acceptConnectRequest($scope.user.userid, $scope.connectRequestId, function () {
+        userConnectService.acceptConnectRequest($scope.user.accountId, $scope.connectRequestId, function () {
             $scope.connectState = connectStates.CONNECTED;
             callbackHandler.finished($scope, false);
-            $rootScope.selectedUserId = $scope.user.userid;
+            $rootScope.selectedUserId = $scope.user.accountId;
             menu.setMainPage('pages/userContact.html', { closeMenu: true });
         }, function () {
         });
@@ -94,7 +96,7 @@
 
     $scope.rejectConnectRequest = function () {
         $scope.loadingCounter++;
-        userConnectService.rejectConnectRequest($scope.user.userid, $scope.connectRequestId, function () {
+        userConnectService.rejectConnectRequest($scope.user.accountId, $scope.connectRequestId, function () {
             $scope.connectState = connectStates.REJECTED;
             callbackHandler.finished($scope, false);
         }, function () {

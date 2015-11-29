@@ -5,30 +5,21 @@
             "id": "org.apache.cordova.geolocation"
         }
     },
-    "cordova-plugin-dialogs": {
-        "source": {
-            "type": "git",
-            "url": "https://github.com/apache/cordova-plugin-dialogs",
-            "subdir": "."
-        }
-    },
     "org.apache.cordova.inappbrowser": {
         "source": {
             "type": "registry",
             "id": "org.apache.cordova.inappbrowser"
-        }
+        },
+        "is_top_level": false,
+        "variables": {}
     },
     "com.microsoft.azure-mobile-services": {
         "source": {
             "type": "registry",
             "id": "com.microsoft.azure-mobile-services"
-        }
-    },
-    "org.apache.cordova.statusbar": {
-        "source": {
-            "type": "registry",
-            "id": "org.apache.cordova.statusbar"
-        }
+        },
+        "is_top_level": true,
+        "variables": {}
     },
     "org.apache.cordova.splashscreen": {
         "source": {
@@ -44,30 +35,20 @@
         "is_top_level": true,
         "variables": {}
     },
-    "cordova-plugin-camera": {
+    "cordova-plugin-inappbrowser": {
         "source": {
             "type": "registry",
-            "id": "cordova-plugin-camera"
+            "id": "cordova-plugin-inappbrowser@1.0.1"
         },
         "is_top_level": true,
         "variables": {}
     },
-    "es6-promise-plugin": {
+    "cordova-plugin-geolocation": {
         "source": {
-            "type": "git",
-            "url": "https://github.com/vstirbu/PromisesPlugin.git",
-            "subdir": "."
+            "type": "registry",
+            "id": "cordova-plugin-geolocation@1.0.1"
         },
-        "is_top_level": false,
-        "variables": {}
-    },
-    "org.jboss.aerogear.cordova.android.reflect": {
-        "source": {
-            "type": "git",
-            "url": "https://github.com/edewit/aerogear-reflect-cordova.git",
-            "subdir": "."
-        },
-        "is_top_level": false,
+        "is_top_level": true,
         "variables": {}
     }
 }

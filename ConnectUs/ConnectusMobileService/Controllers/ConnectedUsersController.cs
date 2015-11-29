@@ -12,7 +12,6 @@ using ConnectusMobileService.Models;
 using ConnectusMobileService.DataObjects.DTO;
 using ConnectusMobileService.Utils;
 using Microsoft.WindowsAzure.MobileServices;
-using ConnectusMobileService.Utils.Singleton;
 using ConnectusMobileService.Service.Data;
 
 namespace ConnectusMobileService.Controllers

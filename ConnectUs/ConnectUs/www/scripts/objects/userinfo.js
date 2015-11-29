@@ -1,17 +1,19 @@
-﻿var UserInfo = function UserInfo(userid, username, profilePicUrl, description, gender, age, lasttimeonline, fbConnected, firstname, lastname, phoneNr, eMail, fbLink){
-    this.userid = userid;
+﻿var UserInfo = function UserInfo(accountId, username, profilePicUrl, status, about, gender, age, lasttimeonline, fbConnected, firstname, lastname, phoneNr, eMail, fbLink, userInfoId, linkedInConnected) {
+    this.accountId = accountId;
     this.username = username;
     this.profilePicUrl = profilePicUrl;
-    this.description = description;
+    this.status = status;
+    this.about = about;
     this.gender = gender;
     if (age)
         this.age = age;
     else
         this.age = '-';
     this.fbConnected = fbConnected;
-    this.linkedInConnected = false;
+    this.linkedInConnected = linkedInConnected;
     this.fbLink = fbLink;
     this.userContact = new UserContact(firstname, lastname, phoneNr, eMail);
+    this.userInfoId = userInfoId;
 }
 
 

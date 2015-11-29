@@ -1,0 +1,46 @@
+﻿<ons-page ng-controller="eventController" ng-init="init()">
+    <ng-include src="'pages/detail/connectusToolbar.html'"></ng-include>
+
+    <ons-list style="margin-top:5px;">
+        <ons-list-header>
+            Event <ons-icon icon="fa-info"
+                          size="20px"
+                          fixed-width="false"
+                          class="headerIconRight">
+                </ons-icon>
+        </ons-list-header>
+
+        <ons-list-item>
+            <ons-row class="item-desc">
+                <ons-col class="textImportant">{{event.name}}</ons-col>
+                <ons-col style="text-align:right !important;">{{event.state}} <ons-icon icon="fa-clock-o"
+                                                                            size="lg"></ons-icon>
+                </ons-col>
+             </ons-row>
+            <ons-row class="item-desc textDetail">{{ event.place }}</ons-row>
+            <ons-row style="text-align:right;">
+                Time: 
+                <ons-col class="item-desc">{{ event.from }}</ons-col> 
+                <ons-col>-</ons-col>
+                <ons-col class="item-desc">{{ event.to }}</ons-col>
+            </ons-row>
+        </ons-list-item>
+
+        <ons-row class="fixToBottom content-padded" ng-switch="participate">
+            <div ng-switch-when="1" class="highlightPositive" style="width:100%;">
+                You are registered for this event.
+            </div>
+            <button ng-switch-when="0" class="button--large--cta" ng-click="registerEvent()">Participate</button>
+        </ons-row>
+        <ons-list-header>
+            Participating Users <ons-icon icon="fa-user"
+                            size="20px"
+                            fixed-width="false"
+                            class="headerIconRight">
+            </ons-icon>
+        </ons-list-header>
+        <ons-list-item ng-if="user.accountId != accountId" class="item" ng-repeat="user in participators" ng-click="$parent.compareUsers(user)" modifier="chevron">
+            <ng-include src="'pages/detail/userInfo.html'"></ng-include>
+        </ons-list-item>
+    </ons-list>
+</ons-page>

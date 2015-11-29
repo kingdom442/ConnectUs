@@ -11,6 +11,7 @@ using ConnectusMobileService.DataObjects;
 using ConnectusMobileService.Models;
 using ConnectusMobileService.Utils;
 using ConnectusMobileService.DataObjects.Authentication;
+using ConnectusMobileService.Utils.LoginProviders;
 
 namespace ConnectusMobileService.Controllers
 {
@@ -60,8 +61,7 @@ namespace ConnectusMobileService.Controllers
                 UserInfo newUserInfo;
                 context.UserInfos.Add(newUserInfo = new UserInfo()
                 {
-                    Description = "About me", UserId = newAccount.Id, Id = Guid.NewGuid().ToString(), NetworkId = (Int16)NetworkType.CONNECT_US,
-                    UserInfoDetail = new UserInfoDetail()
+                    Bio = "About me", UserId = newAccount.Id, Id = Guid.NewGuid().ToString()
                 });
 
                 context.SaveChanges();

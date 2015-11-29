@@ -64,6 +64,14 @@
       <HintPath>..\packages\Facebook.7.0.6\lib\net45\Facebook.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="LinkedIn.Api.Client.Core, Version=1.3.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\LinkedIn.1.3.3\lib\net45\LinkedIn.Api.Client.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="LinkedIn.Api.Client.Owin, Version=1.3.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\LinkedIn.1.3.3\lib\net45\LinkedIn.Api.Client.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.0.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
       <Private>True</Private>
@@ -82,6 +90,10 @@
     </Reference>
     <Reference Include="Microsoft.Owin, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.3.0.0\lib\net45\Microsoft.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Cors, Version=2.0.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Cors.2.0.2\lib\net45\Microsoft.Owin.Cors.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -118,10 +130,6 @@
     </Reference>
     <Reference Include="Microsoft.Owin.Security.OAuth, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.Security.OAuth.2.1.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.Owin.Security.Twitter, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.2.1.0\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.SqlServer.Types, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
@@ -162,6 +170,10 @@
     </Reference>
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Owin.Security.Providers, Version=1.25.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.Security.Providers.1.25\lib\net45\Owin.Security.Providers.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="RazorEngine, Version=3.4.1.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
@@ -248,14 +260,17 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\account\CustomLoginController.cs" />
+    <Compile Include="Controllers\GetEventParticipantsController.cs" />
+    <Compile Include="Controllers\ParticipateEventController.cs" />
     <Compile Include="Controllers\ConnectedUsersController.cs" />
+    <Compile Include="Controllers\account\SyncInconsistentProfileController.cs" />
     <Compile Include="Controllers\UnseenComparisonsController.cs" />
     <Compile Include="Controllers\CompareUsersController.cs" />
-    <Compile Include="Controllers\facebook\FBConnectUserController.cs" />
+    <Compile Include="Controllers\account\IntitialProviderSetupController.cs" />
     <Compile Include="Controllers\account\CustomRegistrationController.cs" />
     <Compile Include="Controllers\account\CheckAuthTokenController.cs" />
     <Compile Include="Controllers\facebook\FBSyncProfileController.cs" />
-    <Compile Include="Controllers\facebook\FBTokenController.cs" />
+    <Compile Include="Controllers\account\GetProviderToken.cs" />
     <Compile Include="Controllers\FindUsersController.cs" />
     <Compile Include="Controllers\GetUserInfoController.cs" />
     <Compile Include="Controllers\table\UserContactController.cs" />
@@ -272,6 +287,8 @@
     <Compile Include="DataObjects\Authentication\RegistrationRequest.cs" />
     <Compile Include="DataObjects\ConnectRequest.cs" />
     <Compile Include="DataObjects\DTO\AccountId.cs" />
+    <Compile Include="DataObjects\DTO\ParticipateEventRequest.cs" />
+    <Compile Include="DataObjects\DTO\SyncInconsistentProfileRequest.cs" />
     <Compile Include="DataObjects\DTO\UnseenComparisonsRequestDTO.cs" />
     <Compile Include="DataObjects\DTO\UserInfoDTO.cs" />
     <Compile Include="DataObjects\DTO\FindUsersRequestData.cs" />
@@ -286,73 +303,29 @@
     <Compile Include="DataObjects\Network.cs" />
     <Compile Include="DataObjects\DTO\Profile\Education.cs" />
     <Compile Include="DataObjects\UserContact.cs" />
-    <Compile Include="Migrations\201509260833374_26.9.cs" />
-    <Compile Include="Migrations\201509260833374_26.9.Designer.cs">
-      <DependentUpon>201509260833374_26.9.cs</DependentUpon>
+    <Compile Include="Migrations\201511231641439_username.cs" />
+    <Compile Include="Migrations\201511231641439_username.Designer.cs">
+      <DependentUpon>201511231641439_username.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201509260858101_scheis.cs" />
-    <Compile Include="Migrations\201509260858101_scheis.Designer.cs">
-      <DependentUpon>201509260858101_scheis.cs</DependentUpon>
+    <Compile Include="Migrations\AzureSqlGenerator.cs" />
+    <Compile Include="Migrations\Local\201511231119064_linkedin.cs" />
+    <Compile Include="Migrations\Local\201511231119064_linkedin.Designer.cs">
+      <DependentUpon>201511231119064_linkedin.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201509300833068_usercontact_friends_event.cs" />
-    <Compile Include="Migrations\201509300833068_usercontact_friends_event.Designer.cs">
-      <DependentUpon>201509300833068_usercontact_friends_event.cs</DependentUpon>
+    <Compile Include="Migrations\Remote\201511230913121_initial.cs" />
+    <Compile Include="Migrations\Remote\201511230913121_initial.Designer.cs">
+      <DependentUpon>201511230913121_initial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201509301013179_unique_connect_request.cs" />
-    <Compile Include="Migrations\201509301013179_unique_connect_request.Designer.cs">
-      <DependentUpon>201509301013179_unique_connect_request.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201509301029179_uniqueconst.cs" />
-    <Compile Include="Migrations\201509301029179_uniqueconst.Designer.cs">
-      <DependentUpon>201509301029179_uniqueconst.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201510010935026_a.cs" />
-    <Compile Include="Migrations\201510010935026_a.Designer.cs">
-      <DependentUpon>201510010935026_a.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201510011623289_eventupdate.cs" />
-    <Compile Include="Migrations\201510011623289_eventupdate.Designer.cs">
-      <DependentUpon>201510011623289_eventupdate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201510141156442_usercontactupdate.cs" />
-    <Compile Include="Migrations\201510141156442_usercontactupdate.Designer.cs">
-      <DependentUpon>201510141156442_usercontactupdate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201510141300481_minor.cs" />
-    <Compile Include="Migrations\201510141300481_minor.Designer.cs">
-      <DependentUpon>201510141300481_minor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201510141417176_minor1.cs" />
-    <Compile Include="Migrations\201510141417176_minor1.Designer.cs">
-      <DependentUpon>201510141417176_minor1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201510160912045_usercomparison_update.cs" />
-    <Compile Include="Migrations\201510160912045_usercomparison_update.Designer.cs">
-      <DependentUpon>201510160912045_usercomparison_update.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201510161212589_minor2.cs" />
-    <Compile Include="Migrations\201510161212589_minor2.Designer.cs">
-      <DependentUpon>201510161212589_minor2.cs</DependentUpon>
-    </Compile>
+    <Compile Include="Service\Data\EqualConnectionsService.cs" />
     <Compile Include="Service\Data\UserInfoService.cs" />
+    <Compile Include="Service\LinkedInProfileDataProvider .cs" />
+    <Compile Include="Utils\Enum\LinkedInFields.cs" />
     <Compile Include="Utils\Enum\FBFields.cs" />
     <Compile Include="DataObjects\DTO\Profile\ProfileData.cs" />
     <Compile Include="DataObjects\UserComparison.cs" />
     <Compile Include="DataObjects\UserContext.cs" />
     <Compile Include="DataObjects\UserInfo.cs" />
     <Compile Include="DataObjects\UserInfoDetail.cs" />
-    <Compile Include="Migrations\201509180900194_init.cs" />
-    <Compile Include="Migrations\201509180900194_init.Designer.cs">
-      <DependentUpon>201509180900194_init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201509181114203_NewUserInfoDetailId.cs" />
-    <Compile Include="Migrations\201509181114203_NewUserInfoDetailId.Designer.cs">
-      <DependentUpon>201509181114203_NewUserInfoDetailId.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201509191210071_UserComparison.cs" />
-    <Compile Include="Migrations\201509191210071_UserComparison.Designer.cs">
-      <DependentUpon>201509191210071_UserComparison.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\MobileServiceContext.cs" />
     <Compile Include="Global.asax.cs">
@@ -362,36 +335,18 @@
     <Compile Include="Service\FBProfileDataProvider.cs" />
     <Compile Include="Service\IProfileDataProvider.cs" />
     <Compile Include="Service\ETLProfileDataProvider.cs" />
-    <Compile Include="SqlServerTypes\Loader.cs" />
-    <Compile Include="Utils\CustomLoginProvider.cs" />
+    <Compile Include="Utils\LoginProviders\CustomLoginProvider.cs" />
     <Compile Include="Utils\DBGeographyUtil.cs" />
     <Compile Include="Utils\JaroWinklerDistance.cs" />
     <Compile Include="Utils\JsonUtil.cs" />
-    <Compile Include="Utils\LoginProviderUtil.cs" />
+    <Compile Include="Utils\LoginProviders\LinkedInLoginProvider.cs" />
+    <Compile Include="Utils\LoginProviders\LoginProviderUtil.cs" />
     <Compile Include="Utils\ProfileComparisonUtil.cs" />
     <Compile Include="Utils\ProfileDataParser.cs" />
-    <Compile Include="Utils\Singleton\MobileServiceClientFactory.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\packages\Microsoft.SqlServer.Types.11.0.2\nativeBinaries\x64\msvcr100.dll">
-      <Link>SqlServerTypes\x64\msvcr100.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\packages\Microsoft.SqlServer.Types.11.0.2\nativeBinaries\x64\SqlServerSpatial110.dll">
-      <Link>SqlServerTypes\x64\SqlServerSpatial110.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\packages\Microsoft.SqlServer.Types.11.0.2\nativeBinaries\x86\msvcr100.dll">
-      <Link>SqlServerTypes\x86\msvcr100.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\packages\Microsoft.SqlServer.Types.11.0.2\nativeBinaries\x86\SqlServerSpatial110.dll">
-      <Link>SqlServerTypes\x86\SqlServerSpatial110.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="DB\sql\insertNetworks.sql" />
     <Content Include="Global.asax" />
-    <Content Include="SqlServerTypes\readme.htm" />
+    <Content Include="LinkedIn_API_ReadMe.txt" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -415,55 +370,20 @@
   <ItemGroup>
     <None Include="Properties\PublishProfiles\connectus - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\connectus - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\mobile-connectus.pubxml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201509180900194_init.resx">
-      <DependentUpon>201509180900194_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201511231641439_username.resx">
+      <DependentUpon>201511231641439_username.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201509181114203_NewUserInfoDetailId.resx">
-      <DependentUpon>201509181114203_NewUserInfoDetailId.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\Local\201511231119064_linkedin.resx">
+      <DependentUpon>201511231119064_linkedin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201509191210071_UserComparison.resx">
-      <DependentUpon>201509191210071_UserComparison.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201509260833374_26.9.resx">
-      <DependentUpon>201509260833374_26.9.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201509260858101_scheis.resx">
-      <DependentUpon>201509260858101_scheis.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201509300833068_usercontact_friends_event.resx">
-      <DependentUpon>201509300833068_usercontact_friends_event.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201509301013179_unique_connect_request.resx">
-      <DependentUpon>201509301013179_unique_connect_request.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201509301029179_uniqueconst.resx">
-      <DependentUpon>201509301029179_uniqueconst.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201510010935026_a.resx">
-      <DependentUpon>201510010935026_a.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201510011623289_eventupdate.resx">
-      <DependentUpon>201510011623289_eventupdate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201510141156442_usercontactupdate.resx">
-      <DependentUpon>201510141156442_usercontactupdate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201510141300481_minor.resx">
-      <DependentUpon>201510141300481_minor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201510141417176_minor1.resx">
-      <DependentUpon>201510141417176_minor1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201510160912045_usercomparison_update.resx">
-      <DependentUpon>201510160912045_usercomparison_update.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201510161212589_minor2.resx">
-      <DependentUpon>201510161212589_minor2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\Remote\201511230913121_initial.resx">
+      <DependentUpon>201511230913121_initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

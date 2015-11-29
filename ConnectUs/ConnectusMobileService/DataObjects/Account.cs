@@ -5,6 +5,7 @@ using System.Web;
 using Microsoft.WindowsAzure.Mobile.Service;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using Newtonsoft.Json;
 
 namespace ConnectusMobileService.DataObjects
 {
@@ -12,7 +13,6 @@ namespace ConnectusMobileService.DataObjects
     {
         [Required]
         [MaxLength(30)]
-        [Index("UX_Username", IsUnique = true)]
         public string Username { get; set; }
         public byte[] Salt { get; set; }
         public byte[] SaltedAndHashedPassword { get; set; }
@@ -23,7 +23,20 @@ namespace ConnectusMobileService.DataObjects
         [MaxLength(30)]
         public string FacebookId { get; set; }
 
-        public virtual Event UserContact { get; set; }
+        [MaxLength(30)]
+        public string LinkedInId { get; set; }
+
+        [JsonIgnore]
         public virtual ICollection<Event> Events { get; set; }
+
+        public bool Equals(Account x, Account y)
+        {
+            return x.Id == y.Id;
+        }
+
+        public int GetHashCode(string obj)
+        {
+            return 0;
+        }
     }
 }

@@ -1,5 +1,5 @@
 {
-    "version": "1.2.8",
+    "version": "1.2.9",
     "name": "com.microsoft.azure-mobile-services",
     "cordova_name": "Windows Azure Mobile Services",
     "description": "Exposes JavaScript api to access an Azure Mobile Services instance",

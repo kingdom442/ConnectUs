@@ -1,36 +1,28 @@
 ﻿
-<ons-page ng-controller="registerController">
+<ons-page ng-controller="registerController" style="background-color:#eee">
     <ng-include src="'pages/detail/connectusToolbar.html'"></ng-include>
 
 
-    <div style="text-align: center">
-        <br />
-        <ons-page>
+        <ons-list style="background-color:#eee; border-bottom: 1px solid lightgray;">
+            <ons-list-item>
+                <input ng-model="username" type="text" placeholder="Username" class="text-input text-input--transparent" style="margin-top:8px; width: 100%;">
+            </ons-list-item>
+
+            <ons-list-item>
+                <input ng-model="email" type="text" placeholder="Email Address" class="text-input text-input--transparent" style="margin-top:8px; width: 100%;">
+            </ons-list-item>
+            <ons-list-item>
+                <input ng-model="password" type="password" placeholder="Password" class="text-input text-input--transparent" style="margin-top:8px; width: 100%;">
+            </ons-list-item>
+
+        </ons-list>
 
 
-            <ons-list>
-                <ons-list-item>
-                    <input ng-model="username" type="text" placeholder="Username" class="text-input text-input--transparent" style="margin-top:8px; width: 100%;">
-                </ons-list-item>
+        <div class="content-padded">
+            <ons-button ng-click="register()" modifier="large">
+                Sign Up
+            </ons-button>
+            <button class="button--large--quiet content-padded" ng-click="menu.setMainPage('pages/login.html', { closeMenu: true });" style="margin-top:4px;">Cancel</button>
+        </div>
 
-                <ons-list-item>
-                    <input ng-model="email" type="text" placeholder="Email Address" class="text-input text-input--transparent" style="margin-top:8px; width: 100%;">
-                </ons-list-item>
-                <ons-list-item>
-                    <input ng-model="password" type="password" placeholder="Password" class="text-input text-input--transparent" style="margin-top:8px; width: 100%;">
-                </ons-list-item>
-
-            </ons-list>
-
-
-            <div class="content-padded">
-                <ons-button ng-click="register()" modifier="large">
-                    Sign Up
-                </ons-button>
-                <button class="button--large--quiet content-padded" ng-click="menu.setMainPage('pages/login.html', { closeMenu: true });" style="margin-top:4px;">Cancel</button>
-            </div>
-
-
-        </ons-page>
-    </div>
 </ons-page>

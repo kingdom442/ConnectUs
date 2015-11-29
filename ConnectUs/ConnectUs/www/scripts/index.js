@@ -28,7 +28,10 @@
 
     // create the module and name it connectUsApp
     var connectUsApp = angular.module('connectusApp', ['onsen']);
-    
+    //connectUsApp.config(['$compileProvider',
+    //function ($compileProvider) {
+    //    $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|file|chrome-extension|x-wmapp.?):|data:image\//);
+    //}]);
 
    
 })();

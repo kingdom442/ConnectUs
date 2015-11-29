@@ -9,10 +9,9 @@ namespace ConnectusMobileService.DataObjects.DTO
     {
         public string UserId { get; set; }
         public string UserName { get; set; }
-        public string CompUserId { get; set; }
-        public string CompUserName { get; set; }
         public DateTimeOffset? Date { get; set; }
         public string EqualData { get; set; }
-        public bool CurrentUserIsInitiator { get; set; }
+        public bool CurrentUserWasInitiator { get; set; }
+        public string ProfilePic { get; set; }
     }
 }

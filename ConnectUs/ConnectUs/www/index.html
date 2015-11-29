@@ -16,6 +16,7 @@
     <link rel="stylesheet" type="text/css" href="css/settings.css">
     <link rel="stylesheet" type="text/css" href="css/font.css">
     <link href="css/index.css" rel="stylesheet" />
+    <link href="lib/swiper/css/swiper.min.css" rel="stylesheet" />
 
     <!-- JS dependencies (order matters!) -->
     <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
@@ -23,9 +24,7 @@
     <script src="lib/angular/angular.js"></script>
     <script src="lib/onsen/js/onsenui.js"></script>
     <script src="lib/jquery/jquery-2.1.4.js"></script>
-       
-    <script>
-    </script>
+
 </head>
 <body ng-controller="appController">
 
@@ -36,10 +35,11 @@
                       var="menu"
                       max-slide-distance="70%"
                       type="reveal">
+
     </ons-sliding-menu>
 
     <ons-template id="menu.html">
-        <ons-page modifier="menu-page">
+        <ons-page modifier="menu-page" style="background-color: #222222;">
             <ons-toolbar modifier="transparent">
                 <div class="right">
                     <ons-toolbar-button class="menu-close" ng-click="menu.close()">
@@ -116,10 +116,12 @@
     <script src="scripts/controller/connectedUsersController.js"></script>
     <script src="scripts/controller/registerController.js"></script>
     <script src="scripts/controller/homeController.js"></script>
-    <script src="scripts/controller/lastProfileComparisonsController.js"></script>
+    <script src="scripts/controller/eventController.js"></script>
     <script src="scripts/controller/findUsersController.js"></script>
     <script src="scripts/controller/userProfileController.js"></script>
     <script src="scripts/controller/connectUsersController.js"></script>
     <script src="scripts/controller/settingsController.js"></script>
+
+    <script src="lib/swiper/js/swiper.jquery.min.js"></script>
 </body>
 </html>

@@ -1,10 +1,11 @@
 ﻿angular.module('connectusApp').controller('userContactController', function ($scope, $rootScope, callbackHandler, userService) {
+    $rootScope.pageStackCount = 2;
 
     $scope.loadUserContact = function (userId) {
         $scope.loadingCounter++;
         userService.loadUserInfo(userId, function (userInfo) {
             if (userInfo) {
-                $scope.userInfo = userInfo;
+                $scope.user = userInfo;
             }
             callbackHandler.finished($scope, false);
         }, function (error) {

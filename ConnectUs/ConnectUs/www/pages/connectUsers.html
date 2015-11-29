@@ -1,12 +1,15 @@
 ﻿<ons-page ng-controller="connectUsersController" ng-init="connect(); loadConnectState();">
     <ng-include src="'pages/detail/connectusToolbar.html'"></ng-include>
 
-    <h3 style="display:inline;">Usercomparison</h3>
-    <ons-row>
-        <ng-include style="margin-left:15px;margin-top:5px;" src="'pages/detail/userInfo.html'"></ng-include>
-    </ons-row>
-
-    <ons-scroller>
+    <h3 style="display:inline;margin-left:15px;margin-top:10px;">Usercomparison</h3>
+   
+    <ng-include src="'pages/detail/userInfo.html'"></ng-include>
+    
+    <ons-scroller style="border-top: 2px solid black;">
+        <div style="margin-left:10px;margin-right:10px;">
+            <b>About me</b>
+            <p>{{user.about}}</p>
+        </div>
         <ons-list id="educationList" ng-if="compareEducation">
             <span>
                 <ons-list-header>
@@ -75,7 +78,7 @@
         <ons-list id="athleteList" ng-if="compareAthletes">
             <span>
                 <ons-list-header>
-                    Athletes <ons-icon icon="fa-soccer-ball-o"
+                    Athletes <ons-icon icon="fa-futbol-o"
                                      size="20px"
                                      fixed-width="false"
                                      class="headerIconRight">

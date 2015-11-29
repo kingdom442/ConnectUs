@@ -34,8 +34,6 @@ namespace ConnectusMobileService.Controllers
             {
                 UserId = x.UserId,
                 UserName = x.User.Username,
-                CompUserId = x.CompUserId,
-                CompUserName = x.CompUser.Username,
                 Date = x.CreatedAt,
                 EqualData = x.EqualJson
             });

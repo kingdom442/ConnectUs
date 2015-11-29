@@ -12,7 +12,6 @@ using ConnectusMobileService.Models;
 using ConnectusMobileService.DataObjects.DTO;
 using ConnectusMobileService.Utils;
 using Microsoft.WindowsAzure.MobileServices;
-using ConnectusMobileService.Utils.Singleton;
 using ConnectusMobileService.Service.Data;
 
 namespace ConnectusMobileService.Controllers
@@ -45,18 +44,6 @@ namespace ConnectusMobileService.Controllers
                 try
                 {
                     BasicUserInfoDTO userInfo = UserInfoService.GetBasicUserInfo(ucont.AccountRefId);
-                    //userInfo.AccountId = ucont.AccountRefId;
-                    //foreach (UserInfo ui in context.UserInfos.Include("Account").Where(ui => ui.UserId == ucont.AccountRefId).OrderBy(x => x.Network.Id))
-                    //{
-                    //    userInfo.Age = (userInfo.Age == null) ? ui.Age : userInfo.Age;
-                    //    userInfo.Description = (userInfo.Description == null) ? ui.Description : userInfo.Description;
-                    //    userInfo.FacebookConnected = (userInfo.FacebookConnected || ui.NetworkId == (Int16)NetworkType.FACEBOOK) ? true : false;
-                    //    userInfo.Gender = (userInfo.Gender == null) ? ui.Gender : userInfo.Gender;
-                    //    userInfo.Username = (userInfo.Username == null) ? ui.Account.Username : userInfo.Username;
-                    //    userInfo.FirstName = (userInfo.FirstName == null) ? ui.FirstName : userInfo.FirstName;
-                    //    userInfo.LastName = (userInfo.LastName == null) ? ui.LastName : userInfo.LastName;
-                    //    userInfo.ProfilePicUrl = (userInfo.ProfilePicUrl == null) ? ui.ProfilePicUrl : userInfo.ProfilePicUrl;
-                    //}
                     return userInfo;
                 }
                 catch (Exception e)

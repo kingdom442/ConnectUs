@@ -1,8 +1,8 @@
-﻿<ons-page ng-controller="loginController">
+﻿<ons-page ng-controller="loginController" style="background-color:#eee">
 
     <ng-include src="'pages/detail/connectusToolbar.html'"></ng-include>
 
-    <ons-list>
+    <ons-list style="background-color:#eee; border-bottom: 1px solid lightgray;">
         <ons-list-item>
             <input ng-model="username" type="text" placeholder="Username" class="text-input text-input--transparent" style="margin-top:8px; width: 100%;">
         </ons-list-item>
@@ -15,26 +15,65 @@
     <div class="content-padded">
         <ons-button modifier="large"
                     ng-click="login()">
-            SignIn
+            Sign in
         </ons-button>
         
     </div>
     <center>
-        Or
+        OR
     </center>
 
-    <div class="content-padded">
-        <ons-button modifier="large"
-                    ng-click="fbLogin()">
-            SignIn with Facebook
-        </ons-button>
-   </div>
+    <button class="button--large--quiet content-padded" 
+            ng-click="fbLogin()">
+        <ons-icon icon="fa-facebook-official" />
+        Facebook Login
+    </button>
+
+    <button class="button--large--quiet content-padded"
+            ng-click="liLogin()">
+        <ons-icon icon="fa-linkedin-square" />
+        LinkedIn Login
+    </button>
 
     <h4 class="content-padded">
-        Have you already <button class="button--quiet" style="display:inline;" ng-click="menu.setMainPage('pages/register.html', { animation: slide });">registered</button> a user?
+        Have you already<button class="button--quiet" style="display:inline;" ng-click="menu.setMainPage('pages/register.html', { animation: slide });">registered</button>a user?
     </h4>
 
     <div ng-if="loginFailed" style="margin-top:5px;" class="highlightNegative content-padded">
         Login failed - Invalid Username or Password?
     </div>
+
+    <!-- Swiper -->
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <div>
+                    <h3>Synchronize profile information</h3>
+                    <p>Imort your data from facebook and/or LinkedIn.</p>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div>
+                    <h3>Find near users</h3>
+                    <p>See who is around or at the same event as you.</p>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div>
+                    <h3>Compare Profiles</h3>
+                    <p>Check which profile attributes match with other users.</p>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div>
+                    <h3>Connect</h3>
+                    <p>Exchange contact information and connect with interesting people.</p>
+                </div>
+            </div>
+        </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
+    </div>
+
+
 </ons-page>

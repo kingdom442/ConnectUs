@@ -7,16 +7,17 @@ angular.module('connectusApp').factory('findUsersService',
     function ($rootScope) {
         var service = {};
 
-        service.findAvailableUsersByGeoLocation = function (coords, findAlreadyComparedUsers, callback) {
+        service.findAvailableUsersByGeoLocation = function (coords, findAlreadyComparedUsers, maxDistance, succCB, errCB) {
             if (connectusClient == null)
                 initMobileServiceClient()
             connectusClient.invokeApi('FindUsers', {
                 method: 'POST',
-                body: { "UserId": $rootScope.accountId, "MaxDistance": 1000, "Longitude": coords.longitude, "Latitude": coords.latitude, "AlreadyCompared": findAlreadyComparedUsers }
+                body: { "UserId": $rootScope.accountId, "MaxDistance": maxDistance, "Longitude": coords.longitude, "Latitude": coords.latitude, "AlreadyCompared": findAlreadyComparedUsers }
             }).done(function (response) {
-                callback(response.result);
+                succCB(response.result);
             }, function (error) {
                 console.error("Finds users failed:" + error);
+                errCB();
             });
             
         };

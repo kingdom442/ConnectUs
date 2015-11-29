@@ -1,7 +1,7 @@
 ﻿<ons-page ng-controller="connectedUsersController" ng-init="init()">
     <ng-include src="'pages/detail/connectusToolbar.html'"></ng-include>
 
-    <ons-list>
+    <ons-list style="margin-top:5px;">
         <ons-list-header>
             Connected Users<ons-icon icon="fa-user"
                                    size="20px"
@@ -9,7 +9,17 @@
                                    class="headerIconRight">
             </ons-icon>
         </ons-list-header>
+
+        <ons-list-item ng-if="connectedUsers.length == 0">
+            <span>Here you see users you are connected with. So far there are none.</span>
+        </ons-list-item>
+
         <ons-list-item class="item" modifier="chevron" ng-repeat="user in connectedUsers" ng-click="showUserDetails(user)">
             <ng-include src="'pages/detail/userInfo.html'"></ng-include>
         </ons-list-item>
+    </ons-list>
+
+    <div class="content-padded">
+        <button class="button--large--cta" ng-click="menu.setMainPage('pages/findUsers.html')">{{connectedUsers.length === 0 ? "Find matching people now" : "Find more matching people"}}</button>
+    </div>
 </ons-page>

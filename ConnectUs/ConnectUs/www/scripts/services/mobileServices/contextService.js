@@ -16,10 +16,9 @@ angular.module('connectusApp').service('contextService', function($rootScope){
         };
 
         // onError Callback receives a PositionError object
-        //
         function onError(error) {
-            showAlert('code: ' + error.code + '\n' +
-                  'message: ' + error.message + '\n', '');
+            if (error.code == error.PERMISSION_DENIED)
+                console.log("Denied");
         }
 
         navigator.geolocation.getCurrentPosition(onSuccess, onError);

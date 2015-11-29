@@ -1,30 +1,24 @@
 ﻿
 angular.module('connectusApp').controller('userProfileController', function ($scope, $rootScope, userService, callbackHandler, loginService) {
     $scope.userinfo = new UserInfo($rootScope.accountId, $rootScope.username, '', undefined, "Age", Date.now);
-    $scope.editProfileImg = 'images/profile-icon.png';
     $scope.loadingCounter = 0;
+    $rootScope.pageStackCount = 2;
 
     $scope.loadUserInfo = function () {
         $scope.loadingCounter++;
         userService.loadUserInfo($rootScope.accountId, function (userinfo) {
             if (userinfo) {
                 $scope.userinfo = userinfo;
-                $scope.editProfileImg = userinfo.profilePicUrl;
+                if (userinfo.fbConnected)
+                    initializing = true;
+                if (userinfo.linkedInConnected)
+                    initializingLI = true;
+                if(userinfo.profilePicUrl)
+                    $scope.editProfileImg = userinfo.profilePicUrl;
             }
             callbackHandler.finished($scope, false);
         }, function (error) {
             callbackHandler.finished($scope, false);
-        });
-    }
-
-    $scope.synchronizeFBProfile = function () {
-        $scope.loadingCounter++;
-       
-        userService.syncFBUserInfo(function () {
-            callbackHandler.finished($scope, true);
-        }, function (error) {
-            callbackHandler.finished($scope, fálse);
-            modalSyncFailed.show();
         });
     }
 
@@ -90,7 +84,10 @@ angular.module('connectusApp').controller('userProfileController', function ($sc
         document.addEventListener("deviceready", onDeviceReady, false);
         $scope.loadUserInfo();
     }
-    var initializing = true;
+    var initializing = false;
+    var initializingLI = false;
+
+
     $scope.changeFBConnection = function () {
         if (initializing) {
             initializing = false;
@@ -99,10 +96,32 @@ angular.module('connectusApp').controller('userProfileController', function ($sc
         if ($scope.userinfo.fbConnected) {
             $scope.loadingCounter++;
             loginService.fbLogin(function () {
-                callbackHandler.finished($scope, false);
+                userService.syncInconsistentProfile(function () {
+                    callbackHandler.finished($scope, true);
+                }, function () {
+                    callbackHandler.finished($scope, false);
+                });
             });
         } else {
 
+        }
+    }
+
+    $scope.changeLIConnection = function () {
+        if (initializingLI) {
+            initializingLI = false;
+            return;
+        }
+        if ($scope.userinfo.linkedInConnected) {
+            $scope.loadingCounter++;
+            loginService.liLogin(function () {
+                userService.syncInconsistentProfile(function () {
+                    callbackHandler.finished($scope, true);
+                }, function () {
+                    callbackHandler.finished($scope, false);
+                });
+            }, function () {
+            });
         }
     }
 

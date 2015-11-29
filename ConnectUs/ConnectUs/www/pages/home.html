@@ -19,7 +19,7 @@
         <ons-list-item ng-repeat="userCmp in lastComparisons" ng-click="showUserComparison(userCmp)" modifier="chevron">
             <ons-row align="center">
                 <ons-col width="80px">
-                    <img ng-src="images/profile-icon.png" class="avator profile-image-small" />
+                    <img ng-src="{{userCmp.profilePicUrl || 'images/profile-icon.png'}}" class="avator profile-image-small" />
                 </ons-col>
                 <ons-col>
                     <ons-row class="item-desc">{{ userCmp.userName }}</ons-row>
@@ -43,7 +43,7 @@
             </ons-list-header>
 
         </span>
-        <ons-list-item ng-repeat="event in events" modifier="chevron">
+        <ons-list-item ng-click="gotoEvent(event)" ng-repeat="event in events" modifier="chevron">
             <ons-row align="center">
                 <ons-col width="60%">
                     <ons-row class="item-desc textImportant">{{event.name}}</ons-row>

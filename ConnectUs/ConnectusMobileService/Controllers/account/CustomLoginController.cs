@@ -11,6 +11,7 @@ using ConnectusMobileService.DataObjects.Authentication;
 using ConnectusMobileService.DataObjects;
 using ConnectusMobileService.Models;
 using ConnectusMobileService.Utils;
+using ConnectusMobileService.Utils.LoginProviders;
 
 namespace ConnectusMobileService.Controllers
 {

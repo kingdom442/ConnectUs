@@ -21,6 +21,10 @@ namespace ConnectusMobileService.Utils
         internal static UserComparison CompareUserProfiles(ProfileData userProfile, ProfileData compUserProfile, IEnumerable<ProfileDataObjects> objectsToCompare = null, IEnumerable<Network> networks = null)
         {
             UserComparison userComparison = new UserComparison();
+            if (userProfile == null)
+                userProfile = new ProfileData();
+            if (compUserProfile == null)
+                compUserProfile = new ProfileData();
             if(objectsToCompare == null)
                 objectsToCompare = ProfileData.GetAllProfileDataObjects();
             if (networks == null)

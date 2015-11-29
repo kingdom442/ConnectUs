@@ -13,8 +13,8 @@ namespace ConnectusMobileService.DataObjects.Authentication
         public string MobileServiceAuthenticationToken { get; set; }
     }
 
-    public class FBCustomLoginResult: CustomLoginResult
+    public class ProviderLoginResult: CustomLoginResult
     {
-        public string facebookid { get; set; }
+        public bool FirstLogin { get; set; }
     }
 }

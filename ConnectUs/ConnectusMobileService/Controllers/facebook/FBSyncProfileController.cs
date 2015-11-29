@@ -41,20 +41,28 @@ namespace ConnectusMobileService.Controllers
                 Network facebook = context.Networks.First(n => n.Id == (Int16)NetworkType.FACEBOOK);
                 ProfileData fbProfileData = await fbDataProvider.GetUserInfo();
                 UserInfo userInfo;
-                if (context.UserInfos.Any(ui => ui.UserId == accountid.accountid && ui.NetworkId == facebook.Id))
+                if (context.UserInfos.Any(ui => ui.UserId == accountid.accountid))
                 {
-                    userInfo = context.UserInfos.Include("UserInfoDetail").First(ui => ui.UserId == accountid.accountid && ui.NetworkId == facebook.Id);
-                    userInfo.Description = fbProfileData.Description;
+                    userInfo = context.UserInfos.Include("UserInfoDetail").First(ui => ui.UserId == accountid.accountid);
+                    userInfo.Bio = fbProfileData.Bio;
+                    userInfo.About = fbProfileData.About;
                     userInfo.ProfilePicUrl = fbProfileData.ProfilePicUrl;
                     // TODO: Update other propoerties
-                    userInfo.UserInfoDetail.JsonInfo = fbProfileData.AsJsonString();
+                    UserInfoDetail detail = userInfo.UserInfoDetails.First(x => x.NetworkId == facebook.Id);
+                    if (detail == null)
+                    {
+                        detail = new UserInfoDetail() { JsonInfo = fbProfileData.AsJsonString(), NetworkId = facebook.Id };
+                        userInfo.UserInfoDetails.Add(detail);
+                    }
+                    else
+                        detail.JsonInfo = fbProfileData.AsJsonString();
                 }
                 else
                 {
-                    userInfo = new UserInfo(fbProfileData) { UserId = accountid.accountid };
-                    userInfo.SetNetork(facebook);
+                    userInfo = new UserInfo() { UserId = accountid.accountid };
+                    userInfo.SetProfileInfo(fbProfileData);
                     userInfo.Id = Guid.NewGuid().ToString();
-                    userInfo.UserInfoDetail = new UserInfoDetail() { JsonInfo = fbProfileData.AsJsonString() };
+                    userInfo.UserInfoDetails.Add(new UserInfoDetail() { JsonInfo = fbProfileData.AsJsonString() });
                     context.UserInfos.Add(userInfo);
                 }
                 context.SaveChanges();

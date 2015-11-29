@@ -5,6 +5,8 @@ using System.Web;
 using Newtonsoft.Json.Linq;
 using ConnectusMobileService.DataObjects.Profile;
 using ConnectusMobileService.DataObjects.DTO.Profile;
+using System.Reflection;
+using System.ComponentModel;
 
 namespace ConnectusMobileService.Utils
 {
@@ -15,7 +17,7 @@ namespace ConnectusMobileService.Utils
     {
         internal static ProfileData ParseFBData(JObject fbJson)
         {
-            ProfileData profileData = new ProfileData() { ProfilePicUrl = (string)fbJson[FBFields.PICTURE.ToString().ToLower()]["data"]["url"], FirstName = (string)fbJson[FBFields.FIRST_NAME.ToString().ToLower()], LastName = (string)fbJson[FBFields.LAST_NAME.ToString().ToLower()], Description = (string)fbJson[FBFields.BIO.ToString().ToLower()], Gender = (string)fbJson[FBFields.GENDER.ToString().ToLower()], ProfileLink = (string)fbJson[FBFields.LINK.ToString().ToLower()] };
+            ProfileData profileData = new ProfileData() { ProfilePicUrl = (string)fbJson[FBFields.PICTURE.ToString().ToLower()]["data"]["url"], FirstName = (string)fbJson[FBFields.FIRST_NAME.ToString().ToLower()], LastName = (string)fbJson[FBFields.LAST_NAME.ToString().ToLower()], Bio = (string)fbJson[FBFields.BIO.ToString().ToLower()], About = (string)fbJson[FBFields.ABOUT.ToString().ToLower()],  Gender = (string)fbJson[FBFields.GENDER.ToString().ToLower()], ProfileLink = (string)fbJson[FBFields.LINK.ToString().ToLower()] };
 
             JArray jEducations = (JArray)fbJson[FBFields.EDUCATION.ToString().ToLower()];
             foreach(JObject jEducation in jEducations)
@@ -55,6 +57,32 @@ namespace ConnectusMobileService.Utils
             }
 
             return profileData;
+        }
+
+
+        internal static ProfileData ParseLinkedInData(JObject jsonProfileData)
+        {
+            ProfileData profileData = new ProfileData() { ProfilePicUrl = (string)jsonProfileData[GetEnumDescription(LinkedInFields.PICTUREURL)],
+                FirstName = (string)jsonProfileData[GetEnumDescription(LinkedInFields.FIRSTNAME)], LastName = (string)jsonProfileData[GetEnumDescription(LinkedInFields.LASTNAME)],
+                Bio = (string)jsonProfileData[GetEnumDescription(LinkedInFields.SUMMARY)], About = (string)jsonProfileData[GetEnumDescription(LinkedInFields.HEADLINE)],
+                ProfileLink = (string)jsonProfileData[GetEnumDescription(LinkedInFields.PUBLICPROFILEURL)], EmailAddress = (string)jsonProfileData[GetEnumDescription(LinkedInFields.EMAILADDRESS)]
+            , Industry = (string)jsonProfileData[GetEnumDescription(LinkedInFields.INDUSTRY)] };
+            
+
+            return profileData;
+        }
+
+        public static string GetEnumDescription(Enum value)
+        {
+            FieldInfo fi = value.GetType().GetField(value.ToString());
+
+            DescriptionAttribute[] attributes =
+                (DescriptionAttribute[])fi.GetCustomAttributes(typeof(DescriptionAttribute), false);
+
+            if (attributes != null && attributes.Length > 0)
+                return attributes[0].Description;
+            else
+                return value.ToString();
         }
     }
 }

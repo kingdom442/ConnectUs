@@ -19,21 +19,20 @@ namespace ConnectusMobileService.Utils
                    (token.Type == JTokenType.Null);
         }
 
-        internal static UserInfo MergeUserInfoDetails(IEnumerable<UserInfo> userInfos)
+        internal static UserInfoDetail MergeUserInfoDetails(IEnumerable<UserInfoDetail> userInfos)
         {
             if (!userInfos.Any())
             {
-                //No Data available for user
-                return null;
+                return new UserInfoDetail();
             }
-            UserInfo merged = userInfos.First();
-            if (merged.UserInfoDetail == null)
-                merged.UserInfoDetail = new UserInfoDetail() { UserInfoId = merged.Id, JsonInfo = "{}" };
-            JObject mergedJson = (merged.UserInfoDetail.JsonInfo != null) ? JObject.Parse(merged.UserInfoDetail.JsonInfo): new JObject();
+            UserInfoDetail merged = userInfos.First();
+            if (merged == null)
+                merged = new UserInfoDetail();
+            JObject mergedJson = (merged.JsonInfo != null) ? JObject.Parse(merged.JsonInfo): new JObject();
 
-            foreach (UserInfo uiDet in userInfos.Where(x => x.Id != merged.Id))
+            foreach (UserInfoDetail uiDet in userInfos.Where(x => x.NetworkId != merged.NetworkId))
             {
-                JObject toMergeJson = (uiDet.UserInfoDetail != null && uiDet.UserInfoDetail.JsonInfo != null) ? JObject.Parse(uiDet.UserInfoDetail.JsonInfo): null;
+                JObject toMergeJson = (uiDet != null && uiDet.JsonInfo != null) ? JObject.Parse(uiDet.JsonInfo): null;
                 if (mergedJson == null)
                     mergedJson = toMergeJson;
                 else
@@ -47,7 +46,7 @@ namespace ConnectusMobileService.Utils
             }
             if (mergedJson != null)
             {
-                merged.UserInfoDetail.JsonInfo = mergedJson.ToString();
+                merged.JsonInfo = mergedJson.ToString();
             }
             return merged;
         }
