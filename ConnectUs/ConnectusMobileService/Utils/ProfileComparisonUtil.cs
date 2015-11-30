@@ -46,14 +46,14 @@ namespace ConnectusMobileService.Utils
 
         private static void CompareEducation(ref UserComparison userComparison, ProfileData userProfile, ProfileData compUserProfile)
         {
-            IEnumerable<Education> onlyProfile1Educations = userProfile.EducationList.Except(compUserProfile.EducationList);
-            IEnumerable<Education> onlyProfile2Educations = compUserProfile.EducationList.Except(userProfile.EducationList);
+            //IEnumerable<Education> onlyProfile1Educations = userProfile.EducationList.Except(compUserProfile.EducationList);
+            //IEnumerable<Education> onlyProfile2Educations = compUserProfile.EducationList.Except(userProfile.EducationList);
 
-            IEnumerable<Education> bothProfileEducations = userProfile.EducationList.Except(onlyProfile1Educations);
+            IEnumerable<Education> bothProfileEducations = userProfile.EducationList.Intersect(compUserProfile.EducationList);
 
             userComparison.EqualProfileData.EducationList = bothProfileEducations.ToList();
-            userComparison.OnlyUserProfileData.EducationList = onlyProfile1Educations.ToList();
-            userComparison.OnlyCompUserProfileData.EducationList = onlyProfile2Educations.ToList();
+            //userComparison.OnlyUserProfileData.EducationList = onlyProfile1Educations.ToList();
+            //userComparison.OnlyCompUserProfileData.EducationList = onlyProfile2Educations.ToList();
         }
 
 

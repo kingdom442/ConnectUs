@@ -12,6 +12,7 @@ angular.module('connectusApp').controller('settingsController', function ($scope
         includeTeams: getBooleanFromLocalStorage('setting_teams'),
         includeAthletes: getBooleanFromLocalStorage('setting_athletes')
     };
+
     $scope.changeSettings = function () {
         saveItemToLocalStorage('settings_bluetooth', $scope.settings.bluetoothAllowed);
         saveItemToLocalStorage('setting_geolocation', $scope.settings.geolocationEnabled);

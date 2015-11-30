@@ -1,4 +1,5 @@
-﻿var UserInfo = function UserInfo(accountId, username, profilePicUrl, status, about, gender, age, lasttimeonline, fbConnected, firstname, lastname, phoneNr, eMail, fbLink, userInfoId, linkedInConnected) {
+﻿var UserInfo = function UserInfo(accountId, username, profilePicUrl, status, about, gender, age, lasttimeonline, fbConnected, firstname, lastname, phoneNr, eMail,
+    fbLink, userInfoId, linkedInConnected, linkedInProfileLink) {
     this.accountId = accountId;
     this.username = username;
     this.profilePicUrl = profilePicUrl;
@@ -12,6 +13,7 @@
     this.fbConnected = fbConnected;
     this.linkedInConnected = linkedInConnected;
     this.fbLink = fbLink;
+    this.linkedInProfileLink = linkedInProfileLink;
     this.userContact = new UserContact(firstname, lastname, phoneNr, eMail);
     this.userInfoId = userInfoId;
 }

@@ -1,4 +1,4 @@
-﻿<ons-page ng-controller="connectUsersController" ng-init="connect(); loadConnectState();">
+﻿<ons-page ng-controller="connectUsersController" ng-init="init()">
     <ng-include src="'pages/detail/connectusToolbar.html'"></ng-include>
 
     <h3 style="display:inline;margin-left:15px;margin-top:10px;">Usercomparison</h3>
@@ -10,17 +10,30 @@
             <b>About me</b>
             <p>{{user.about}}</p>
         </div>
-        <ons-list id="educationList" ng-if="compareEducation">
-            <span>
-                <ons-list-header>
-                    Education <ons-icon icon="fa-graduation-cap"
-                                        size="lg"
-                                        fixed-width="false"
-                                        class="headerIconRight">
-                    </ons-icon>
-                </ons-list-header>
 
-            </span>
+        <ons-list>
+            <ons-list-header>
+                People you both know <ons-icon icon="fa-users"
+                                    size="lg"
+                                    class="headerIconRight">
+                </ons-icon>
+            </ons-list-header>
+            
+            <ons-list-item ng-if="equalAthletes.length > 0">
+                <ons-col ng-repeat="equalConnection in equalConnections" width="80px"><img nr-src="{{equalConnection.profilePicUrl || 'images/profile-icon.png'}}" class="avator profile-image-small" /></ons-col>
+            </ons-list-item>
+
+            <ons-list-item ng-if="(!equalConnections || equalConnections.length == 0) && loadingCounter == 0">You have no matching connected users.</ons-list-item>
+        </ons-list>
+
+        <ons-list id="educationList" ng-if="compareEducation">
+            <ons-list-header>
+                Education <ons-icon icon="fa-graduation-cap"
+                                    size="lg"
+                                    fixed-width="false"
+                                    class="headerIconRight">
+                </ons-icon>
+            </ons-list-header>
             <ons-list-item ng-repeat="edu in equalEducations">
                 <ons-row>
                     <ons-col width="20%">{{edu.dateTo}}</ons-col>
@@ -65,7 +78,7 @@
                 </ons-list-header>
 
             </span>
-            <ons-list-item ng-repeat="team in equalInterests">
+            <ons-list-item ng-repeat="team in equalTeams">
                 <ons-row class="item-desc textImportant">
                     {{team.name}}
                 </ons-row>
@@ -73,7 +86,7 @@
                     {{team.description}}
                 </ons-row>
             </ons-list-item>
-            <ons-list-item ng-if="equalInterests.length == 0 && loadingCounter == 0">You have no matching interests.</ons-list-item>
+            <ons-list-item ng-if="equalTeams.length == 0 && loadingCounter == 0">You have no matching sport teams.</ons-list-item>
         </ons-list>
         <ons-list id="athleteList" ng-if="compareAthletes">
             <span>
@@ -86,15 +99,15 @@
                 </ons-list-header>
 
             </span>
-            <ons-list-item ng-repeat="team in equalSports">
+            <ons-list-item ng-repeat="athlete in equalAthletes">
                 <ons-row class="item-desc textImportant">
-                    {{team.name}}
+                    {{athlete.name}}
                 </ons-row>
                 <ons-row class="item-desc textDetail">
-                    {{team.description}}
+                    {{athlete.description}}
                 </ons-row>
             </ons-list-item>
-            <ons-list-item ng-if="sportInterests.length == 0 && loadingCounter == 0">You have no matching sport interests.</ons-list-item>
+            <ons-list-item ng-if="equalAthletes.length == 0 && loadingCounter == 0">You have no matching athletes.</ons-list-item>
         </ons-list>
     </ons-scroller>
 
@@ -115,6 +128,7 @@
             <div ng-if="requester == 0">{{}} rejected your connect request..</div>
             <div ng-if="requester == 1">You rejected the connect request.</div>
         </div>
+        <button ng-switch-when="0" class="button--large--quiet content-padded" ng-click="menu.setMainPage('pages/settings.html', {closeMenu: true})">Comparison settings</button>
         <button ng-switch-when="0" class="button--large--cta" ng-click="sendConnectRequest()">Connect</button>
     </ons-row>
 </ons-page>

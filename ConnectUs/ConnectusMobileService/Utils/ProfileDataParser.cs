@@ -52,9 +52,10 @@ namespace ConnectusMobileService.Utils
                 profileData.Interests.Add(new Interest()
                 {
                     name = (!JsonUtil.IsNullOrEmpty(jAthlete.SelectToken("name"))) ? (string)jAthlete["name"] : null,
-                    type = InterestType.TEAM
+                    type = InterestType.ATHLETE
                 });
             }
+
 
             return profileData;
         }

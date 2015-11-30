@@ -14,7 +14,8 @@
             <span>Here you see users you are connected with. So far there are none.</span>
         </ons-list-item>
 
-        <ons-list-item class="item" modifier="chevron" ng-repeat="user in connectedUsers" ng-click="showUserDetails(user)">
+        <ons-list-item ng-class="{active: hover}"  ng-mouseenter="hover = true" ng-mouseleave="hover = false" 
+                        class="item" modifier="chevron" ng-repeat="user in connectedUsers" ng-click="showUserDetails(user)">
             <ng-include src="'pages/detail/userInfo.html'"></ng-include>
         </ons-list-item>
     </ons-list>

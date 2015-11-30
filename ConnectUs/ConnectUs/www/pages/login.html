@@ -2,6 +2,14 @@
 
     <ng-include src="'pages/detail/connectusToolbar.html'"></ng-include>
 
+    <!--<ons-template id="error.html">
+        <ons-dialog var="errorDialog" modifier="border" cancelable>
+            <div style="width:500px;height:900px;overflow:scroll;">
+                {{error}}
+            </div>
+        </ons-dialog>
+    </ons-template>-->
+
     <ons-list style="background-color:#eee; border-bottom: 1px solid lightgray;">
         <ons-list-item>
             <input ng-model="username" type="text" placeholder="Username" class="text-input text-input--transparent" style="margin-top:8px; width: 100%;">
@@ -74,6 +82,4 @@
         <!-- Add Pagination -->
         <div class="swiper-pagination"></div>
     </div>
-
-
 </ons-page>

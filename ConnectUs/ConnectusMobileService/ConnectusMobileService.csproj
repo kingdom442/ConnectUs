@@ -260,6 +260,7 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\account\CustomLoginController.cs" />
+    <Compile Include="Controllers\EqualConnectionsController.cs" />
     <Compile Include="Controllers\GetEventParticipantsController.cs" />
     <Compile Include="Controllers\ParticipateEventController.cs" />
     <Compile Include="Controllers\ConnectedUsersController.cs" />
@@ -316,7 +317,6 @@
     <Compile Include="Migrations\Remote\201511230913121_initial.Designer.cs">
       <DependentUpon>201511230913121_initial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Service\Data\EqualConnectionsService.cs" />
     <Compile Include="Service\Data\UserInfoService.cs" />
     <Compile Include="Service\LinkedInProfileDataProvider .cs" />
     <Compile Include="Utils\Enum\LinkedInFields.cs" />

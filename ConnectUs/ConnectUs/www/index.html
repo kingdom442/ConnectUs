@@ -73,7 +73,7 @@
             <br>
 
             <ons-list class="bottom-menu-list">
-                <ons-list-item class="bottom-menu-item" ng-click="menu.setMainPage('about.html', {closeMenu: true})">
+                <ons-list-item class="bottom-menu-item" ng-click="menu.setMainPage('pages/about.html', {closeMenu: true})">
                     About
                 </ons-list-item>
                 <ons-list-item class="bottom-menu-item" ng-click="logout()">
@@ -83,7 +83,20 @@
         </ons-page>
     </ons-template>
 
-
+    <ons-template id="userDetails.html">
+        <ons-dialog var="userDialog" modifier="border" cancelable>
+            <div class="profile-card">
+                <img ng-src="{{selectedUser.profilePicUrl || 'images/profile-icon.png'}}" class="profile-image">
+                <div class="profile-name">{{selectedUser.username}}</div>
+                <div class="profile-id">{{selectedUser.age}}</div>
+                <div class="profile-desc">{{selectedUser.status}}</div>
+            </div>
+            <center style="margin-top:5px;margin-bottom:5px;">
+                <button class="button--cta" ng-click="userDialog.hide()">Close</button>
+                <button class="button--cta" ng-click="userDialog.hide();$parent.compareUsers(selectedUser)">Connect</button>
+            </center>
+        </ons-dialog>
+    </ons-template>
 
     <!-- Cordova-Verweis, wird Ihrer App beim Erstellen hinzugefügt. -->
     <!--<script src="cordova.js"></script>-->

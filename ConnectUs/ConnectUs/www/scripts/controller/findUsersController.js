@@ -23,8 +23,9 @@ angular.module('connectusApp').controller('findUsersController', function ($scop
                             else
                                 $scope.comparedusers.push(new UserInfo(u.accountId, u.username, u.profilePicUrl, u.status, u.about, true, u.age, ""));
                         });
-                    } else {
-                        $scope.noUserFound = true;
+                    } if(!findAlreadyComparedUsers){
+                        //$scope.noUserFound = true;
+                        $scope.users.push(new UserInfo(-1, 'Max Mustermann', 'https://maxcdn.icons8.com/Color/PNG/96/Users/dizzy_person-96.png', '@University', 'I am a computer science student in the fifth semester. Always interested into meeting new people.', true, '22', '', false, 'Max', 'Mustermann', '', '', '', '', false, ''));
                     }
                     callbackHandler.finished($scope, false);
                 }, function () {

@@ -39,7 +39,8 @@
                             class="headerIconRight">
             </ons-icon>
         </ons-list-header>
-        <ons-list-item ng-if="user.accountId != accountId" class="item" ng-repeat="user in participators" ng-click="$parent.compareUsers(user)" modifier="chevron">
+        <ons-list-item ng-class="{active: hover}"  ng-mouseenter="hover = true" ng-mouseleave="hover = false" 
+                        ng-if="user.accountId != accountId" class="item" ng-repeat="user in participators" ng-click="$parent.compareUsers(user)" modifier="chevron">
             <ng-include src="'pages/detail/userInfo.html'"></ng-include>
         </ons-list-item>
     </ons-list>
