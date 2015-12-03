@@ -28,18 +28,28 @@ angular.module('connectusApp').controller('userProfileController', function ($sc
             userService.updateUserInfo($scope.userinfo, function (suc) {
                 if ($scope.userinfo.userContact.phoneNumber || $scope.userinfo.userContact.eMail) {
                     userService.updateUserContact($scope.userinfo, function (suc) {
-                    callbackHandler.finished($scope, true);
+                        $scope.updateAccountInfo();
                     }, function (err) {
                         callbackHandler.finished($scope, false);
                     });
                 } else {
-                    callbackHandler.finished($scope, true);
+                    $scope.updateAccountInfo();
                 }
             }, function (err) {
                 callbackHandler.finished($scope, false);
             });
         }
     };
+
+    $scope.updateAccountInfo = function () {
+        userService.changeAccountInfo($rootScope.accountId, $scope.userinfo.username, $scope.userinfo.businessInterested, $scope.userinfo.privateInterested,
+        function () {
+            callbackHandler.finished($scope, true);
+        },
+        function () {
+            callbackHandler.finished($scope, false);
+        });
+    }
 
     $scope.editProfile = function(){
         profileCarousel.next({
@@ -98,6 +108,7 @@ angular.module('connectusApp').controller('userProfileController', function ($sc
             loginService.fbLogin(function () {
                 userService.syncInconsistentProfile(function () {
                     callbackHandler.finished($scope, true);
+                    $scope.loadUserInfo();
                 }, function () {
                     callbackHandler.finished($scope, false);
                 });
@@ -117,6 +128,7 @@ angular.module('connectusApp').controller('userProfileController', function ($sc
             loginService.liLogin(function () {
                 userService.syncInconsistentProfile(function () {
                     callbackHandler.finished($scope, true);
+                    $scope.loadUserInfo();
                 }, function () {
                     callbackHandler.finished($scope, false);
                 });

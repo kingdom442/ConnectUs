@@ -89,6 +89,8 @@
                 callbackHandler.finished($scope, false);
             }, function () {
             });
+        } else {
+            $scope.connectState = 0;
         }
     }
 
@@ -110,7 +112,7 @@
         $scope.loadingCounter++;
         userConnectService.sendConnectRequest($scope.user.accountId, function () {
             $scope.connectState = connectStates.REQUESTED;
-            callbackHandler.finished($scope, false);
+            callbackHandler.finished($scope, true);
         }, function(){
         });
     };
@@ -119,7 +121,7 @@
         $scope.loadingCounter++;
         userConnectService.acceptConnectRequest($scope.user.accountId, $scope.connectRequestId, function () {
             $scope.connectState = connectStates.CONNECTED;
-            callbackHandler.finished($scope, false);
+            callbackHandler.finished($scope, true);
             $rootScope.selectedUserId = $scope.user.accountId;
             menu.setMainPage('pages/userContact.html', { closeMenu: true });
         }, function () {
@@ -130,7 +132,7 @@
         $scope.loadingCounter++;
         userConnectService.rejectConnectRequest($scope.user.accountId, $scope.connectRequestId, function () {
             $scope.connectState = connectStates.REJECTED;
-            callbackHandler.finished($scope, false);
+            callbackHandler.finished($scope, true);
         }, function () {
         });
     };

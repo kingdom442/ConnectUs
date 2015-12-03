@@ -48,6 +48,9 @@
         },
         "cordova-plugin-geolocation": {
             "PACKAGE_NAME": "{57359770-91bb-11e5-83ad-151b86050b21}"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "{57359770-91bb-11e5-83ad-151b86050b21}"
         }
     },
     "dependent_plugins": {

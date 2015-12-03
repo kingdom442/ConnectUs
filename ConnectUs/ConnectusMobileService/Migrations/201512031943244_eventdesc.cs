@@ -3,16 +3,16 @@ namespace ConnectusMobileService.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class linkedin : DbMigration
+    public partial class eventdesc : DbMigration
     {
         public override void Up()
         {
-            AddColumn("connectus.Accounts", "LinkedInId", c => c.String(maxLength: 30));
+            AddColumn("connectus.Events", "Description", c => c.String());
         }
         
         public override void Down()
         {
-            DropColumn("connectus.Accounts", "LinkedInId");
+            DropColumn("connectus.Events", "Description");
         }
     }
 }

@@ -42,5 +42,7 @@ namespace ConnectusMobileService.DataObjects.DTO
         public string Email { get; set; }
         public string FacebookProfileLink { get; set; }
         public string LinkedInProfileLink { get; set; }
+        public bool PrivateInterested { get; internal set; }
+        public bool BusinessInterested { get; internal set; }
     }
 }

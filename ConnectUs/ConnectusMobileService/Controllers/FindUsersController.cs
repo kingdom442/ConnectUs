@@ -25,10 +25,17 @@ namespace ConnectusMobileService.Controllers
         public HttpResponseMessage Post(FindUsersRequestData requestData)
         {
             MobileServiceContext context = new MobileServiceContext();
+            Account requester = context.Accounts.FirstOrDefault(x => x.Id == requestData.UserId);
+            if(requester == null)
+            {
+                Services.Log.Error("User with id from param is not available");
+                return this.Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
             DateTimeOffset fiveHoursBefore = DateTimeOffset.Now.AddHours(-500);
             List<UserContext> uContexts = context.UserContexts.ToList();
             uContexts = uContexts.Where(x => DateTimeOffset.Compare(x.CreatedAt.Value, fiveHoursBefore) > 0).GroupBy(uContext => uContext.AccountRefId).Select(grp => grp.First()).OrderBy(x => x.CreatedAt).ToList();
             uContexts.RemoveAll(ctx => ctx.AccountRefId == requestData.UserId);
+            uContexts.RemoveAll(ctx => !((requester.BusinessInterest && ctx.Account.BusinessInterest) || (requester.PrivateInterest && ctx.Account.PrivateInterest)));
             if (requestData.AlreadyCompared.HasValue)
             {
                 uContexts.RemoveAll(ctx =>
@@ -43,14 +50,16 @@ namespace ConnectusMobileService.Controllers
             {
                 try
                 {
-                    BasicUserInfoDTO userInfo = UserInfoService.GetBasicUserInfo(ucont.AccountRefId);
-                    return userInfo;
+                    
+                        BasicUserInfoDTO userInfo = UserInfoService.GetBasicUserInfo(ucont.AccountRefId);
+                        return userInfo;
                 }
                 catch (Exception e)
                 {
                     Console.Write(e.Message);
                     return null;
                 }
+                
             }
             ).ToList();
             return this.Request.CreateResponse(HttpStatusCode.OK, response);

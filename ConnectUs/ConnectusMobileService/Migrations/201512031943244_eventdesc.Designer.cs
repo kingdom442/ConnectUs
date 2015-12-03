@@ -7,13 +7,13 @@ namespace ConnectusMobileService.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.1-30610")]
-    public sealed partial class username : IMigrationMetadata
+    public sealed partial class eventdesc : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(username));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(eventdesc));
         
         string IMigrationMetadata.Id
         {
-            get { return "201511231641439_username"; }
+            get { return "201512031943244_eventdesc"; }
         }
         
         string IMigrationMetadata.Source

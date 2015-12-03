@@ -7,13 +7,13 @@ namespace ConnectusMobileService.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.1-30610")]
-    public sealed partial class linkedin : IMigrationMetadata
+    public sealed partial class interests : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(linkedin));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(interests));
         
         string IMigrationMetadata.Id
         {
-            get { return "201511231119064_linkedin"; }
+            get { return "201512031637239_interests"; }
         }
         
         string IMigrationMetadata.Source

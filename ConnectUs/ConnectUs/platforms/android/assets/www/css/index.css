@@ -19,6 +19,10 @@ ons-list-header{
 .active{
     background-color: lightblue;
 }
+
+.align-right{
+    text-align:right;
+}
 /*slider*/
 .swiper-container {
     border-top: 2px solid black;

@@ -35,7 +35,7 @@ namespace connectusmobileservice.controllers
             {
                 throw new InvalidOperationException("This can only be called by authenticated clients");
             }
-
+            Account account = context.Accounts.FirstOrDefault(a => a.Id == requestParams.accountid);
             UserInfo userInfo = context.UserInfos.Include("UserInfoDetails").FirstOrDefault(ui => ui.UserId == requestParams.accountid);
             if (requestParams.provider == 0 || requestParams.provider == 1)
             {
@@ -59,6 +59,7 @@ namespace connectusmobileservice.controllers
                     userInfo.SetProfileInfo(fbProfileData);
                     if(userInfo.UserInfoDetails != null && !userInfo.UserInfoDetails.Any(x => x.NetworkId == (int)NetworkType.FACEBOOK))
                         userInfo.UserInfoDetails.Add(detail);
+                    account.FacebookId = creds.UserId;
 
                     context.SaveChanges();
 
@@ -87,6 +88,7 @@ namespace connectusmobileservice.controllers
                     userInfo.SetProfileInfo(linkedInProfileData);
                     if (userInfo.UserInfoDetails != null && !userInfo.UserInfoDetails.Any(x => x.NetworkId == (int)NetworkType.LINKED_IN))
                         userInfo.UserInfoDetails.Add(detail);
+                    account.LinkedInId = creds.UserId;
 
                     context.SaveChanges();
 

@@ -10,7 +10,7 @@
             </ons-icon>
         </ons-list-header>
 
-        <ons-list-item ng-if="connectedUsers.length == 0">
+        <ons-list-item ng-if="!connectedUsers || connectedUsers.length == 0">
             <span>Here you see users you are connected with. So far there are none.</span>
         </ons-list-item>
 

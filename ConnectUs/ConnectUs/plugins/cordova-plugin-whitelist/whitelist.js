@@ -1,5 +1,4 @@
-cordova.define("cordova-plugin-geolocation.PositionError", function(require, exports, module) { /*
- *
+/*
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
  * distributed with this work for additional information
@@ -19,22 +18,10 @@ cordova.define("cordova-plugin-geolocation.PositionError", function(require, exp
  *
 */
 
-/**
- * Position error object
- *
- * @constructor
- * @param code
- * @param message
- */
-var PositionError = function(code, message) {
-    this.code = code || null;
-    this.message = message || '';
-};
-
-PositionError.PERMISSION_DENIED = 1;
-PositionError.POSITION_UNAVAILABLE = 2;
-PositionError.TIMEOUT = 3;
-
-module.exports = PositionError;
-
-});
+if (!document.querySelector('meta[http-equiv=Content-Security-Policy]')) {
+    var msg = 'No Content-Security-Policy meta tag found. Please add one when using the cordova-plugin-whitelist plugin.';
+    console.error(msg);
+    setInterval(function() {
+        console.warn(msg);
+    }, 10000);
+}

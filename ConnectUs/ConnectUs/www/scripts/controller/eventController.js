@@ -8,9 +8,14 @@ angular.module('connectusApp').controller('eventController', function ($scope, $
         $scope.participate = 0;
         $scope.event = $rootScope.selectedEvent;
         eventService.getParticipants($scope.event.id, function (participators) {
+            if (participators.length == 0)
+                $scope.noOtherParticipators = true;
             participators.forEach(function (participator) {
-                if(participator.accountId == $scope.accountId)
+                if (participator.accountId == $scope.accountId) {
                     $scope.participate = 1;
+                    if (participators.length == 1)
+                        $scope.noOtherParticipators = true;
+                }
             });
             $scope.participators = participators;
             callbackHandler.finished($scope, false);

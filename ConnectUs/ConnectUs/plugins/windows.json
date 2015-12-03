@@ -26,6 +26,9 @@
         },
         "cordova-plugin-geolocation": {
             "PACKAGE_NAME": "ConnectUs"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "ConnectUs"
         }
     },
     "dependent_plugins": {

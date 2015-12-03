@@ -33,7 +33,7 @@
 
                 <ons-row class="profile-wrapper">
                     <ons-col width="60px" class="profile-image-wrapper">
-                        <img ng-src="{{userCmp.profilePic || 'images/profile-icon.png'}}" class="profile-image-small" />
+                        <img ng-src="{{editProfileImg || 'images/profile-icon.png'}}" class="profile-image-small" />
                     </ons-col>
 
                     <ons-col>
@@ -54,12 +54,32 @@
                             About me
                             <textarea rows="4" class="text-input" style="width:100%;height: 100px;" placeholder="About" ng-model="userinfo.about" />
                         </ons-list-item>
+                        <ons-list-item>
+                            Age
+                            <button type="button" modifier="list-item" class="button--quiet content-padded" ng-click="showAgePopover()">{{userinfo.age}}</button>
+                        </ons-list-item>
                     </ons-list>
-                    <div class="settings-header">Personal data</div>
+
+                    <div class="settings-header">Interested Area</div>
+                    <div style="margin-top:5px;" class="highlightInfo content-padded">
+                        In which context are you looking for people.
+                    </div>
+                    <ons-list modifier="inset" class="settings-list">
+                        <ons-list-item>
+                            Business
+                            <ons-switch modifier="list-item" ng-model="userinfo.businessInterested"></ons-switch>
+                        </ons-list-item>
+
+                        <ons-list-item>
+                            Private
+                            <ons-switch modifier="list-item" ng-model="userinfo.privateInterested"></ons-switch>
+                        </ons-list-item>
+                    </ons-list>
+
+                    <div class="settings-header">Contact information</div>
                     <div style="margin-top:5px;" class="highlightInfo content-padded">
                         The following information is visible for users you connect with. By adding infos here, you can easily interchange contact and personal infos.
                     </div>
-
                     <ons-list modifier="inset" class="settings-list">
                         <ons-list-item>
                             First name
@@ -76,10 +96,6 @@
                         <ons-list-item>
                             E-Mail
                             <input type="email" class="text-input" style="width:100%;" placeholder="Enter your mail addr." ng-model="userinfo.userContact.eMail" />
-                        </ons-list-item>
-                        <ons-list-item>
-                            Age
-                            <button type="button" modifier="list-item" class="button--quiet content-padded" ng-click="showAgePopover()">{{userinfo.age}}</button>
                         </ons-list-item>
                     </ons-list>
                     <button class="button--large--cta content-padded" type="submit" style="margin-top:4px;">Save</button>

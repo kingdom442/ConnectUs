@@ -22,8 +22,8 @@ namespace ConnectusMobileService.Controllers
             MobileServiceContext context = new MobileServiceContext();
             List<BasicUserInfoDTO> equal = new List<BasicUserInfoDTO>();
 
-            List<Account> userConnections = context.ConnectRequests.Where(cr => cr.RequestUserId == parameters.UserId || cr.ConnectUserId == parameters.UserId).Select(cr => ((cr.ConnectUserId == parameters.UserId) ? cr.RequestUser : cr.ConnectUser)).ToList();
-            List<Account> user2Connections = context.ConnectRequests.Where(cr => cr.RequestUserId == parameters.CompUserId || cr.ConnectUserId == parameters.CompUserId).Select(cr => ((cr.ConnectUserId == parameters.CompUserId) ? cr.RequestUser : cr.ConnectUser)).ToList();
+            List<Account> userConnections = context.ConnectRequests.Where(cr => cr.Accepted.Value && (cr.RequestUserId == parameters.UserId || cr.ConnectUserId == parameters.UserId)).Select(cr => ((cr.ConnectUserId == parameters.UserId) ? cr.RequestUser : cr.ConnectUser)).ToList();
+            List<Account> user2Connections = context.ConnectRequests.Where(cr => cr.Accepted.Value && (cr.RequestUserId == parameters.CompUserId || cr.ConnectUserId == parameters.CompUserId)).Select(cr => ((cr.ConnectUserId == parameters.CompUserId) ? cr.RequestUser : cr.ConnectUser)).ToList();
 
             IEnumerable<Account> intersect = userConnections.Intersect<Account>(user2Connections);
 

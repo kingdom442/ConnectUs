@@ -1,6 +1,13 @@
 ﻿<ons-page ng-controller="homeController" ng-init="init()">
     <ng-include src="'pages/detail/connectusToolbar.html'"></ng-include>
 
+
+    <div ng-if="welcome" class="highlightPositive" style="width:100%;margin-top:5px;opacity:0.8;">
+        <div><ons-icon class="clickable" icon="fa-times-circle-o" style="margin-left:92%;" size="lg" ng-click="closeWelcomeInfo()"/></div>
+        <div style="padding:10px;">Welcome! Your user has been created. You can change your search parameters under settings and in your profile! In the profile you can also add contact info for other users.</div>
+        <img src="images/swipe-right.png" />
+    </div>
+
     <div class="content-padded">
         <button class="button--large--cta" ng-click="menu.setMainPage('pages/findUsers.html', {closeMenu: true})">Find people around</button>
     </div>
@@ -62,6 +69,36 @@
         </ons-list-item>
     </ons-list>
 
+    <ons-template id="initialSettings.html">
+        <ons-dialog var="initialDialog" modifier="border">
+
+            <ons-toolbar inline>
+                <div class="center">
+                    <strong>Initial account settings</strong>
+                </div>
+            </ons-toolbar>
+            <div style="padding: 0px 10px;border-top: 2px solid black;">
+                <p>
+                    <input placeholder="Your username" class="text-input" ng-model="initSettings.username">
+                </p>
+                <div style="margin-top:5px;" class="highlightInfo content-padded">
+                    Choose whether you are looking for people in private or business context (or both).
+                </div>
+                <p>
+                    Business
+                    <ons-switch style="margin-left:10px;" ng-model="initSettings.businessInterested" ng-change="changeInitialInterest()"></ons-switch>
+                </p>
+                <p>
+                    Private
+                    <ons-switch style="margin-left:25px;" ng-model="initSettings.privateInterested" ng-change="changeInitialInterest()"></ons-switch>
+                </p>
+
+                <p>
+                    <ons-button modifier="large" ng-click="initialDialog.hide();saveInitialSettings();">Save</ons-button>
+                </p>
+            </div>
+        </ons-dialog>
+    </ons-template>
 
 </ons-page>
 

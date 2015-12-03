@@ -5,7 +5,7 @@
    
     <ng-include src="'pages/detail/userInfo.html'"></ng-include>
     
-    <ons-scroller style="border-top: 2px solid black;">
+    <div style="border-top: 2px solid black;overflow-y:auto;height:calc(100% - ( 3 * 44px) - 57px);">
         <div style="margin-left:10px;margin-right:10px;">
             <b>About me</b>
             <p>{{user.about}}</p>
@@ -13,14 +13,13 @@
 
         <ons-list>
             <ons-list-header>
-                People you both know <ons-icon icon="fa-users"
-                                    size="lg"
-                                    class="headerIconRight">
-                </ons-icon>
+                &nbsp;<ons-icon icon="fa-users" /> &nbsp;&nbsp;&nbsp;
+                People you both know
             </ons-list-header>
-            
-            <ons-list-item ng-if="equalAthletes.length > 0">
-                <ons-col ng-repeat="equalConnection in equalConnections" width="80px"><img nr-src="{{equalConnection.profilePicUrl || 'images/profile-icon.png'}}" class="avator profile-image-small" /></ons-col>
+            <ons-list-item ng-if="equalConnections.length > 0">
+                <ons-col ng-repeat="equalConnection in equalConnections" width="80px" style="margin-top:10px;">
+                    <img ng-src="{{equalConnection.profilePicUrl || 'images/profile-icon.png'}}" class="avator profile-image-small" ng-click="$parent.showUserPopup(equalConnection);" />
+                </ons-col>
             </ons-list-item>
 
             <ons-list-item ng-if="(!equalConnections || equalConnections.length == 0) && loadingCounter == 0">You have no matching connected users.</ons-list-item>
@@ -28,11 +27,8 @@
 
         <ons-list id="educationList" ng-if="compareEducation">
             <ons-list-header>
-                Education <ons-icon icon="fa-graduation-cap"
-                                    size="lg"
-                                    fixed-width="false"
-                                    class="headerIconRight">
-                </ons-icon>
+                &nbsp;<ons-icon icon="fa-graduation-cap" /> &nbsp;&nbsp;&nbsp;
+                Education
             </ons-list-header>
             <ons-list-item ng-repeat="edu in equalEducations">
                 <ons-row>
@@ -44,16 +40,11 @@
         </ons-list>
 
         <ons-list id="workList" ng-if="compareWork">
-            <span>
-                <ons-list-header>
-                    Work <ons-icon icon="fa-building"
-                                   size="20px"
-                                   fixed-width="false"
-                                   class="headerIconRight">
-                    </ons-icon>
-                </ons-list-header>
-
-            </span>
+           
+            <ons-list-header>
+                &nbsp;<ons-icon icon="fa-building" /> &nbsp;&nbsp;&nbsp;
+                Work
+            </ons-list-header>
             <ons-list-item ng-repeat="work in equalWork">
                 <ons-row>
                     <ons-col style="margin-top:5px;line-height:normal;" class="fontDate verticalMiddle" width="20%">
@@ -70,11 +61,8 @@
         <ons-list id="teamList" ng-if="compareTeams">
             <span>
                 <ons-list-header>
-                    Teams <ons-icon icon="fa-trophy"
-                                    size="20px"
-                                    fixed-width="false"
-                                    class="headerIconRight">
-                    </ons-icon>
+                    &nbsp;<ons-icon icon="fa-trophy" /> &nbsp;&nbsp;&nbsp;
+                    Teams
                 </ons-list-header>
 
             </span>
@@ -90,12 +78,9 @@
         </ons-list>
         <ons-list id="athleteList" ng-if="compareAthletes">
             <span>
-                <ons-list-header>
-                    Athletes <ons-icon icon="fa-futbol-o"
-                                     size="20px"
-                                     fixed-width="false"
-                                     class="headerIconRight">
-                    </ons-icon>
+                <ons-list-header  style="padding-left:10px;">
+                    &nbsp;<ons-icon icon="fa-futbol-o" /> &nbsp;&nbsp;&nbsp;
+                    Athletes
                 </ons-list-header>
 
             </span>
@@ -109,7 +94,7 @@
             </ons-list-item>
             <ons-list-item ng-if="equalAthletes.length == 0 && loadingCounter == 0">You have no matching athletes.</ons-list-item>
         </ons-list>
-    </ons-scroller>
+    </div>
 
     <ons-row class="fixToBottom content-padded" ng-switch="connectState">
         <div ng-switch-when="1" style="width:100%;">

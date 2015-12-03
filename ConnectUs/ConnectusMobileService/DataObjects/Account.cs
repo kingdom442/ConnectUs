@@ -6,6 +6,7 @@ using Microsoft.WindowsAzure.Mobile.Service;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
+using System.ComponentModel;
 
 namespace ConnectusMobileService.DataObjects
 {
@@ -25,6 +26,11 @@ namespace ConnectusMobileService.DataObjects
 
         [MaxLength(30)]
         public string LinkedInId { get; set; }
+
+        [DefaultValue(true)]
+        public bool BusinessInterest { get; set; }
+        [DefaultValue(true)]
+        public bool PrivateInterest { get; set; }
 
         [JsonIgnore]
         public virtual ICollection<Event> Events { get; set; }

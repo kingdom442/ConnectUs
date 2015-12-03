@@ -15,6 +15,10 @@
                         {
                             "xml": "<feature name=\"Device\"><param name=\"android-package\" value=\"org.apache.cordova.device.Device\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Whitelist\"><param name=\"android-package\" value=\"org.apache.cordova.whitelist.WhitelistPlugin\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -43,6 +47,9 @@
             "PACKAGE_NAME": "io.cordova.myapp2311dded6aa94a2c94d5e6ec846c1e6f"
         },
         "cordova-plugin-geolocation": {
+            "PACKAGE_NAME": "io.cordova.myapp2311dded6aa94a2c94d5e6ec846c1e6f"
+        },
+        "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "io.cordova.myapp2311dded6aa94a2c94d5e6ec846c1e6f"
         }
     },

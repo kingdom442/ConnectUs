@@ -12,26 +12,27 @@
 
         <ons-list-item>
             <ons-row class="item-desc">
-                <ons-col class="textImportant">{{event.name}}</ons-col>
-                <ons-col style="text-align:right !important;">{{event.state}} <ons-icon icon="fa-clock-o"
+                <ons-col class="textImportant">{{event.name}} in {{event.place}}</ons-col>
+                <ons-col class="align-right">{{event.state}} <ons-icon icon="fa-clock-o"
                                                                             size="lg"></ons-icon>
                 </ons-col>
              </ons-row>
-            <ons-row class="item-desc textDetail">{{ event.place }}</ons-row>
+            <ons-row class="item-desc" style="border-top:1px solid gray;">{{ event.description }}</ons-row>
             <ons-row style="text-align:right;">
                 Time: 
-                <ons-col class="item-desc">{{ event.from }}</ons-col> 
-                <ons-col>-</ons-col>
-                <ons-col class="item-desc">{{ event.to }}</ons-col>
+                <ons-col class="item-desc"><b>From: </b>{{ event.from }}</ons-col> 
+                
+                <ons-col class="item-desc"><b>To: </b>{{ event.to }}</ons-col>
             </ons-row>
         </ons-list-item>
 
-        <ons-row class="fixToBottom content-padded" ng-switch="participate">
+        <ons-list-item class="content-padded" style="margin-bottom:5px;" ng-switch="participate">
             <div ng-switch-when="1" class="highlightPositive" style="width:100%;">
                 You are registered for this event.
             </div>
-            <button ng-switch-when="0" class="button--large--cta" ng-click="registerEvent()">Participate</button>
-        </ons-row>
+            <button ng-switch-when="0" class="button--quiet" ng-click="registerEvent()">Participate at event</button>
+        </ons-list-item>
+        
         <ons-list-header>
             Participating Users <ons-icon icon="fa-user"
                             size="20px"
@@ -39,9 +40,14 @@
                             class="headerIconRight">
             </ons-icon>
         </ons-list-header>
-        <ons-list-item ng-class="{active: hover}"  ng-mouseenter="hover = true" ng-mouseleave="hover = false" 
-                        ng-if="user.accountId != accountId" class="item" ng-repeat="user in participators" ng-click="$parent.compareUsers(user)" modifier="chevron">
-            <ng-include src="'pages/detail/userInfo.html'"></ng-include>
-        </ons-list-item>
+        <ons-scroller>
+            <ons-list-item ng-if="noOtherParticipators">
+                <span>Here you see other users that participate at the event. So far none have registered.</span>
+            </ons-list-item>
+            <ons-list-item ng-class="{active: hover}" ng-mouseenter="hover = true" ng-mouseleave="hover = false"
+                           ng-if="user.accountId != accountId" class="item" ng-repeat="user in participators" ng-click="$parent.compareUsers(user)" modifier="chevron">
+                <ng-include src="'pages/detail/userInfo.html'"></ng-include>
+            </ons-list-item>
+        </ons-scroller>
     </ons-list>
 </ons-page>

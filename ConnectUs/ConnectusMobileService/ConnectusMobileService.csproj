@@ -304,15 +304,15 @@
     <Compile Include="DataObjects\Network.cs" />
     <Compile Include="DataObjects\DTO\Profile\Education.cs" />
     <Compile Include="DataObjects\UserContact.cs" />
-    <Compile Include="Migrations\201511231641439_username.cs" />
-    <Compile Include="Migrations\201511231641439_username.Designer.cs">
-      <DependentUpon>201511231641439_username.cs</DependentUpon>
+    <Compile Include="Migrations\201512031637239_interests.cs" />
+    <Compile Include="Migrations\201512031637239_interests.Designer.cs">
+      <DependentUpon>201512031637239_interests.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201512031943244_eventdesc.cs" />
+    <Compile Include="Migrations\201512031943244_eventdesc.Designer.cs">
+      <DependentUpon>201512031943244_eventdesc.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\AzureSqlGenerator.cs" />
-    <Compile Include="Migrations\Local\201511231119064_linkedin.cs" />
-    <Compile Include="Migrations\Local\201511231119064_linkedin.Designer.cs">
-      <DependentUpon>201511231119064_linkedin.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Remote\201511230913121_initial.cs" />
     <Compile Include="Migrations\Remote\201511230913121_initial.Designer.cs">
       <DependentUpon>201511230913121_initial.cs</DependentUpon>
@@ -376,11 +376,11 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201511231641439_username.resx">
-      <DependentUpon>201511231641439_username.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201512031637239_interests.resx">
+      <DependentUpon>201512031637239_interests.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\Local\201511231119064_linkedin.resx">
-      <DependentUpon>201511231119064_linkedin.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201512031943244_eventdesc.resx">
+      <DependentUpon>201512031943244_eventdesc.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\Remote\201511230913121_initial.resx">
       <DependentUpon>201511230913121_initial.cs</DependentUpon>
