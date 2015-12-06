@@ -317,6 +317,48 @@
     <Compile Include="Migrations\Remote\201511230913121_initial.Designer.cs">
       <DependentUpon>201511230913121_initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\Accounts.cs">
+      <DependentUpon>FinalModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ConnectRequests.cs">
+      <DependentUpon>FinalModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Events.cs">
+      <DependentUpon>FinalModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FinalModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FinalModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FinalModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FinalModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FinalModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FinalModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Networks.cs">
+      <DependentUpon>FinalModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserComparisons.cs">
+      <DependentUpon>FinalModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserContacts.cs">
+      <DependentUpon>FinalModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserContexts.cs">
+      <DependentUpon>FinalModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserInfoDetails.cs">
+      <DependentUpon>FinalModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserInfoes.cs">
+      <DependentUpon>FinalModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Service\Data\UserInfoService.cs" />
     <Compile Include="Service\LinkedInProfileDataProvider .cs" />
     <Compile Include="Utils\Enum\LinkedInFields.cs" />
@@ -347,6 +389,16 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <Content Include="LinkedIn_API_ReadMe.txt" />
+    <Content Include="Models\FinalModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>FinalModel.edmx</DependentUpon>
+      <LastGenOutput>FinalModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\FinalModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>FinalModel.edmx</DependentUpon>
+      <LastGenOutput>FinalModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -368,6 +420,13 @@
     <Content Include="Performance\Microsoft.ServiceBus.MessagingPerformanceCounters.man" />
   </ItemGroup>
   <ItemGroup>
+    <EntityDeploy Include="Models\FinalModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>FinalModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\FinalModel.edmx.diagram">
+      <DependentUpon>FinalModel.edmx</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\connectus - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\connectus - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\mobile-connectus.pubxml" />

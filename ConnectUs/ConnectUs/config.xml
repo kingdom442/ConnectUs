@@ -4,10 +4,10 @@
   <description>ConnectUs Cordova Application.</description>
   <author href="http://cordova.io" email="dev@cordova.apache.org">Dominik Prilmüller</author>
   <content src="index.html" />
-  
   <access origin="*" />
   <allow-navigation href="http://*/*" />
   <access origin="*" launch-external="yes" />
+  
   
   <vs:features />
   <preference name="SplashScreen" value="screen" />
@@ -107,10 +107,10 @@
   <preference name="android-minSdkVersion" value="14" />
   <preference name="android-maxSdkVersion" value="19" />
   <preference name="android-targetSdkVersion" value="19" />
- 
   <vs:plugin name="com.microsoft.azure-mobile-services" version="1.2.9" />
   <vs:plugin name="cordova-plugin-device" version="1.0.1" />
   <vs:plugin name="cordova-plugin-geolocation" version="1.0.1" />
   <vs:plugin name="cordova-plugin-inappbrowser" version="1.0.1" />
   <vs:plugin name="cordova-plugin-whitelist" version="1.2.0" />
+  <vs:plugin name="cordova-plugin-statusbar" version="2.0.0" />
 </widget>

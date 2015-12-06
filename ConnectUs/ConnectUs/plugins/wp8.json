@@ -33,6 +33,10 @@
                         {
                             "xml": "<feature name=\"Device\"><param name=\"wp-package\" value=\"Device\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"StatusBar\"><param name=\"wp-package\" value=\"StatusBar\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -50,6 +54,9 @@
             "PACKAGE_NAME": "{57359770-91bb-11e5-83ad-151b86050b21}"
         },
         "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "{57359770-91bb-11e5-83ad-151b86050b21}"
+        },
+        "cordova-plugin-statusbar": {
             "PACKAGE_NAME": "{57359770-91bb-11e5-83ad-151b86050b21}"
         }
     },

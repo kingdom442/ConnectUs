@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en" ng-app="connectusApp">
+<html lang="en" ng-app="connectusApp"  ng-controller="appController">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="lib/onsen/css/onsenui.css" />
     <link rel="stylesheet" href="lib/onsen/css/onsen-css-components-default.css" />
     <link rel="stylesheet" type="text/css" href="css/menu.css">
+    <link rel="stylesheet" type="text/css" href="css/animation.css">
     <link rel="stylesheet" type="text/css" href="css/settings.css">
     <link rel="stylesheet" type="text/css" href="css/font.css">
     <link href="css/index.css" rel="stylesheet" />
@@ -22,12 +23,13 @@
     <!-- JS dependencies (order matters!) -->
     <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
     <script src="scripts/platformOverrides.js"></script>
-    <script src="lib/angular/angular.js"></script>
-    <script src="lib/onsen/js/onsenui.js"></script>
+    <script src="lib/angular/angular.min.js"></script>
+    <script src="lib/angular/angular-animate.min.js"></script>
+    <script src="lib/onsen/js/onsenui.min.js"></script>
     <script src="lib/jquery/jquery-2.1.4.js"></script>
 
 </head>
-<body ng-controller="appController">
+<body>
 
     <ons-sliding-menu main-page="pages/login.html"
                       menu-page="menu.html"
@@ -44,7 +46,7 @@
             <ons-toolbar modifier="transparent">
                 <div class="right">
                     <ons-toolbar-button class="menu-close" ng-click="menu.close()">
-                        <ons-icon>Close</ons-icon>
+                        <ons-icon icon="fa-arrow-left">  Close </ons-icon>
                     </ons-toolbar-button>
                 </div>
             </ons-toolbar>

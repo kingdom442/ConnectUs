@@ -11,11 +11,7 @@
         // Verarbeiten der Cordova-Pause- und -Fortsetzenereignisse
         document.addEventListener( 'pause', onPause.bind( this ), false );
         document.addEventListener( 'resume', onResume.bind( this ), false );
-        
-        //if (navigator.notification) { // Override default HTML alert with native dialog
-        //    window.alert = navigator.notification.alert;
-        //}
-        // TODO: Cordova wurde geladen
+    
     };
 
     function onPause() {
@@ -27,11 +23,11 @@
     };
 
     // create the module and name it connectUsApp
-    var connectUsApp = angular.module('connectusApp', ['onsen']);
+
+    var connectUsApp = angular.module('connectusApp', ['onsen', 'ngAnimate']);
     connectUsApp.config(['$compileProvider',
     function ($compileProvider) {
         $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|ghttps?|ms-appx|x-wmapp0):/);
     }]);
-
    
 })();

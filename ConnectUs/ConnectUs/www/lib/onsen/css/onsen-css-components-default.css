@@ -554,10 +554,12 @@ h6 {
   text-align: left;
   width: auto;
   max-width: 50%;
+  margin-left:10px;
 }
 .navigation-bar--android__right {
   float: right;
   text-align: right;
+  margin-left:-10px;
   width: auto;
 }
 .navigation-bar--android__center:first-child:last-child {

@@ -1,0 +1,888 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ConnectusDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Accounts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Salt" Type="varbinary(max)" />
+          <Property Name="SaltedAndHashedPassword" Type="varbinary(max)" />
+          <Property Name="MailAddress" Type="nvarchar(max)" />
+          <Property Name="FacebookId" Type="nvarchar" MaxLength="30" />
+          <Property Name="Version" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetimeoffset" Precision="7" Nullable="false" />
+          <Property Name="UpdatedAt" Type="datetimeoffset" Precision="7" />
+          <Property Name="Deleted" Type="bit" Nullable="false" />
+          <Property Name="LinkedInId" Type="nvarchar" MaxLength="30" />
+          <Property Name="BusinessInterest" Type="bit" Nullable="false" />
+          <Property Name="PrivateInterest" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ConnectRequests">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RequestUserId" Type="nvarchar" MaxLength="128" />
+          <Property Name="ConnectUserId" Type="nvarchar" MaxLength="128" />
+          <Property Name="Accepted" Type="bit" />
+          <Property Name="Version" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetimeoffset" Precision="7" Nullable="false" />
+          <Property Name="UpdatedAt" Type="datetimeoffset" Precision="7" />
+          <Property Name="Deleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EventAccounts">
+          <Key>
+            <PropertyRef Name="Event_Id" />
+            <PropertyRef Name="Account_Id" />
+          </Key>
+          <Property Name="Event_Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Account_Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Events">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Place" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Location" Type="geography" />
+          <Property Name="FromDate" Type="datetimeoffset" Precision="7" Nullable="false" />
+          <Property Name="ToDate" Type="datetimeoffset" Precision="7" Nullable="false" />
+          <Property Name="Version" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetimeoffset" Precision="7" Nullable="false" />
+          <Property Name="UpdatedAt" Type="datetimeoffset" Precision="7" />
+          <Property Name="Deleted" Type="bit" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Networks">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserComparisonNetworks">
+          <Key>
+            <PropertyRef Name="UserComparison_Id" />
+            <PropertyRef Name="Network_Id" />
+          </Key>
+          <Property Name="UserComparison_Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Network_Id" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserComparisons">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="CompUserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetimeoffset" Precision="7" Nullable="false" />
+          <Property Name="EqualJson" Type="nvarchar(max)" />
+          <Property Name="OnlyUserJson" Type="nvarchar(max)" />
+          <Property Name="OnlyCompUserJson" Type="nvarchar(max)" />
+          <Property Name="Version" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="UpdatedAt" Type="datetimeoffset" Precision="7" />
+          <Property Name="Deleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserContacts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+          <Property Name="PhoneNr" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="Version" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetimeoffset" Precision="7" Nullable="false" />
+          <Property Name="UpdatedAt" Type="datetimeoffset" Precision="7" />
+          <Property Name="Deleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserContexts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Location" Type="geography" />
+          <Property Name="AccountRefId" Type="nvarchar" MaxLength="128" />
+          <Property Name="Version" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetimeoffset" Precision="7" Nullable="false" />
+          <Property Name="UpdatedAt" Type="datetimeoffset" Precision="7" />
+          <Property Name="Deleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserInfoDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="UserInfo_Id" Type="nvarchar" MaxLength="128" />
+          <Property Name="JsonInfo" Type="nvarchar(max)" />
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="NetworkId" Type="smallint" Nullable="false" />
+          <Property Name="Version" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetimeoffset" Precision="7" Nullable="false" />
+          <Property Name="UpdatedAt" Type="datetimeoffset" Precision="7" />
+          <Property Name="Deleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserInfoes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+          <Property Name="ProfilePicUrl" Type="nvarchar" MaxLength="2000" />
+          <Property Name="Age" Type="nvarchar(max)" />
+          <Property Name="Gender" Type="nvarchar(max)" />
+          <Property Name="FirstName" Type="nvarchar(max)" />
+          <Property Name="LastName" Type="nvarchar(max)" />
+          <Property Name="Version" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetimeoffset" Precision="7" Nullable="false" />
+          <Property Name="UpdatedAt" Type="datetimeoffset" Precision="7" />
+          <Property Name="Deleted" Type="bit" Nullable="false" />
+          <Property Name="Bio" Type="nvarchar(max)" />
+          <Property Name="About" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_connectus_ConnectRequests_connectus_Accounts_ConnectUserId">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="0..1" />
+          <End Role="ConnectRequests" Type="Self.ConnectRequests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ConnectRequests">
+              <PropertyRef Name="ConnectUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_connectus_ConnectRequests_connectus_Accounts_RequestUserId">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="0..1" />
+          <End Role="ConnectRequests" Type="Self.ConnectRequests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ConnectRequests">
+              <PropertyRef Name="RequestUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_connectus_EventAccounts_connectus_Accounts_Account_Id">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EventAccounts" Type="Self.EventAccounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EventAccounts">
+              <PropertyRef Name="Account_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_connectus_EventAccounts_connectus_Events_Event_Id">
+          <End Role="Events" Type="Self.Events" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EventAccounts" Type="Self.EventAccounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Events">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EventAccounts">
+              <PropertyRef Name="Event_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_connectus_UserComparisonNetworks_connectus_Networks_Network_Id">
+          <End Role="Networks" Type="Self.Networks" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserComparisonNetworks" Type="Self.UserComparisonNetworks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Networks">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserComparisonNetworks">
+              <PropertyRef Name="Network_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_connectus_UserComparisonNetworks_connectus_UserComparisons_UserComparison_Id">
+          <End Role="UserComparisons" Type="Self.UserComparisons" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserComparisonNetworks" Type="Self.UserComparisonNetworks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserComparisons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserComparisonNetworks">
+              <PropertyRef Name="UserComparison_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_connectus_UserComparisons_connectus_Accounts_CompUserId">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+          <End Role="UserComparisons" Type="Self.UserComparisons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserComparisons">
+              <PropertyRef Name="CompUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_connectus_UserComparisons_connectus_Accounts_UserId">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserComparisons" Type="Self.UserComparisons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserComparisons">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_connectus_UserContacts_connectus_Accounts_UserId">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="0..1" />
+          <End Role="UserContacts" Type="Self.UserContacts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserContacts">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_connectus_UserContexts_connectus_Accounts_AccountRefId">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="0..1" />
+          <End Role="UserContexts" Type="Self.UserContexts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserContexts">
+              <PropertyRef Name="AccountRefId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_connectus_UserInfoDetails_connectus_Networks_NetworkId">
+          <End Role="Networks" Type="Self.Networks" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserInfoDetails" Type="Self.UserInfoDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Networks">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserInfoDetails">
+              <PropertyRef Name="NetworkId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_connectus_UserInfoDetails_connectus_UserInfoes_UserInfoId">
+          <End Role="UserInfoes" Type="Self.UserInfoes" Multiplicity="0..1" />
+          <End Role="UserInfoDetails" Type="Self.UserInfoDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfoes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserInfoDetails">
+              <PropertyRef Name="UserInfo_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_connectus_UserInfoes_connectus_Accounts_UserId">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="0..1" />
+          <End Role="UserInfoes" Type="Self.UserInfoes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserInfoes">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ConnectusDBModelStoreContainer">
+          <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="connectus" store:Type="Tables" />
+          <EntitySet Name="ConnectRequests" EntityType="Self.ConnectRequests" Schema="connectus" store:Type="Tables" />
+          <EntitySet Name="EventAccounts" EntityType="Self.EventAccounts" Schema="connectus" store:Type="Tables" />
+          <EntitySet Name="Events" EntityType="Self.Events" Schema="connectus" store:Type="Tables" />
+          <EntitySet Name="Networks" EntityType="Self.Networks" Schema="connectus" store:Type="Tables" />
+          <EntitySet Name="UserComparisonNetworks" EntityType="Self.UserComparisonNetworks" Schema="connectus" store:Type="Tables" />
+          <EntitySet Name="UserComparisons" EntityType="Self.UserComparisons" Schema="connectus" store:Type="Tables" />
+          <EntitySet Name="UserContacts" EntityType="Self.UserContacts" Schema="connectus" store:Type="Tables" />
+          <EntitySet Name="UserContexts" EntityType="Self.UserContexts" Schema="connectus" store:Type="Tables" />
+          <EntitySet Name="UserInfoDetails" EntityType="Self.UserInfoDetails" Schema="connectus" store:Type="Tables" />
+          <EntitySet Name="UserInfoes" EntityType="Self.UserInfoes" Schema="connectus" store:Type="Tables" />
+          <AssociationSet Name="FK_connectus_ConnectRequests_connectus_Accounts_ConnectUserId" Association="Self.FK_connectus_ConnectRequests_connectus_Accounts_ConnectUserId">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="ConnectRequests" EntitySet="ConnectRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_connectus_ConnectRequests_connectus_Accounts_RequestUserId" Association="Self.FK_connectus_ConnectRequests_connectus_Accounts_RequestUserId">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="ConnectRequests" EntitySet="ConnectRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_connectus_EventAccounts_connectus_Accounts_Account_Id" Association="Self.FK_connectus_EventAccounts_connectus_Accounts_Account_Id">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="EventAccounts" EntitySet="EventAccounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_connectus_EventAccounts_connectus_Events_Event_Id" Association="Self.FK_connectus_EventAccounts_connectus_Events_Event_Id">
+            <End Role="Events" EntitySet="Events" />
+            <End Role="EventAccounts" EntitySet="EventAccounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_connectus_UserComparisonNetworks_connectus_Networks_Network_Id" Association="Self.FK_connectus_UserComparisonNetworks_connectus_Networks_Network_Id">
+            <End Role="Networks" EntitySet="Networks" />
+            <End Role="UserComparisonNetworks" EntitySet="UserComparisonNetworks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_connectus_UserComparisonNetworks_connectus_UserComparisons_UserComparison_Id" Association="Self.FK_connectus_UserComparisonNetworks_connectus_UserComparisons_UserComparison_Id">
+            <End Role="UserComparisons" EntitySet="UserComparisons" />
+            <End Role="UserComparisonNetworks" EntitySet="UserComparisonNetworks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_connectus_UserComparisons_connectus_Accounts_CompUserId" Association="Self.FK_connectus_UserComparisons_connectus_Accounts_CompUserId">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="UserComparisons" EntitySet="UserComparisons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_connectus_UserComparisons_connectus_Accounts_UserId" Association="Self.FK_connectus_UserComparisons_connectus_Accounts_UserId">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="UserComparisons" EntitySet="UserComparisons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_connectus_UserContacts_connectus_Accounts_UserId" Association="Self.FK_connectus_UserContacts_connectus_Accounts_UserId">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="UserContacts" EntitySet="UserContacts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_connectus_UserContexts_connectus_Accounts_AccountRefId" Association="Self.FK_connectus_UserContexts_connectus_Accounts_AccountRefId">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="UserContexts" EntitySet="UserContexts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_connectus_UserInfoDetails_connectus_Networks_NetworkId" Association="Self.FK_connectus_UserInfoDetails_connectus_Networks_NetworkId">
+            <End Role="Networks" EntitySet="Networks" />
+            <End Role="UserInfoDetails" EntitySet="UserInfoDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_connectus_UserInfoDetails_connectus_UserInfoes_UserInfoId" Association="Self.FK_connectus_UserInfoDetails_connectus_UserInfoes_UserInfoId">
+            <End Role="UserInfoes" EntitySet="UserInfoes" />
+            <End Role="UserInfoDetails" EntitySet="UserInfoDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_connectus_UserInfoes_connectus_Accounts_UserId" Association="Self.FK_connectus_UserInfoes_connectus_Accounts_UserId">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="UserInfoes" EntitySet="UserInfoes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ConnectusDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Accounts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Salt" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="SaltedAndHashedPassword" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="MailAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FacebookId" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Version" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="CreatedAt" Type="DateTimeOffset" Nullable="false" Precision="7" />
+          <Property Name="UpdatedAt" Type="DateTimeOffset" Precision="7" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+          <Property Name="LinkedInId" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="BusinessInterest" Type="Boolean" Nullable="false" />
+          <Property Name="PrivateInterest" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ConnectRequests" Relationship="Self.FK_connectus_ConnectRequests_connectus_Accounts_ConnectUserId" FromRole="Accounts" ToRole="ConnectRequests" />
+          <NavigationProperty Name="ConnectRequests1" Relationship="Self.FK_connectus_ConnectRequests_connectus_Accounts_RequestUserId" FromRole="Accounts" ToRole="ConnectRequests" />
+          <NavigationProperty Name="UserComparisons" Relationship="Self.FK_connectus_UserComparisons_connectus_Accounts_CompUserId" FromRole="Accounts" ToRole="UserComparisons" />
+          <NavigationProperty Name="UserComparisons1" Relationship="Self.FK_connectus_UserComparisons_connectus_Accounts_UserId" FromRole="Accounts" ToRole="UserComparisons" />
+          <NavigationProperty Name="UserContacts" Relationship="Self.FK_connectus_UserContacts_connectus_Accounts_UserId" FromRole="Accounts" ToRole="UserContacts" />
+          <NavigationProperty Name="UserContexts" Relationship="Self.FK_connectus_UserContexts_connectus_Accounts_AccountRefId" FromRole="Accounts" ToRole="UserContexts" />
+          <NavigationProperty Name="UserInfoes" Relationship="Self.FK_connectus_UserInfoes_connectus_Accounts_UserId" FromRole="Accounts" ToRole="UserInfoes" />
+          <NavigationProperty Name="Events" Relationship="Self.EventAccounts" FromRole="Accounts" ToRole="Events" />
+        </EntityType>
+        <EntityType Name="ConnectRequests">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RequestUserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ConnectUserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Accepted" Type="Boolean" />
+          <Property Name="Version" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="CreatedAt" Type="DateTimeOffset" Nullable="false" Precision="7" />
+          <Property Name="UpdatedAt" Type="DateTimeOffset" Precision="7" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Accounts" Relationship="Self.FK_connectus_ConnectRequests_connectus_Accounts_ConnectUserId" FromRole="ConnectRequests" ToRole="Accounts" />
+          <NavigationProperty Name="Accounts1" Relationship="Self.FK_connectus_ConnectRequests_connectus_Accounts_RequestUserId" FromRole="ConnectRequests" ToRole="Accounts" />
+        </EntityType>
+        <EntityType Name="Events">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Place" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Location" Type="Geography" />
+          <Property Name="FromDate" Type="DateTimeOffset" Nullable="false" Precision="7" />
+          <Property Name="ToDate" Type="DateTimeOffset" Nullable="false" Precision="7" />
+          <Property Name="Version" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="CreatedAt" Type="DateTimeOffset" Nullable="false" Precision="7" />
+          <Property Name="UpdatedAt" Type="DateTimeOffset" Precision="7" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Accounts" Relationship="Self.EventAccounts" FromRole="Events" ToRole="Accounts" />
+        </EntityType>
+        <EntityType Name="Networks">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="UserInfoDetails" Relationship="Self.FK_connectus_UserInfoDetails_connectus_Networks_NetworkId" FromRole="Networks" ToRole="UserInfoDetails" />
+          <NavigationProperty Name="UserComparisons" Relationship="Self.UserComparisonNetworks" FromRole="Networks" ToRole="UserComparisons" />
+        </EntityType>
+        <EntityType Name="UserComparisons">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CompUserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreatedAt" Type="DateTimeOffset" Nullable="false" Precision="7" />
+          <Property Name="EqualJson" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OnlyUserJson" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OnlyCompUserJson" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Version" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="UpdatedAt" Type="DateTimeOffset" Precision="7" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Accounts" Relationship="Self.FK_connectus_UserComparisons_connectus_Accounts_CompUserId" FromRole="UserComparisons" ToRole="Accounts" />
+          <NavigationProperty Name="Accounts1" Relationship="Self.FK_connectus_UserComparisons_connectus_Accounts_UserId" FromRole="UserComparisons" ToRole="Accounts" />
+          <NavigationProperty Name="Networks" Relationship="Self.UserComparisonNetworks" FromRole="UserComparisons" ToRole="Networks" />
+        </EntityType>
+        <EntityType Name="UserContacts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNr" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Version" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="CreatedAt" Type="DateTimeOffset" Nullable="false" Precision="7" />
+          <Property Name="UpdatedAt" Type="DateTimeOffset" Precision="7" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Accounts" Relationship="Self.FK_connectus_UserContacts_connectus_Accounts_UserId" FromRole="UserContacts" ToRole="Accounts" />
+        </EntityType>
+        <EntityType Name="UserContexts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Location" Type="Geography" />
+          <Property Name="AccountRefId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Version" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="CreatedAt" Type="DateTimeOffset" Nullable="false" Precision="7" />
+          <Property Name="UpdatedAt" Type="DateTimeOffset" Precision="7" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Accounts" Relationship="Self.FK_connectus_UserContexts_connectus_Accounts_AccountRefId" FromRole="UserContexts" ToRole="Accounts" />
+        </EntityType>
+        <EntityType Name="UserInfoDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="UserInfo_Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="JsonInfo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NetworkId" Type="Int16" Nullable="false" />
+          <Property Name="Version" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="CreatedAt" Type="DateTimeOffset" Nullable="false" Precision="7" />
+          <Property Name="UpdatedAt" Type="DateTimeOffset" Precision="7" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Networks" Relationship="Self.FK_connectus_UserInfoDetails_connectus_Networks_NetworkId" FromRole="UserInfoDetails" ToRole="Networks" />
+          <NavigationProperty Name="UserInfoes" Relationship="Self.FK_connectus_UserInfoDetails_connectus_UserInfoes_UserInfoId" FromRole="UserInfoDetails" ToRole="UserInfoes" />
+        </EntityType>
+        <EntityType Name="UserInfoes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ProfilePicUrl" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="Age" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Gender" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Version" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="CreatedAt" Type="DateTimeOffset" Nullable="false" Precision="7" />
+          <Property Name="UpdatedAt" Type="DateTimeOffset" Precision="7" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+          <Property Name="Bio" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="About" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Accounts" Relationship="Self.FK_connectus_UserInfoes_connectus_Accounts_UserId" FromRole="UserInfoes" ToRole="Accounts" />
+          <NavigationProperty Name="UserInfoDetails" Relationship="Self.FK_connectus_UserInfoDetails_connectus_UserInfoes_UserInfoId" FromRole="UserInfoes" ToRole="UserInfoDetails" />
+        </EntityType>
+        <Association Name="FK_connectus_ConnectRequests_connectus_Accounts_ConnectUserId">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="0..1" />
+          <End Role="ConnectRequests" Type="Self.ConnectRequests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ConnectRequests">
+              <PropertyRef Name="ConnectUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_connectus_ConnectRequests_connectus_Accounts_RequestUserId">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="0..1" />
+          <End Role="ConnectRequests" Type="Self.ConnectRequests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ConnectRequests">
+              <PropertyRef Name="RequestUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_connectus_UserComparisons_connectus_Accounts_CompUserId">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+          <End Role="UserComparisons" Type="Self.UserComparisons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserComparisons">
+              <PropertyRef Name="CompUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_connectus_UserComparisons_connectus_Accounts_UserId">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserComparisons" Type="Self.UserComparisons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserComparisons">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_connectus_UserContacts_connectus_Accounts_UserId">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="0..1" />
+          <End Role="UserContacts" Type="Self.UserContacts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserContacts">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_connectus_UserContexts_connectus_Accounts_AccountRefId">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="0..1" />
+          <End Role="UserContexts" Type="Self.UserContexts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserContexts">
+              <PropertyRef Name="AccountRefId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_connectus_UserInfoes_connectus_Accounts_UserId">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="0..1" />
+          <End Role="UserInfoes" Type="Self.UserInfoes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserInfoes">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_connectus_UserInfoDetails_connectus_Networks_NetworkId">
+          <End Role="Networks" Type="Self.Networks" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserInfoDetails" Type="Self.UserInfoDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Networks">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserInfoDetails">
+              <PropertyRef Name="NetworkId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_connectus_UserInfoDetails_connectus_UserInfoes_UserInfoId">
+          <End Role="UserInfoes" Type="Self.UserInfoes" Multiplicity="0..1" />
+          <End Role="UserInfoDetails" Type="Self.UserInfoDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfoes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserInfoDetails">
+              <PropertyRef Name="UserInfo_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EventAccounts">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="*" />
+          <End Role="Events" Type="Self.Events" Multiplicity="*" />
+        </Association>
+        <Association Name="UserComparisonNetworks">
+          <End Role="Networks" Type="Self.Networks" Multiplicity="*" />
+          <End Role="UserComparisons" Type="Self.UserComparisons" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="ConnectusDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Accounts" EntityType="Self.Accounts" />
+          <EntitySet Name="ConnectRequests" EntityType="Self.ConnectRequests" />
+          <EntitySet Name="Events" EntityType="Self.Events" />
+          <EntitySet Name="Networks" EntityType="Self.Networks" />
+          <EntitySet Name="UserComparisons" EntityType="Self.UserComparisons" />
+          <EntitySet Name="UserContacts" EntityType="Self.UserContacts" />
+          <EntitySet Name="UserContexts" EntityType="Self.UserContexts" />
+          <EntitySet Name="UserInfoDetails" EntityType="Self.UserInfoDetails" />
+          <EntitySet Name="UserInfoes" EntityType="Self.UserInfoes" />
+          <AssociationSet Name="FK_connectus_ConnectRequests_connectus_Accounts_ConnectUserId" Association="Self.FK_connectus_ConnectRequests_connectus_Accounts_ConnectUserId">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="ConnectRequests" EntitySet="ConnectRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_connectus_ConnectRequests_connectus_Accounts_RequestUserId" Association="Self.FK_connectus_ConnectRequests_connectus_Accounts_RequestUserId">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="ConnectRequests" EntitySet="ConnectRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_connectus_UserComparisons_connectus_Accounts_CompUserId" Association="Self.FK_connectus_UserComparisons_connectus_Accounts_CompUserId">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="UserComparisons" EntitySet="UserComparisons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_connectus_UserComparisons_connectus_Accounts_UserId" Association="Self.FK_connectus_UserComparisons_connectus_Accounts_UserId">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="UserComparisons" EntitySet="UserComparisons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_connectus_UserContacts_connectus_Accounts_UserId" Association="Self.FK_connectus_UserContacts_connectus_Accounts_UserId">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="UserContacts" EntitySet="UserContacts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_connectus_UserContexts_connectus_Accounts_AccountRefId" Association="Self.FK_connectus_UserContexts_connectus_Accounts_AccountRefId">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="UserContexts" EntitySet="UserContexts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_connectus_UserInfoes_connectus_Accounts_UserId" Association="Self.FK_connectus_UserInfoes_connectus_Accounts_UserId">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="UserInfoes" EntitySet="UserInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_connectus_UserInfoDetails_connectus_Networks_NetworkId" Association="Self.FK_connectus_UserInfoDetails_connectus_Networks_NetworkId">
+            <End Role="Networks" EntitySet="Networks" />
+            <End Role="UserInfoDetails" EntitySet="UserInfoDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_connectus_UserInfoDetails_connectus_UserInfoes_UserInfoId" Association="Self.FK_connectus_UserInfoDetails_connectus_UserInfoes_UserInfoId">
+            <End Role="UserInfoes" EntitySet="UserInfoes" />
+            <End Role="UserInfoDetails" EntitySet="UserInfoDetails" />
+          </AssociationSet>
+          <AssociationSet Name="EventAccounts" Association="Self.EventAccounts">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="Events" EntitySet="Events" />
+          </AssociationSet>
+          <AssociationSet Name="UserComparisonNetworks" Association="Self.UserComparisonNetworks">
+            <End Role="Networks" EntitySet="Networks" />
+            <End Role="UserComparisons" EntitySet="UserComparisons" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ConnectusDBModelStoreContainer" CdmEntityContainer="ConnectusDBEntities">
+          <EntitySetMapping Name="Accounts">
+            <EntityTypeMapping TypeName="ConnectusDBModel.Accounts">
+              <MappingFragment StoreEntitySet="Accounts">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Salt" ColumnName="Salt" />
+                <ScalarProperty Name="SaltedAndHashedPassword" ColumnName="SaltedAndHashedPassword" />
+                <ScalarProperty Name="MailAddress" ColumnName="MailAddress" />
+                <ScalarProperty Name="FacebookId" ColumnName="FacebookId" />
+                <ScalarProperty Name="Version" ColumnName="Version" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="LinkedInId" ColumnName="LinkedInId" />
+                <ScalarProperty Name="BusinessInterest" ColumnName="BusinessInterest" />
+                <ScalarProperty Name="PrivateInterest" ColumnName="PrivateInterest" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ConnectRequests">
+            <EntityTypeMapping TypeName="ConnectusDBModel.ConnectRequests">
+              <MappingFragment StoreEntitySet="ConnectRequests">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RequestUserId" ColumnName="RequestUserId" />
+                <ScalarProperty Name="ConnectUserId" ColumnName="ConnectUserId" />
+                <ScalarProperty Name="Accepted" ColumnName="Accepted" />
+                <ScalarProperty Name="Version" ColumnName="Version" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Events">
+            <EntityTypeMapping TypeName="ConnectusDBModel.Events">
+              <MappingFragment StoreEntitySet="Events">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Place" ColumnName="Place" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+                <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+                <ScalarProperty Name="Version" ColumnName="Version" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Networks">
+            <EntityTypeMapping TypeName="ConnectusDBModel.Networks">
+              <MappingFragment StoreEntitySet="Networks">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserComparisons">
+            <EntityTypeMapping TypeName="ConnectusDBModel.UserComparisons">
+              <MappingFragment StoreEntitySet="UserComparisons">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CompUserId" ColumnName="CompUserId" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="EqualJson" ColumnName="EqualJson" />
+                <ScalarProperty Name="OnlyUserJson" ColumnName="OnlyUserJson" />
+                <ScalarProperty Name="OnlyCompUserJson" ColumnName="OnlyCompUserJson" />
+                <ScalarProperty Name="Version" ColumnName="Version" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserContacts">
+            <EntityTypeMapping TypeName="ConnectusDBModel.UserContacts">
+              <MappingFragment StoreEntitySet="UserContacts">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="PhoneNr" ColumnName="PhoneNr" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Version" ColumnName="Version" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserContexts">
+            <EntityTypeMapping TypeName="ConnectusDBModel.UserContexts">
+              <MappingFragment StoreEntitySet="UserContexts">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="AccountRefId" ColumnName="AccountRefId" />
+                <ScalarProperty Name="Version" ColumnName="Version" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserInfoDetails">
+            <EntityTypeMapping TypeName="ConnectusDBModel.UserInfoDetails">
+              <MappingFragment StoreEntitySet="UserInfoDetails">
+                <ScalarProperty Name="UserInfo_Id" ColumnName="UserInfo_Id" />
+                <ScalarProperty Name="JsonInfo" ColumnName="JsonInfo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="NetworkId" ColumnName="NetworkId" />
+                <ScalarProperty Name="Version" ColumnName="Version" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserInfoes">
+            <EntityTypeMapping TypeName="ConnectusDBModel.UserInfoes">
+              <MappingFragment StoreEntitySet="UserInfoes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ProfilePicUrl" ColumnName="ProfilePicUrl" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Version" ColumnName="Version" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="Bio" ColumnName="Bio" />
+                <ScalarProperty Name="About" ColumnName="About" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="EventAccounts" TypeName="ConnectusDBModel.EventAccounts" StoreEntitySet="EventAccounts">
+            <EndProperty Name="Accounts">
+              <ScalarProperty Name="Id" ColumnName="Account_Id" />
+            </EndProperty>
+            <EndProperty Name="Events">
+              <ScalarProperty Name="Id" ColumnName="Event_Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="UserComparisonNetworks" TypeName="ConnectusDBModel.UserComparisonNetworks" StoreEntitySet="UserComparisonNetworks">
+            <EndProperty Name="Networks">
+              <ScalarProperty Name="Id" ColumnName="Network_Id" />
+            </EndProperty>
+            <EndProperty Name="UserComparisons">
+              <ScalarProperty Name="Id" ColumnName="UserComparison_Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

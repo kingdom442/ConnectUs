@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5c37445e2d7347f7849d915c0d60ccc8" Name="Diagram1">
+        <EntityTypeShape EntityType="ConnectusDBModel.Accounts" Width="1.875" PointX="3" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConnectusDBModel.ConnectRequests" Width="1.875" PointX="3" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConnectusDBModel.Events" Width="1.875" PointX="5.5" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConnectusDBModel.Networks" Width="1.875" PointX="8.625" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConnectusDBModel.UserComparisons" Width="1.875" PointX="7.875" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConnectusDBModel.UserContacts" Width="1.875" PointX="0.5" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConnectusDBModel.UserContexts" Width="1.875" PointX="0.5" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConnectusDBModel.UserInfoDetails" Width="1.875" PointX="9" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConnectusDBModel.UserInfoes" Width="1.875" PointX="6.25" PointY="10.625" IsExpanded="true" />
+        <AssociationConnector Association="ConnectusDBModel.FK_connectus_ConnectRequests_connectus_Accounts_ConnectUserId" ManuallyRouted="false" />
+        <AssociationConnector Association="ConnectusDBModel.FK_connectus_ConnectRequests_connectus_Accounts_RequestUserId" ManuallyRouted="false" />
+        <AssociationConnector Association="ConnectusDBModel.FK_connectus_UserComparisons_connectus_Accounts_CompUserId" ManuallyRouted="false" />
+        <AssociationConnector Association="ConnectusDBModel.FK_connectus_UserComparisons_connectus_Accounts_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="ConnectusDBModel.FK_connectus_UserContacts_connectus_Accounts_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="ConnectusDBModel.FK_connectus_UserContexts_connectus_Accounts_AccountRefId" ManuallyRouted="false" />
+        <AssociationConnector Association="ConnectusDBModel.FK_connectus_UserInfoes_connectus_Accounts_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="ConnectusDBModel.FK_connectus_UserInfoDetails_connectus_Networks_NetworkId" ManuallyRouted="false" />
+        <AssociationConnector Association="ConnectusDBModel.FK_connectus_UserInfoDetails_connectus_UserInfoes_UserInfoId" ManuallyRouted="false" />
+        <AssociationConnector Association="ConnectusDBModel.EventAccounts" ManuallyRouted="false" />
+        <AssociationConnector Association="ConnectusDBModel.UserComparisonNetworks" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
