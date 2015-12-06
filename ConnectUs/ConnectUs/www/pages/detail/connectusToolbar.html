@@ -1,0 +1,18 @@
+﻿
+<ons-toolbar style="background-color: #222222;border-bottom: 2px solid cornflowerblue;margin-bottom:5px; height: auto;">
+    <div ng-hide="hideMenuToggle" class="left">
+        <ons-toolbar-button ng-click="menu.toggleMenu()">
+            <ons-icon icon="fa-bars" size="2x" style="margin-top:4px;">
+        </ons-toolbar-button>
+    </div>
+    <div class="center"><h2 style="display:inline;color:white;">Connect<span style="color:cornflowerblue;">Us</span></h2></div>
+
+    <div class="right">
+        <ons-toolbar-button>
+            <ons-icon ng-if="loadingCounter > 0" icon="fa-circle-o-notch" size="lg" style="color:cornflowerblue;" spin="true" fixed-width="false"></ons-icon>
+        </ons-toolbar-button>
+        <ons-toolbar-button ng-if="saved">
+            <ons-icon icon="fa-check-circle-o" style="color:green;" size="lg" fixed-width="false"></ons-icon>
+        </ons-toolbar-button>
+</div>
+</ons-toolbar>

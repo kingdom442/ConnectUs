@@ -1,0 +1,72 @@
+﻿<ons-page ng-controller="settingsController">
+    <ng-include src="'pages/detail/connectusToolbar.html'"></ng-include>
+
+    <div class="settings-header">Settings <ons-icon style="float:right;" icon="fa-cog" /></div>
+    <div style="margin-top:5px;" class="highlightInfo content-padded">
+        Allow ConnectUs to find nearby users via GPS or Bluetooth.
+    </div>
+    <ons-list modifier="inset" class="settings-list">
+        <ons-list-item>
+            Geolocation
+            <ons-switch modifier="list-item" ng-model="settings.geolocationEnabled" ng-change="changeSettings()"></ons-switch>
+        </ons-list-item>
+
+        <ons-list-item>
+            Search Area
+            <label style="margin-left:10px;">
+                <input type="radio" name="response"  ng-model="settings.searchArea"  value="1000" ng-checked="changeSearchArea()" />
+                Neighbourhood
+            </label>
+            <label>
+                <input type="radio" name="response"  ng-model="settings.searchArea"  value="30000" ng-checked="changeSearchArea()" />
+                City
+            </label>
+            <span  class="notification" style="background-color:cornflowerblue;color:black;line-height:42px !important;height:auto !important;position:absolute;right:10px;margin-top:2px;">{{settings.searchArea}} m</span>
+            <div style="clear:both;" />
+            <input type="range" ng-model="settings.searchArea" min="100" max="10000" step="100" ng-change="changeSearchArea()" ng-mouseup="enableMenuSlide()">
+        </ons-list-item>
+
+        <ons-list-item>
+            Bluetooth
+            <ons-switch modifier="list-item" ng-model="settings.bluetootAllowed" ng-change="changeSettings()"></ons-switch>
+        </ons-list-item>
+    </ons-list>
+
+    <div class="settings-header">Comparison Fields <ons-icon style="float:right;" icon="fa-list" /></div>
+    <div style="margin-top:5px;" class="highlightInfo content-padded">
+        Select the fields that should be included for the comparison with other users.
+    </div>
+    <ons-list modifier="inset" class="settings-list">
+        <ons-list-item>
+            Education
+            <ons-switch modifier="list-item" ng-model="settings.includeEducation" ng-change="changeSettings()"></ons-switch>
+        </ons-list-item>
+   
+        <ons-list-item>
+            Jobhistory
+            <ons-switch modifier="list-item"  ng-model="settings.includeWork" ng-change="changeSettings()"></ons-switch>
+        </ons-list-item>
+
+        <ons-list-item>
+            Sportteams
+            <ons-switch modifier="list-item"  ng-model="settings.includeTeams" ng-change="changeSettings()"></ons-switch>
+        </ons-list-item>
+
+        <ons-list-item>
+            Athletes
+            <ons-switch modifier="list-item"  ng-model="settings.includeAthletes" ng-change="changeSettings()"></ons-switch>
+        </ons-list-item>
+    </ons-list>
+
+    <!--<div class="settings-header">Privacy <ons-icon style="float:right;" icon="fa-user-secret" /></div>-->
+    <!--<ons-list modifier="inset" class="settings-list">
+        <ons-list-item modifier="chevron">
+            Terms of Use
+        </ons-list-item>
+
+        <ons-list-item modifier="chevron">
+            Privacy Policy
+        </ons-list-item>
+    </ons-list>-->
+</ons-page>
+

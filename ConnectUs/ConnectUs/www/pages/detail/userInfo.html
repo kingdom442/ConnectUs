@@ -1,0 +1,9 @@
+﻿<ons-row align="center">
+    <ons-col width="80px">
+        <img style="margin-left:10px;" ng-src="{{user.profilePicUrl || 'images/profile-icon.png'}}" class="avator profile-image-small"  ng-click="$parent.showUserPopup(user); $event.stopPropagation();" />
+    </ons-col>
+    <ons-col>
+        <ons-row class="item-desc">{{ user.username }}</ons-row>
+        <ons-row><b>Status:  </b>{{user.status}}</ons-row>
+    </ons-col>
+</ons-row>
