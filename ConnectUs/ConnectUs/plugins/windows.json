@@ -32,6 +32,9 @@
         },
         "cordova-plugin-statusbar": {
             "PACKAGE_NAME": "ConnectUs"
+        },
+        "at.modalog.cordova.plugin.cache": {
+            "PACKAGE_NAME": "ConnectUs"
         }
     },
     "dependent_plugins": {

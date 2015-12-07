@@ -13,16 +13,21 @@
 
         <ons-list-item>
             Search Area
-            <label style="margin-left:10px;">
-                <input type="radio" name="response"  ng-model="settings.searchArea"  value="1000" ng-checked="changeSearchArea()" />
+            <span  class="notification" style="background-color:cornflowerblue;color:black;line-height:42px !important;height:auto !important;position:absolute;right:10px;margin-top:2px;">{{settings.searchArea}} m</span>
+            <div style="clear:both;" />
+            <label>
+                <input type="radio" name="response" ng-model="settings.searchArea" value="1000" ng-checked="changeSearchArea()" />
                 Neighbourhood
             </label>
             <label>
-                <input type="radio" name="response"  ng-model="settings.searchArea"  value="30000" ng-checked="changeSearchArea()" />
+                <input type="radio" name="response" ng-model="settings.searchArea" value="30000" ng-checked="changeSearchArea()" />
                 City
             </label>
-            <span  class="notification" style="background-color:cornflowerblue;color:black;line-height:42px !important;height:auto !important;position:absolute;right:10px;margin-top:2px;">{{settings.searchArea}} m</span>
             <div style="clear:both;" />
+            <label>
+                <input type="radio" name="response" ng-model="settings.searchArea" value="0" ng-checked="changeSearchArea()" />
+                Ignore location
+            </label>
             <input type="range" ng-model="settings.searchArea" min="100" max="10000" step="100" ng-change="changeSearchArea()" ng-mouseup="enableMenuSlide()">
         </ons-list-item>
 

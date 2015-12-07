@@ -23,6 +23,10 @@
                         {
                             "xml": "<feature name=\"StatusBar\"><param name=\"android-package\" value=\"org.apache.cordova.statusbar.StatusBar\" /><param name=\"onload\" value=\"true\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Cache\"><param name=\"android-package\" value=\"at.modalog.cordova.plugin.cache.Cache\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -57,6 +61,9 @@
             "PACKAGE_NAME": "io.cordova.myapp2311dded6aa94a2c94d5e6ec846c1e6f"
         },
         "cordova-plugin-statusbar": {
+            "PACKAGE_NAME": "io.cordova.myapp2311dded6aa94a2c94d5e6ec846c1e6f"
+        },
+        "at.modalog.cordova.plugin.cache": {
             "PACKAGE_NAME": "io.cordova.myapp2311dded6aa94a2c94d5e6ec846c1e6f"
         }
     },

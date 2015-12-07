@@ -58,6 +58,9 @@
         },
         "cordova-plugin-statusbar": {
             "PACKAGE_NAME": "{57359770-91bb-11e5-83ad-151b86050b21}"
+        },
+        "at.modalog.cordova.plugin.cache": {
+            "PACKAGE_NAME": "{57359770-91bb-11e5-83ad-151b86050b21}"
         }
     },
     "dependent_plugins": {

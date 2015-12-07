@@ -25,6 +25,7 @@ namespace ConnectusMobileService
         /// </summary>
         protected void Application_Start()
         {
+            SqlServerTypes.Utilities.LoadNativeAssemblies(Server.MapPath("~/bin"));
             WebApiConfig.Register();
         }
     }

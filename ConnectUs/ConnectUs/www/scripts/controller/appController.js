@@ -2,6 +2,37 @@
     ons.ready(function () {
         $scope.init();
     });
+    ons.setDefaultDeviceBackButtonListener(onBackKeyDown);
+    function onBackKeyDown() {
+        if (menu.isMenuOpened()) {
+            menu.toggleMenu();
+            return true;
+        }
+        else if ($rootScope.pageStackCount == 1) { //Home
+            if (ons.platform.isAndroid()) {
+                ons.notification.confirm({
+                    message: 'Close ConnectUs?',
+                    callback: function (answer) {
+                        if(answer == 1)
+                            navigator.app.exitApp();
+                    }
+                });
+            }
+        }
+        else if ($rootScope.pageStackCount == 0) {
+            navigator.app.exitApp();
+        } else {
+            menu.setMainPage('pages/home.html', { closeMenu: true });
+            return true;
+        }
+        return false; 
+    }
+
+    //for Windows Phone users
+    if (window.WinJS && window.WinJS.Application) {
+        window.WinJS.Application.onbackclick = function () { return onBackKeyDown(); };
+    }
+
     $rootScope.pageStackCount = 0;
 
     $rootScope.$reset = function () {
@@ -52,30 +83,6 @@
         $scope.$on('eLogin', function (event, args) {
             $scope.tryLogin();
         });
-        
-        //for not Windows Phone users
-        document.addEventListener("backbutton", function (e) {
-            e.preventDefault();
-            var prevent = $scope.onBackKeyDown();
-        }, false);
-        //for Windows Phone users
-        if (window.WinJS && window.WinJS.Application){
-            window.WinJS.Application.onbackclick = function () { return $scope.onBackKeyDown(); };
-        }
     };
-
-    $scope.onBackKeyDown = function() {
-        if (menu.isMenuOpened())
-            menu.toggleMenu();
-        else if ($rootScope.pageStackCount == 1) { //Home
-            return false;
-        }
-        else if ($rootScope.pageStackCount == 0) {
-            return false;
-        } else {
-            menu.setMainPage('pages/home.html', { closeMenu: true });
-        }
-        return true; 
-    }
 
 });

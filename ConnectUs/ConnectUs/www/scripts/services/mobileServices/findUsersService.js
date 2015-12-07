@@ -10,6 +10,10 @@ angular.module('connectusApp').factory('findUsersService',
         service.findAvailableUsersByGeoLocation = function (coords, findAlreadyComparedUsers, maxDistance, succCB, errCB) {
             if (connectusClient == null)
                 initMobileServiceClient()
+            if (coords == 0){
+                coords.longitude = 0;
+                coords.latitude = 0;
+            }
             connectusClient.invokeApi('FindUsers', {
                 method: 'POST',
                 body: { "UserId": $rootScope.accountId, "MaxDistance": maxDistance, "Longitude": coords.longitude, "Latitude": coords.latitude, "AlreadyCompared": findAlreadyComparedUsers }

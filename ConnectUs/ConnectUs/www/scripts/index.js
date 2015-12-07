@@ -7,12 +7,16 @@
 
     document.addEventListener( 'deviceready', onDeviceReady.bind( this ), false );
 
+
     function onDeviceReady() {
         // Verarbeiten der Cordova-Pause- und -Fortsetzenereignisse
         document.addEventListener( 'pause', onPause.bind( this ), false );
         document.addEventListener( 'resume', onResume.bind( this ), false );
-    
+        window.cache.clear(function () { }, function () { });
+
     };
+
+   
 
     function onPause() {
         // TODO: Diese Anwendung wurde ausgesetzt. Speichern Sie hier den Anwendungszustand.
@@ -23,7 +27,6 @@
     };
 
     // create the module and name it connectUsApp
-
     var connectUsApp = angular.module('connectusApp', ['onsen', 'ngAnimate']);
     connectUsApp.config(['$compileProvider',
     function ($compileProvider) {

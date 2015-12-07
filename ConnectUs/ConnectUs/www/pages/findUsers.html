@@ -7,11 +7,11 @@
     </div>
 
     <div ng-if="!geolocationAllowed" style="margin-top:5px;" class="warningInfo content-padded">
-        Please enable GPS in your phones settings.
+        ConnectUs couldn't get your GPS signal. Please enable GPS on your phone. If the problem remains, it may be that you cannot receive a signal indoors. Below you see a list of all users - location independent.
     </div>
 
 
-    <div ng-if="geolocationAllowed" style="margin-top:5px;">
+    <div style="margin-top:5px;">
         <ons-list>
             <ons-list-header>
                 Users around <ons-icon icon="fa-user"
@@ -20,11 +20,8 @@
                                        class="headerIconRight">
                 </ons-icon>
             </ons-list-header>
-            <ons-list-item ng-show="users.length === 0">
-                <div ng-switch="noUserFound" class="info">
-                    <div ng-switch-when="false">Pull down to refresh.</div>
-                    <div ng-switch-default>No user found with the selected parameters.</div>
-                </div>
+            <ons-list-item  ng-if="noUserFound">
+                <div class="info">No user found with your<button class="button--quiet" style="display:inline;margin:0px;" ng-click="menu.setMainPage('pages/settings.html', { animation: slide });">settings</button>/<button class="button--quiet" style="display:inline;" ng-click="menu.setMainPage('pages/userProfile.html', { animation: slide });">interests</button>.</div>
             </ons-list-item>
             <ons-list-item ng-class="{active: hover}"  ng-mouseenter="hover = true" ng-mouseleave="hover = false" 
                             class="item" ng-repeat="user in users" ng-click="$parent.compareUsers(user)" modifier="chevron">
@@ -37,6 +34,9 @@
                 Show already compared users
                 <ons-switch modifier="list-item" ng-model="showComparedUsers" ng-change="changeShowComparedUsers()"></ons-switch>
             </ons-list-header>
+            <ons-list-item ng-if="noComparedUserFound">
+                <div class="info">No user found with your<button class="button--quiet" style="display:inline;" ng-click="menu.setMainPage('pages/settings.html', { animation: slide });">settings</button>/<button class="button--quiet" style="display:inline;" ng-click="menu.setMainPage('pages/userProfile.html', { animation: slide });">interests</button>.</div>
+            </ons-list-item>
             <ons-list-item ng-class="{active: hover}"  ng-mouseenter="hover = true" ng-mouseleave="hover = false" 
                             class="item" ng-repeat="user in comparedusers" ng-click="$parent.compareUsers(user)" modifier="chevron">
                 <ng-include src="'pages/detail/userInfo.html'"></ng-include>

@@ -26,7 +26,7 @@ namespace ConnectusMobileService.Service
         {
             List<FBFields> allFields = Enum.GetValues(typeof(FBFields)).Cast<FBFields>().ToList();
             string fieldStr = "";
-            allFields.ForEach(x => fieldStr += (x == FBFields.PICTURE) ? "picture.width(200).height(200)" : x.ToString().ToLower() + ", ");
+            allFields.ForEach(x => fieldStr += (x == FBFields.PICTURE) ? "picture.width(200).height(200)," : x.ToString().ToLower() + ",");
             fieldStr = fieldStr.Remove(fieldStr.Length - 1);
             try
             {

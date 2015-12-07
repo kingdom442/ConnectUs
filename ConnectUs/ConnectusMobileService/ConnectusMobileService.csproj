@@ -361,6 +361,7 @@
     </Compile>
     <Compile Include="Service\Data\UserInfoService.cs" />
     <Compile Include="Service\LinkedInProfileDataProvider .cs" />
+    <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="Utils\Enum\LinkedInFields.cs" />
     <Compile Include="Utils\Enum\FBFields.cs" />
     <Compile Include="DataObjects\DTO\Profile\ProfileData.cs" />
@@ -387,6 +388,22 @@
     <Compile Include="Utils\ProfileDataParser.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="..\packages\Microsoft.SqlServer.Types.11.0.2\nativeBinaries\x64\msvcr100.dll">
+      <Link>SqlServerTypes\x64\msvcr100.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\packages\Microsoft.SqlServer.Types.11.0.2\nativeBinaries\x64\SqlServerSpatial110.dll">
+      <Link>SqlServerTypes\x64\SqlServerSpatial110.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\packages\Microsoft.SqlServer.Types.11.0.2\nativeBinaries\x86\msvcr100.dll">
+      <Link>SqlServerTypes\x86\msvcr100.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\packages\Microsoft.SqlServer.Types.11.0.2\nativeBinaries\x86\SqlServerSpatial110.dll">
+      <Link>SqlServerTypes\x86\SqlServerSpatial110.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Global.asax" />
     <Content Include="LinkedIn_API_ReadMe.txt" />
     <Content Include="Models\FinalModel.Context.tt">
@@ -399,6 +416,7 @@
       <DependentUpon>FinalModel.edmx</DependentUpon>
       <LastGenOutput>FinalModel.cs</LastGenOutput>
     </Content>
+    <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

@@ -7,8 +7,6 @@
   <access origin="*" />
   <allow-navigation href="http://*/*" />
   <access origin="*" launch-external="yes" />
-  
-  
   <vs:features />
   <preference name="SplashScreen" value="screen" />
   <preference name="windows-target-version" value="8.1" />
@@ -113,4 +111,5 @@
   <vs:plugin name="cordova-plugin-inappbrowser" version="1.0.1" />
   <vs:plugin name="cordova-plugin-whitelist" version="1.2.0" />
   <vs:plugin name="cordova-plugin-statusbar" version="2.0.0" />
+  <vs:plugin name="at.modalog.cordova.plugin.cache" version="1.0.0" src="https://github.com/moderna/cordova-plugin-cache.git" />
 </widget>

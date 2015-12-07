@@ -43,9 +43,11 @@ namespace ConnectusMobileService.Controllers
                     return !requestData.AlreadyCompared.Value == context.UserComparisons.Any(comp => (comp.UserId == requestData.UserId || comp.UserId == ctx.AccountRefId) && (comp.CompUserId == requestData.UserId || comp.CompUserId == ctx.AccountRefId));
                 });
             }
-            DbGeography georaphy = DBGeographyUtil.getDBGeography(requestData.Longitude, requestData.Latitude);
-            //if(requestData.MaxDistance > 0)
-            //    uContexts.RemoveAll(ctx => ctx.Location.Distance(georaphy) > requestData.MaxDistance);
+            if (requestData.MaxDistance > 0 && (requestData.Latitude != 0 || requestData.Longitude != 0))
+            {
+                DbGeography georaphy = DBGeographyUtil.getDBGeography(requestData.Longitude, requestData.Latitude);
+                uContexts.RemoveAll(ctx => ctx.Location.Distance(georaphy) > requestData.MaxDistance);
+            }
             List<BasicUserInfoDTO> response = uContexts.Select(ucont =>
             {
                 try
