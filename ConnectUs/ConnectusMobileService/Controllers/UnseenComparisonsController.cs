@@ -43,16 +43,18 @@ namespace ConnectusMobileService.Controllers
                 }
                 
                 if (!result.Any(x => (x.UserId == otherUser.Id)))
-                { 
-                    result.Add(new UserComparisonResultDTO()
-                    {
-                        UserId = otherUser.Id,
-                        UserName = otherUser.Username,
-                        EqualData = cmp.EqualJson,
-                        Date = cmp.CreatedAt,
-                        CurrentUserWasInitiator = currentUserIsInitiator,
-                        ProfilePic = context.UserInfos.FirstOrDefault(x => x.UserId == otherUser.Id).ProfilePicUrl
-                    });
+                {
+                    if (!context.ConnectRequests.Any(connectReqeust => ((connectReqeust.ConnectUserId == requestData.UserId && connectReqeust.RequestUserId == otherUser.Id) || (connectReqeust.ConnectUserId == otherUser.Id && connectReqeust.RequestUserId == requestData.UserId)) && connectReqeust.Accepted != null)){
+                        result.Add(new UserComparisonResultDTO()
+                        {
+                            UserId = otherUser.Id,
+                            UserName = otherUser.Username,
+                            EqualData = cmp.EqualJson,
+                            Date = cmp.CreatedAt,
+                            CurrentUserWasInitiator = currentUserIsInitiator,
+                            ProfilePic = context.UserInfos.FirstOrDefault(x => x.UserId == otherUser.Id).ProfilePicUrl
+                        });
+                    }
                 }
             }
             

@@ -26,45 +26,63 @@ namespace ConnectusMobileService.Controllers
         {
             MobileServiceContext context = new MobileServiceContext();
             Account requester = context.Accounts.FirstOrDefault(x => x.Id == requestData.UserId);
-            if(requester == null)
+            if (requester == null)
             {
                 Services.Log.Error("User with id from param is not available");
                 return this.Request.CreateResponse(HttpStatusCode.BadRequest);
             }
-            DateTimeOffset fiveHoursBefore = DateTimeOffset.Now.AddHours(-500);
-            List<UserContext> uContexts = context.UserContexts.ToList();
-            uContexts = uContexts.Where(x => DateTimeOffset.Compare(x.CreatedAt.Value, fiveHoursBefore) > 0).GroupBy(uContext => uContext.AccountRefId).Select(grp => grp.First()).OrderBy(x => x.CreatedAt).ToList();
-            uContexts.RemoveAll(ctx => ctx.AccountRefId == requestData.UserId);
-            uContexts.RemoveAll(ctx => !((requester.BusinessInterest && ctx.Account.BusinessInterest) || (requester.PrivateInterest && ctx.Account.PrivateInterest)));
-            if (requestData.AlreadyCompared.HasValue)
+            bool checkLocation = requestData.MaxDistance > 0 && (requestData.Latitude != 0 || requestData.Longitude != 0);
+
+            if (checkLocation)
             {
-                uContexts.RemoveAll(ctx =>
+                DateTimeOffset fiveHoursBefore = DateTimeOffset.Now.AddHours(-500);
+                List<UserContext> uContexts = context.UserContexts.ToList();
+                uContexts = uContexts.Where(x => DateTimeOffset.Compare(x.CreatedAt.Value, fiveHoursBefore) > 0).GroupBy(uContext => uContext.AccountRefId).Select(grp => grp.First()).OrderBy(x => x.CreatedAt).ToList();
+                uContexts.RemoveAll(ctx => ctx.AccountRefId == requestData.UserId);
+                uContexts.RemoveAll(ctx => !((requester.BusinessInterest && ctx.Account.BusinessInterest) || (requester.PrivateInterest && ctx.Account.PrivateInterest)));
+                if (requestData.AlreadyCompared.HasValue)
                 {
-                    return !requestData.AlreadyCompared.Value == context.UserComparisons.Any(comp => (comp.UserId == requestData.UserId || comp.UserId == ctx.AccountRefId) && (comp.CompUserId == requestData.UserId || comp.CompUserId == ctx.AccountRefId));
-                });
-            }
-            if (requestData.MaxDistance > 0 && (requestData.Latitude != 0 || requestData.Longitude != 0))
-            {
+                    uContexts.RemoveAll(ctx =>
+                    {
+                        return !requestData.AlreadyCompared.Value == context.UserComparisons.Any(comp => (comp.UserId == requestData.UserId || comp.UserId == ctx.AccountRefId) && (comp.CompUserId == requestData.UserId || comp.CompUserId == ctx.AccountRefId));
+                    });
+
+                }
+
                 DbGeography georaphy = DBGeographyUtil.getDBGeography(requestData.Longitude, requestData.Latitude);
                 uContexts.RemoveAll(ctx => ctx.Location.Distance(georaphy) > requestData.MaxDistance);
-            }
-            List<BasicUserInfoDTO> response = uContexts.Select(ucont =>
-            {
-                try
+                
+                List<BasicUserInfoDTO> response = uContexts.Select(ucont =>
                 {
-                    
+                    try
+                    {
+
                         BasicUserInfoDTO userInfo = UserInfoService.GetBasicUserInfo(ucont.AccountRefId);
                         return userInfo;
+                    }
+                    catch (Exception e)
+                    {
+                        Console.Write(e.Message);
+                        return null;
+                    }
+
                 }
-                catch (Exception e)
-                {
-                    Console.Write(e.Message);
-                    return null;
-                }
-                
+                ).ToList();
+
+                return this.Request.CreateResponse(HttpStatusCode.OK, response);
             }
-            ).ToList();
-            return this.Request.CreateResponse(HttpStatusCode.OK, response);
+            else
+            {
+                List<BasicUserInfoDTO> response = new List<BasicUserInfoDTO>();
+                List<UserComparison> allComparisons = context.UserComparisons.ToList();
+                foreach (Account a in context.Accounts.Where(a => a.Id != requestData.UserId))
+                {
+                    if (!requestData.AlreadyCompared.HasValue || requestData.AlreadyCompared.Value == allComparisons.Any(comp => (comp.UserId == requestData.UserId || comp.UserId == a.Id) && (comp.CompUserId == requestData.UserId || comp.CompUserId == a.Id)))
+                        if ((requester.BusinessInterest && a.BusinessInterest) || (requester.PrivateInterest && a.PrivateInterest))
+                        response.Add(UserInfoService.GetBasicUserInfo(a.Id));
+                }
+                return this.Request.CreateResponse(HttpStatusCode.OK, response);
+            }
         }
 
     }
